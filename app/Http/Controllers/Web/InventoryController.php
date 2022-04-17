@@ -78,8 +78,7 @@ class InventoryController extends Controller
 
     public function update(Request $request, $id)
     {
-        //dd($request->all());
-
+       
         $data = $this->inventory->update($id, $request->all());
         if($data)
         {

@@ -25,7 +25,7 @@ class EquipmentController extends Controller
     {            
 
         $brand = getConmonCode('brand');
-        //dd($brand);
+        
         $active = "equipment";
         $equipments = $this->equipment->paginate(20, $request->search);
         return view('equipment.index', compact('active', 'equipments'));
