@@ -1,6 +1,7 @@
 /node_modules
 /public/hot
 /public/storage
+app/storage/
 storage/*.key
 storage/logs/laravel.log
 /vendor/
