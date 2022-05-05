@@ -50,7 +50,7 @@
         }
 
         .select2-container--default .select2-selection--single{
-            border: 1px solid #C3CAD2 !important; 
+            border: 0 solid #C3CAD2 !important; 
             border-radius: 3 !important; 
             padding: 6px 6px;
             width: 100%;
@@ -86,6 +86,18 @@ $(".custom-file-input").on("change", function() {
   var fileName = $(this).val().split("\\").pop();
   $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
 });
+</script>
+
+<script>
+
+var warehouse_id = <?php echo $edit->warehouse_id; ?>
+
+
+$('.warehouse').select2({
+    placeholder: '',
+    allowClear: true
+}).val(warehouse_id).trigger('change');
+
 </script>
 
 @stop

@@ -22,8 +22,9 @@ class RevenueController extends Controller
         $revenues = $this->revenue->paginate($perPage = 10, $request->search);
         $raw_paginate = json_encode($revenues); 
         $paginate = json_decode($raw_paginate);
-        //dd($revenues);
-        return view('revenue.index', compact('active', 'paginate', 'revenues'));
+        $customers = getAllCustomer();
+        //dd($customers);
+        return view('revenue.test', compact('active', 'paginate', 'revenues', 'customers'));
     }
 
     public function create()

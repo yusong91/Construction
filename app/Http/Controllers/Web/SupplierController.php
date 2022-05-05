@@ -10,7 +10,6 @@ use Vanguard\Repositories\Supplier\SupplierRepository;
 
 class SupplierController extends Controller
 {
-    
     private $supplier;
      
     public function __construct(SupplierRepository $supplier)

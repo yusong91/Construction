@@ -50,7 +50,7 @@
         }
 
         .select2-container--default .select2-selection--single{
-            border: 1px solid #C3CAD2 !important; 
+            border: 0 solid #C3CAD2 !important; 
             border-radius: 3 !important; 
             padding: 6px 6px;
             width: 100%;
@@ -63,7 +63,9 @@
             top: 6px !important;
             right: 1px;
             width: 20px
-        } 
+        }  
+
+        
    
 </style> 
  
@@ -79,7 +81,7 @@
         </form>
     </div>
 </div>
-
+ 
 <script>
 // Add the following code if you want the name of the file appear on select
 $(".custom-file-input").on("change", function() {

@@ -15,6 +15,11 @@ class Equipment extends Model
         'equip_type_id', 'equipment_id', 'brand_id','chassis_no' ,'engine_no', 'historical_cost', 'purchase_date', 'weight', 'year', 'receipt_no', 'vender', 'note', 'image', 'sold'
     ];
 
+    public function revenue_parent_quipment(){    
+  
+        return $this->belongsTo('Vanguard\Model\CommonCode','equip_type_id'); 
+    }
+
     public function parent_quipment(){    
   
         return $this->belongsTo('Vanguard\Model\CommonCode','equip_type_id'); 

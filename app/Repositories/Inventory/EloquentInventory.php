@@ -12,14 +12,14 @@ class EloquentInventory implements InventoryRepository
 
     public function paginate($perPage, $search = null)
     {   
-        $query = Inventory::query()->with('parent_sparepart');
+        $query = Inventory::query()->with(['parent_sparepart', 'parent_warehouse']);
 
         if ($search) {
             $query->where(function ($q) use ($search) {
                 $q->where('name', "like", "%{$search}%");
                 $q->orWhere('menufacture', 'like', "%{$search}%");
                 $q->orWhere('vender', 'like', "%{$search}%"); 
-                $q->orWhere('warehouse_location', 'like', "%{$search}%");
+                
             });
         } 
         
@@ -60,7 +60,7 @@ class EloquentInventory implements InventoryRepository
                 'unit'=>$item['4'],
                 'price'=>(int)$item['5'],
                 'purchased_date'=>$this->getDate($item['6']),
-                'warehouse_location'=>$item['7'],
+                'warehouse_id'=>$item['7'],
                 'note'=>$item['8'],
                 'image'=>$file_name,
                 'created_at'=>$now,
@@ -77,14 +77,9 @@ class EloquentInventory implements InventoryRepository
 
     public function update($id, array $data)
     {
-        //dd($data['spare_id']);
         $now = Carbon::now(); 
         $purchased_date = $this->getDate($data['purchased_date']);
      
-            // $file_img = $item[''];
-            // $file_name = $file_img->getClientOriginalName();
-            // $save_path_img = storage_path('images');
-            // $file_img->move($save_path_img, $file_name);
         $insert_data =[                 
             'name'=>$data['name'],
             'sparep_id'=>$data['spare_id'],
@@ -94,7 +89,7 @@ class EloquentInventory implements InventoryRepository
             'unit'=>$data['unit'],
             'price'=>$data['price'],
             'purchased_date'=>$purchased_date,
-            'warehouse_location'=>$data['warehouse_location'],
+            'warehouse_id'=>$data['warehouse_id'],
             'note'=>$data['note'],
             'updated_at'=>$now
         ];            

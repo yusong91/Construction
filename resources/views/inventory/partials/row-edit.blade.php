@@ -58,7 +58,11 @@
                 </td>
          
                 <td>
-                    <input type="text" class="form-control" name="warehouse_location" style="width: 250px;" value="{{ $edit->warehouse_location }}">
+                    <select class="warehouse form-control" required name="warehouse_id" data-live-search="true" style="width: 200px;">
+                        @foreach($warehouses as $item)
+                            <option value="{{ $item->id }}" >{{ $item->name }}</option>
+                        @endforeach 
+                    </select>
                 </td>
 
                 <td>

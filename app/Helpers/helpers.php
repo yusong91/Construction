@@ -82,9 +82,24 @@ if(!function_exists('getStringDate')){
         }
         $time = strtotime(str_replace('/', '-', $date));
         return date('Y-m-d', $time);
-       
     }
 }
+
+if(!function_exists('getAllWarehouse')){
+    function getAllWarehouse(){
+        $data = \Vanguard\Model\Warehouse::all();
+        return $data;
+    }
+}
+
+if(!function_exists('getAllCustomer')){
+    function getAllCustomer(){
+        $data = \Vanguard\Model\Customer::with('child_revenue')->with('child_revenue.parent_equipment')->with('child_revenue.parent_equipment.revenue_parent_quipment')->get();
+        return $data;
+    }
+}
+
+
 
 
 

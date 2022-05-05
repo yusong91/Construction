@@ -13,7 +13,7 @@ class Inventory extends Model
 
     protected $fillable = [
             
-        'name', 'sparep_id', 'menufacture', 'vender', 'quantity', 'unit', 'price', 'purchased_date', 'warehouse_location', 'image'
+        'name', 'sparep_id', 'menufacture', 'vender', 'quantity', 'unit', 'price', 'purchased_date', 'warehouse_id', 'image'
     ];
 
     public function parent_sparepart(){    
@@ -26,6 +26,10 @@ class Inventory extends Model
 
     public function parent_equipment(){    
         return $this->belongsTo('Vanguard\Model\Customer','equipment_id'); 
+    }
+
+    public function parent_warehouse(){    
+        return $this->belongsTo('Vanguard\Model\Warehouse','warehouse_id'); 
     }
 
     

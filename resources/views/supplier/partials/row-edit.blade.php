@@ -8,6 +8,7 @@
             <th scope="col" class="text-center">Job Title</th>
             <th scope="col" class="text-center">Address</th>
             <th scope="col" class="text-center">Other</th>
+            <th scope="col" class="text-center">Note</th>
         </tr>
     </thead>
     <tbody>
@@ -47,7 +48,12 @@
                     </td>
                     <td>
                         <div class="form-floating">
-                            <input type="text" class="form-control" name="other" style="width: 300px;" value="{{ $edit->other }}">
+                            <input type="text" class="form-control" name="other" style="width: 200px;" value="{{ $edit->other }}">
+                        </div>   
+                    </td> 
+                    <td>
+                        <div class="form-floating">
+                            <input type="text" class="form-control" name="note" style="width: 350px;" value="{{ $edit->note }}">
                         </div>   
                     </td>          
                 <tr>

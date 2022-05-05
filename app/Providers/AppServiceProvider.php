@@ -37,6 +37,8 @@ use Vanguard\Repositories\Staff\EloquentStaff;
 use Vanguard\Repositories\Staff\StaffRepository;
 use Vanguard\Repositories\Maintenance\EloquentMaintenance;
 use Vanguard\Repositories\Maintenance\MaintenanceRepository;
+use Vanguard\Repositories\Warehouse\EloquentWarehouse;
+use Vanguard\Repositories\Warehouse\WarehouseRepository;
 
 
 
@@ -72,6 +74,7 @@ class AppServiceProvider extends ServiceProvider
         $this->app->singleton(RevenueRepository::class, EloquentRevenue::class);
         $this->app->singleton(StaffRepository::class, EloquentStaff::class);
         $this->app->singleton(MaintenanceRepository::class, EloquentMaintenance::class);
+        $this->app->singleton(WarehouseRepository::class, EloquentWarehouse::class);
         
         if ($this->app->environment('local')) {
             $this->app->register(\Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class);

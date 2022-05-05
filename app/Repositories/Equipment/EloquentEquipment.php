@@ -6,6 +6,8 @@ use Vanguard\Model\Equipment;
 use Vanguard\Model\CommonCode;
 use DB;
 use Carbon\Carbon; 
+use Illuminate\Support\Facades\Storage;
+
 
 
 class EloquentEquipment implements EquipmentRepository
@@ -94,10 +96,20 @@ class EloquentEquipment implements EquipmentRepository
             if(count($item) < 12){
                 continue;
             }
-            $file_img = $item['11'];
-            $file_name = $file_img->getClientOriginalName();
-            $save_path_img = storage_path('images');
-            $file_img->move($save_path_img, $file_name);
+            //$file_img = $item['11'];
+            // $file_name = $file_img->getClientOriginalName();
+            // $save_path_img = storage_path('images');
+            // $file_img->move($save_path_img, $file_name);
+
+
+            $digital_file = "";
+            if(isset($item['11'])) 
+            { 
+                $file = $item['11'];
+                $digital_file = Storage::putFile('img', $file);
+            }
+
+
             array_push($insert_data,[                 
                 'equip_type_id'=>$type_id,
                 'equipment_id'=>$item['0'],

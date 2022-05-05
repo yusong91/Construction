@@ -9,6 +9,7 @@
             <th class="text-center align-middle">Job Title</th>
             <th class="text-center align-middle">Address</th>
             <th class="text-center align-middle">Other</th>
+            <th class="text-center align-middle">Note</th>
             <th class="text-center align-middle">Action</th>
                     
         </thead> 
@@ -26,7 +27,8 @@
                     <td class="text-center align-middle">{{ $item->email }}</td>
                     <td class="text-center align-middle">{{ $item->job }}</td>
                     <td class="text-center align-middle">{{ $item->address }}</td>
-                    <td class="text-center align-middle">{{ $item->other }}</td>   
+                    <td class="text-center align-middle">{{ $item->other }}</td>  
+                    <td class="text-center align-middle">{{ $item->note }}</td>   
                     <td class="text-center align-middle">                
                        
                         <a href="{{ route('supplier.edit', $item->id) }}"

@@ -128,6 +128,11 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
      */
     Route::resource('report-equipmentoutstand', 'ReportEquipmentOutstandController')->middleware('permission:report.equipmentoutstand.index');
 
+    /**
+     * Warehouse
+     */
+    Route::resource('warehouse', 'warehouseController');
+
 
     /**
      * User Management
@@ -248,6 +253,7 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
      * Customer
      */
     Route::resource('customer', 'CustomerController')->middleware('permission:customer.index');
+    
 
     /**
      * Equipment Sold

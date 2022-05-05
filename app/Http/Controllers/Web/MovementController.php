@@ -6,7 +6,6 @@ use Illuminate\Http\Request;
 use Vanguard\Http\Controllers\Controller;
 use Vanguard\Repositories\MovementRent\MovementRepository;
 
-
 class MovementController extends Controller
 { 
     private $movement;

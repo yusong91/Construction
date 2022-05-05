@@ -21,7 +21,7 @@ class Customer extends Model
     public function child_revenue(){    
    
         return $this->hasMany('Vanguard\Model\Revenue','customer_id'); 
-    }
+    } 
 
     public function child_equipment(){    
    

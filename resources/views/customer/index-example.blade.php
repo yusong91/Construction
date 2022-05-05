@@ -64,35 +64,35 @@
         <div class="table-responsive" style="padding-top: 40px;">
              <table class="table table-borderless table-striped">
                 <thead> 
-                <th class="text-center verticel-center">No</th>
                     <th class="text-center verticel-center">Company Name</th>
                     <th class="text-center verticel-center">Customer Name</th>
-                    <th class="text-center verticel-center">Customer Phone</th>
-                    <th class="text-center verticel-center">Email</th>
-                    <th class="text-center verticel-center">Job</th>
-                    <th class="text-center verticel-center">Address</th>
-                    <th class="text-center verticel-center">Other</th>
+                    <th class="text-center verticel-center">Rental Service</th>
+                    <th class="text-center verticel-center">Payment</th>
                     <th class="text-center verticel-center">Action</th>
                 </thead>
                 <tbody>  
 
                     @if(count($customers))
-                        @foreach($customers as $item) 
+                        @foreach($customers as $items) 
                             <tr>
-                                <td class="text-center verticel-center" >{{ 1 + $loop->index }}</td>
-                                <td class="text-center verticel-center" >{{ $item->company_name }}</td>
-                                <td class="text-center verticel-center" >{{ $item->customer_name }}</td>
-                                <td class="text-center verticel-center" >{{ $item->customer_phone }}</td>
-                                <td class="text-center verticel-center" >{{ $item->email }}</td>
-                                <td class="text-center verticel-center" >{{ $item->job }}</td>
-                                <td class="text-center verticel-center" >{{ $item->address }}</td>
-                                <td class="text-center verticel-center" >{{ $item->other }}</td>
+                                <th class="text-center verticel-center"><h5>{{ $items->company_name }}</h5></th>
+                                <td class="text-center verticel-center" >{{ count($items->child_revenue) < 1 ? $items->customer_name : '' }}</td>
+                                <th scope="row" colspan="2"></th>
                                 <td class="text-center verticel-center text-center">
-                                    <a href="{{ route('customer.edit', $item->id) }}" class="btn btn-icon edit" title="Update" data-toggle="tooltip" data-placement="top"> <i class="fas fa-edit"></i></a>
-                                    <a href="{{ route('customer.destroy', $item->id) }}" class="btn btn-icon" data-action="" data-toggle="tooltip" data-placement="top" data-method="DELETE" data-confirm-title="@lang('app.please_confirm')" data-confirm-text="@lang('app.confirm_delete')" data-confirm-delete="@lang('app.yes_proceed')"><i class="fas fa-trash"></i></a>
+                                    <a href="{{ route('customer.show', $items->id) }}" class="btn btn-icon edit" title="List Customer" data-toggle="tooltip" data-placement="top"> <i class="fas fa-list"></i></a>
+                                    <a href="{{ route('customer.edit', $items->id) }}" class="btn btn-icon edit" title="Update" data-toggle="tooltip" data-placement="top"> <i class="fas fa-edit"></i></a>
+                                    <a href="{{ route('customer.destroy', $items->id) }}" class="btn btn-icon" data-action="" data-toggle="tooltip" data-placement="top" data-method="DELETE" data-confirm-title="@lang('app.please_confirm')" data-confirm-text="@lang('app.confirm_delete')" data-confirm-delete="@lang('app.yes_proceed')"><i class="fas fa-trash"></i></a>
                                 </td>
                             </tr>
-                            
+                            @foreach($items->child_revenue as $item)
+                                <tr>
+                                    <td></td>
+                                    <td class="text-center verticel-center">{{ $item->customer_name }}</td>
+                                    <td class="text-center verticel-center">{{ $item->parent_equipment->revenue_parent_quipment->value }} : {{ $item->parent_equipment->equipment_id }}</td>
+                                    <td class="text-center verticel-center">${{ $item->amount ?? '' }}</td>
+                                    <td></td>
+                                </tr>
+                            @endforeach
                         @endforeach
                     @else
                         <tr>

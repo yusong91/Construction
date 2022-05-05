@@ -6,14 +6,14 @@ use Vanguard\Model\Customer;
 use Vanguard\Model\Equipment;
 use DB;
 use Carbon\Carbon;
-use Illuminate\Database\SQLiteConnection;
+use Illuminate\Database\SQLiteConnection; 
 
 class EloquentCustomer implements CustomerRepository
 { 
-
+    //->with('child_revenue')->with('child_revenue.parent_equipment')->with('child_revenue.parent_equipment.revenue_parent_quipment')
     public function paginate($perPage, $search = null)
     {   
-        $query = Customer::query()->with('child_revenue');
+        $query = Customer::query();
 
         if ($search) {
             $query->where(function ($q) use ($search) {
@@ -26,19 +26,6 @@ class EloquentCustomer implements CustomerRepository
         if ($search) {
             $result->appends(['search' => $search]);
         }
-
-        foreach($result as $items)
-        {
-            foreach($items->child_revenue as $item)
-            {
-                $equipment = Equipment::where('id', $item['equipment_id'])->with('parent_quipment')->get();
-                
-                $item->setAttribute('equipment', $equipment);
-
-                //dd(gettype($item));
-            }
-        }
-       
         return $result;
     }
 

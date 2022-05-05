@@ -102,7 +102,7 @@
                         <tr>
                             <td class="text-center align-middle">{{ $loop->index + 1}}</td>
                             <td class="text-center align-middle">{{ $item->name }}</td>
-                            <td class="text-center align-middle">{{ $item->warehouse_location }}</td>
+                            <td class="text-center align-middle">{{ $item->parent_warehouse->name }}</td>
                             <td class="text-center align-middle">{{ $item->quantity }}</td>
                             <td class="text-center align-middle">{{ $item->quantity - $item->used }}</td>
                             <td class="text-center align-middle">${{ $item->price }}</td> 
@@ -114,15 +114,8 @@
                             <td class="text-center align-middle"><img src="{{ url('/storage/song.jpg') }}" class="rounded mx-auto d-block" alt="" style="width: 100px;"></td>
                             <td class="text-center align-middle">{{ $item->note }}</td>
                             <td class="text-center align-middle">
-                                
                                 <a href="{{ route('inventory.edit', $item->id) }}" class="btn btn-icon edit" title="Update" data-toggle="tooltip" data-placement="top"> <i class="fas fa-edit"></i></a>
-
-                                <a href="{{ route('inventory.destroy', $item->id) }}" class="btn btn-icon" data-action="" title="Delete" data-toggle="tooltip" data-placement="top" data-method="DELETE"
-                                    data-confirm-title="@lang('app.please_confirm')"
-                                    data-confirm-text="@lang('app.confirm_delete')"
-                                    data-confirm-delete="@lang('app.yes_proceed')">
-                                                <i class="fas fa-trash"></i>
-                                </a>
+                                <a href="{{ route('inventory.destroy', $item->id) }}" class="btn btn-icon" data-action="" title="Delete" data-toggle="tooltip" data-placement="top" data-method="DELETE"data-confirm-title="@lang('app.please_confirm')"data-confirm-text="@lang('app.confirm_delete')"data-confirm-delete="@lang('app.yes_proceed')"><i class="fas fa-trash"></i></a>
                             </td>
                         </tr>
                         @endforeach

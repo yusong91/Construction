@@ -44,7 +44,7 @@ class EquipmentController extends Controller
         // $validated = $request->validate([
         //     'title' => 'required|unique:posts|max:255',
         //     'body' => 'required',
-        // ]);
+        // ]); 
 
         $data = $request->all();
         $type_id = $request->input('equip_type_id');

@@ -84,6 +84,8 @@
                     <a class="dropdown-item" href="{{ route('common-codes.show', 7) }}">Brand</a>
                     <a class="dropdown-item" href="{{ route('common-codes.show', 10) }}">Equipment Type</a>
                     <a class="dropdown-item" href="{{ route('staff.index') }}">Staff</a>
+                    <a class="dropdown-item" href="{{ route('warehouse.index') }}">Warehouse</a>
+                </div>
             </li>
 
             @hook('navbar:items')

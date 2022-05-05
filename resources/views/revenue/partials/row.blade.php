@@ -1,4 +1,4 @@
-<div class="table-responsive" style="padding-top: 40px;">
+<div class="table-responsive">
     <table class="table table-borderless table-striped" style="width: 1500px;">
         <thead> 
             <th class="text-center align-middle">No</th>

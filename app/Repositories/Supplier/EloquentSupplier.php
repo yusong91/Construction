@@ -5,7 +5,7 @@ use Vanguard\Model\Supplier;
 use Carbon\Carbon;
 use Validator;
 use DB;
-
+ 
 class EloquentSupplier implements SupplierRepository
 {  
     public function paginate($perPage, $search = null)
@@ -49,6 +49,7 @@ class EloquentSupplier implements SupplierRepository
                 'job'=>$item['4'],
                 'address'=>$item['5'],
                 'other'=>$item['6'],
+                'note'=>$item['7'],
                 'created_at'=>$now,
                 'updated_at'=>$now
             ]);            

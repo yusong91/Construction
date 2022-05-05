@@ -25,7 +25,7 @@
 var sparep_id = <?php echo $edit->sparep_id; ?>
 
 $('.js-example-responsive').select2({
-    placeholder: 'Equipment Type *',
+    placeholder: '',
     allowClear: true
 }).val(sparep_id).trigger('change');
 

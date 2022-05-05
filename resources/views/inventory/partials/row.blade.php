@@ -59,7 +59,11 @@
                 </td>
          
                 <td>
-                    <input type="text" class="form-control" name="{{$i}}warehouse_location" style="width: 250px;">
+                    <select class="form-control js-example-responsive"  name="{{$i}}warehouse_id" data-live-search="true" style="width: 250px; border: 2px solid #ccc;">    
+                        @foreach($warehouses as $item)
+                            <option value="{{ $item->id }}">{{ $item->name }}</option>
+                        @endforeach     
+                    </select>            
                 </td>
 
                 <td>

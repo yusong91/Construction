@@ -29,7 +29,7 @@ class InventoryController extends Controller
         foreach($inventorys as $item){
             $inventory_groups[$item->parent_sparepart->id][] = $item;
         } 
-        //dd($inventory_groups['13'][0]->parent_sparepart['value']);
+        //dd($inventorys);
         $raw_paginate = json_encode($inventorys); 
         $paginate = json_decode($raw_paginate);
         return view('inventory.index', compact('active' , 'paginate' , 'inventory_groups'));
@@ -38,8 +38,9 @@ class InventoryController extends Controller
     public function create()
     {
         $active = 'inventory';
+        $warehouses = getAllWarehouse();
         $spare_parts = getConmonCode('spare_part');
-        return view('inventory.create', compact('active', 'spare_parts'));
+        return view('inventory.create', compact('active', 'spare_parts', 'warehouses'));
     }
 
     public function store(Request $request)
@@ -65,20 +66,20 @@ class InventoryController extends Controller
 
     public function show($id)
     {  
-        //
+        // 
     } 
 
     public function edit($id)
     {
         $active = 'inventory';
+        $warehouses = getAllWarehouse();
         $spare_parts = getConmonCode('spare_part');
         $edit = $this->inventory->find($id);
-        return view('inventory.edit', compact('active', 'spare_parts', 'edit'));
+        return view('inventory.edit', compact('active', 'spare_parts', 'edit' , 'warehouses'));
     }
 
     public function update(Request $request, $id)
     {
-       
         $data = $this->inventory->update($id, $request->all());
         if($data)
         {
