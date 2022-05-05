@@ -28,9 +28,9 @@
                 @endforeach
             @else            
                         
-                        <tr>
-                            <td colspan="4"><em>@lang('app.no_records_found')</em></td>
-                        </tr>
+                <tr>
+                    <td colspan="4"><em>@lang('app.no_records_found')</em></td>
+                </tr>
             @endif   
                 </tbody>
     </table> 
