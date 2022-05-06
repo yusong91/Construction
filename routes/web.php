@@ -131,7 +131,7 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
     /**
      * Warehouse
      */
-    Route::resource('warehouse', 'warehouseController');
+    Route::resource('warehouse', 'WarehouseController');
 
 
     /**
