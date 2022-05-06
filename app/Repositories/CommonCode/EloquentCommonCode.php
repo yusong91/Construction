@@ -11,7 +11,6 @@ class EloquentCommonCode implements CommonCodeRepository
 { 
     public function getEquipmentReport($key) 
     {   
-    
         return CommonCode::where('parent_id', 10)->with('children_equipment')->with('children_equipment.child_revenue')->with('children_equipment.child_maintenance')->whereHas('children_equipment.child_revenue', function($q) use ($key) {
 
             $q->whereDate('from_date', '>=', getStringDate($key['from_date'])); 
