@@ -122,11 +122,11 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
      * Report Movement
      */
     Route::resource('report-movement', 'ReportMovementController')->middleware('permission:report.movement.index');
-
+ 
     /**
      * Report Equipment Outstanding
      */
-    Route::resource('report-equipmentoutstand', 'ReportEquipmentOutstandController')->middleware('permission:report.equipmentoutstand.index');
+    Route::resource('report-equipmentoutstand', 'ReportEquipmentOutStandController')->middleware('permission:report.equipmentoutstand.index');
 
     /**
      * Warehouse

@@ -21,24 +21,24 @@ class ReportMovementController extends Controller
     public function index()
     {
         $active = 'reportmovement'; 
-
-        return view('report.movement-report.index', compact('active'));        
+        $key_sort = ['asc'=>'A-Z', 'desc'=>'Z-A'];
+        $sort = '';
+        return view('report.movement-report.index', compact('active', 'key_sort', 'sort'));        
     }
 
     public function create()
     {
-        
+         
     }
-
+ 
     public function store(Request $request)
     {
         $active = 'reportmovement'; 
-
         $data = $request->all();
-
         $equipments = $this->common->getEquipmentMovement($data);
-
-        return view('report.movement-report.result', compact('active', 'equipments')); 
+        $key_sort = ['asc'=>'A-Z', 'desc'=>'Z-A'];
+        $sort = $data['sort_by'];
+        return view('report.movement-report.result', compact('active', 'equipments', 'key_sort', 'sort', 'data')); 
     }
 
     public function show($id)

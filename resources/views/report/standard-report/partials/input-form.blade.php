@@ -3,22 +3,25 @@
             
             <div class="col-4">
                 <div class="form-floating mb-3">
-                    <input type="text" id="a_date" class="form-control" name="from_date" placeholder="From Date">       
+                    <label for="a_date">@lang('From Date')</label>
+                    <input type="text" id="a_date" class="form-control" name="from_date" value="{{ isset($data['to_date']) ? $data['to_date'] : '' }}" required >       
                 </div>
-            </div>
+            </div> 
   
             <div class="col-4">
                 <div class="form-floating mb-3">
-                    <input type="text" id="b_date" class="form-control" name="to_date" placeholder="To">
+                    <label for="a_date">@lang('To Date')</label>
+                    <input type="text" id="b_date" class="form-control" name="to_date" value="{{ isset($data['to_date']) ? $data['to_date'] : '' }}" required >
                 </div>
             </div>
 
             <div class="col-md-4">
                 <div class="form-floating mb-3">
+                    <label for="a_date">@lang('Sort By')</label>
                     <select class="form-control js-example-responsive" name="sort_by" data-live-search="true" id="select_box" required>
-                        <option value="asc">A-Z</option>
-                        <option value="desc">Z-A</option>
-            
+                        @foreach($key_sort as $key => $value)
+                            <option value="{{ $key }}" {{  $sort == $key ? 'selected' : '' }}>{{ $value }}</option>
+                        @endforeach
                     </select> 
                 </div>
             </div>
@@ -26,11 +29,13 @@
 
 
 <script>
+
+    var sory_key = ($data['sort_by'] ? $data['sort_by'] : '');
     
     $('.js-example-responsive').select2({
-        placeholder: 'Select Sory By',
+        placeholder: '',
         allowClear: true
-    }).val(null).trigger('change');
+    }).val(sory_key).trigger('change');
     $( document ).tooltip();
 
 </script>

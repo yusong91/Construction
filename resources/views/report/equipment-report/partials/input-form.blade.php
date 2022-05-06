@@ -32,7 +32,7 @@
     var sory_key = ($data['sort_by'] ? $data['sort_by'] : '');
 
     $('.js-example-responsive').select2({
-        placeholder: '',
+        placeholder: 'Sort By',
         allowClear: true
     }).val(sory_key).trigger('change');
     $( document ).tooltip();

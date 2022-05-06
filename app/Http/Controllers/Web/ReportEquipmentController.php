@@ -40,9 +40,7 @@ class ReportEquipmentController extends Controller
     public function store(Request $request)
     {
         $active = 'reportequipment'; 
-
         $data = $request->all();
-       // dd($data);
         $key_sort = ['asc'=>'A-Z', 'desc'=>'Z-A'];
         $equipment = $this->common->getEquipmentReport($data);
         $sort = $data['sort_by'];

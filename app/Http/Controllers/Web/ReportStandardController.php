@@ -22,28 +22,10 @@ class ReportStandardController extends Controller
     public function index() 
     {
         $active = 'reportstandard'; 
-
-        $incomes = $this->revenue->all();
-
-        $expenses = $this->maintenance->all();
-
-        $total_expense = 0;
-        $total_income = 0;
-        $net_income = 0;
-
-        foreach($expenses as $item)
-        {
-            $total_expense += $item->unit_price * $item->amount;
-        }
-
-        foreach($incomes as $item)
-        {
-            $total_income += $item->amount;
-        }
-
-        $net_income = $total_income - $total_expense;
+        $key_sort = ['asc'=>'A-Z', 'desc'=>'Z-A'];
+        $sort = '';
         
-        return view('report.standard-report.index', compact('active', 'expenses', 'incomes', 'total_expense', 'total_income', 'net_income'));
+        return view('report.standard-report.index', compact('active', 'key_sort', 'sort'));
     } 
  
     public function create()
@@ -54,23 +36,17 @@ class ReportStandardController extends Controller
     public function store(Request $request)
     {
         $active = 'reportstandard'; 
-
         $data = $request->all();
-
         $str_from_date = $data['from_date'];
-
         $str_to_date = $data['to_date'];
-
         $sory_by = $data['sort_by']; 
-
         $incomes = $this->revenue->findByKey([getStringDate($str_from_date), getStringDate($str_to_date), $sory_by]);
-
         $expenses = $this->maintenance->all();
-
         $total_expense = 0;
         $total_income = 0;
         $net_income = 0;
- 
+        $key_sort = ['asc'=>'A-Z', 'desc'=>'Z-A'];
+        $sort = $data['sort_by'];
         foreach($expenses as $item)
         {
             $total_expense += $item->unit_price * $item->amount;
@@ -83,7 +59,7 @@ class ReportStandardController extends Controller
 
         $net_income = $total_income - $total_expense;
         
-        return view('report.standard-report.result', compact('active', 'expenses', 'incomes', 'total_expense', 'total_income', 'net_income'));
+        return view('report.standard-report.result', compact('active', 'expenses', 'incomes', 'total_expense', 'total_income', 'net_income', 'key_sort', 'sort', 'data'));
     }
 
     public function show($id)
