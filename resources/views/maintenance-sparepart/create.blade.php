@@ -1,7 +1,5 @@
 @extends('layouts.main_app')
 
-
-
 @section('page-title', __('Dashboard'))
 @section('page-heading', __('Dashboard'))
 
@@ -20,41 +18,78 @@
             padding: 0 !important;
             margin: 0 !important;
     }
-    .form-control, .custom-file-label {
+
+    .form-borderless {
             border: 0;
     }
-
+    
     .select2-container .select2-selection--single{
-            height:40px !important;
-            width: 100%;
-        }
+        height:40px !important;
+        width: 100%;
+    }
         
-        .select2-container--default .select2-selection--single{
-            border: 0 solid #C3CAD2 !important; 
-            border-radius: 3 !important; 
-            padding: 6px 6px;
-            width: 100%;
-        }  
+    .select2-container--default .select2-selection--single{
+        border: 0 solid #C3CAD2 !important; 
+        border-radius: 3 !important; 
+        padding: 6px 6px;
+        width: 100%;
+    }  
 
-        .select2-container--default .select2-selection--single .select2-selection__arrow {
-            height: 30px;
-            width: 100%;
-            position: absolute;
-            top: 6px !important;
-            right: 1px;
-            width: 20px
-        } 
+    .select2-container--default .select2-selection--single .select2-selection__arrow {
+        height: 30px;
+        width: 100%;
+        position: absolute;
+        top: 6px !important;
+        right: 1px;
+        width: 20px
+    } 
+
+    .fixed
+    {
+        position:fixed;
+        width: 50%;
+        
+       
+    }
     
 </style>
 
+
+
 <div class="card">
     <div class="card-body">
-        @include('partials.button_group_transaction') 
-        <form action="{{ route('maintenance.store') }}" id="user-form" method="POST" accept-charset="UTF-8" autocomplete="off">
-            @include('maintenance-sparepart.partials.input-form')
-            {{ csrf_field() }}
-            <button type="submit" class="btn btn-primary mt-4">Create</button>
-        </form>
+
+        @include('partials.button_group_transaction')
+
+        <fieldset class="border p-2 " style="overflow-x: scroll;">
+
+            <legend>New Movement & Rent</legend>
+        
+            <div class="row">
+                
+                <div class="col-4">
+                    <label for="invoice">@lang('Maintenance Date')</label>   
+                    <input class="form-control" type="text" id="a_date">        
+                </div> 
+
+                <div class="col-4"></div>
+
+                <div class="col-4">
+                    <label for="invoice">@lang('Invoice Number/Other Attachment')</label>
+                    <div class="custom-file">
+                        <input type="file" class="custom-file-input" id="file_replacement" name="invoice" style="width: 350px;">
+                        <label class="custom-file-label" for="file_replacement"></label>
+                    </div>   
+                </div> 
+
+            </div> 
+
+            @include('maintenance-sparepart.partials.row-input')
+
+            <button type="submit" class="btn btn-primary">Create</button>
+
+        </fieldset>
+
     </div>
 </div>
 

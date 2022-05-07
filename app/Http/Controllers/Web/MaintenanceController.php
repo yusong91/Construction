@@ -32,7 +32,9 @@ class MaintenanceController extends Controller
         $staffs = getStaff();
         $suppliers = getSupplier(); 
         $equipments = getEquipment();
-        return view('maintenance-sparepart.create', compact('active', 'staffs', 'suppliers', 'spare_parts', 'equipments'));
+        $types = ['new_spare_part'=>'New Spare Part', 'inventory'=>'From Inventory', 'service'=>'Service'];
+        
+        return view('maintenance-sparepart.create', compact('active', 'staffs', 'suppliers', 'spare_parts', 'equipments', 'types'));
     }
 
     public function store(Request $request)

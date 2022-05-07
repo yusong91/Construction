@@ -4,5 +4,4 @@
 
     @include('movement-rent.partials.row-input')
                 
- 
 </fieldset>

@@ -75,16 +75,16 @@
                 <a class="nav-link {{ Request::is('report-standard*' , 'report-equipment*', 'report-movement*') ? 'active' : ''  }}"  href="{{ route('report-standard.index') }}"><h5 class="header mb-0">Report</h5></a>
             </li>
 
-            <li class="nav-item dropdown d-flex align-items-center visible-lg">
+            <li class="nav-item dropdown d-flex align-items-center visible-lg {{ Request::is('common-codes*', 'staff*', 'warehouse*') ? 'active' : ''  }} ">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-expanded="false">
                     <span style="font-size:17px; font-weight:bold; font-weight: 540;">Setting<span>
                 </a>
 
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="{{ route('common-codes.show', 7) }}">Brand</a>
-                    <a class="dropdown-item" href="{{ route('common-codes.show', 10) }}">Equipment Type</a>
-                    <a class="dropdown-item" href="{{ route('staff.index') }}">Staff</a>
-                    <a class="dropdown-item" href="{{ route('warehouse.index') }}">Warehouse</a>
+                    <a class="dropdown-item {{ Request::is('common-codes/show/7') ? 'active' : ''  }}" href="{{ route('common-codes.show', 7) }}">Brand</a>
+                    <a class="dropdown-item {{ Request::is('common-codes/show/10') ? 'active' : ''  }}" href="{{ route('common-codes.show', 10) }}">Equipment Type</a>
+                    <a class="dropdown-item {{ Request::is('staff*') ? 'active' : ''  }}" href="{{ route('staff.index') }}">Staff</a>
+                    <a class="dropdown-item {{ Request::is('warehouse*') ? 'active' : ''  }}" href="{{ route('warehouse.index') }}">Warehouse</a>
                 </div>
             </li>
 

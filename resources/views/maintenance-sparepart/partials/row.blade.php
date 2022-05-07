@@ -1,5 +1,5 @@
 <div class="table-responsive" style="padding-top: 40px;">
-             <table class="table table-borderless table-striped" style="width: 2000px;">
+             <table class="table table-borderless table-striped">
                 <thead> 
                     <th class="text-center align-middle" style="width: 100px;">Date</th>
                     <th class="text-center align-middle" style="width: 200px;">Equipment ID</th>
