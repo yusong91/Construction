@@ -121,7 +121,7 @@ class EloquentEquipment implements EquipmentRepository
                 'receipt_no'=>$item['9'],
                 'vender'=>$item['4'],
                 'note'=>$item['10'],
-                'image'=>$file_name,
+                'image'=>$digital_file,
                 'created_at'=>$now,
                 'updated_at'=>$now
             ]);            

@@ -13,7 +13,7 @@ use Vanguard\Repositories\Equipment\EquipmentRepository;
 use Illuminate\Support\Facades\Storage;
 use Google\Cloud\Storage\StorageClient;
 
-
+ 
 class EquipmentController extends Controller
 {   
     private $equipment;
