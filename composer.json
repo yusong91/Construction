@@ -32,6 +32,7 @@
         "anhskohbo/no-captcha": "3.*",
         "fideloper/proxy": "^4.2",
         "fruitcake/laravel-cors": "^1.0",
+        "google/cloud-storage": "^1.26",
         "intervention/image": "^2.3",
         "jenssegers/agent": "^2.5",
         "lab404/laravel-impersonate": "^1.2",
@@ -42,8 +43,8 @@
         "laravelcollective/html": "^6.2",
         "proengsoft/laravel-jsvalidation": "^4.0.0",
         "spatie/laravel-query-builder": "^3.0",
-        "vanguardapp/announcements": "^3.0",
         "vanguardapp/activity-log": "^3.0",
+        "vanguardapp/announcements": "^3.0",
         "vanguardapp/plugins": "^3.0.0",
         "webpatser/laravel-countries": "dev-master"
     },
