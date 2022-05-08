@@ -29,28 +29,18 @@
             <div class="col-4"> 
                 <form action="" method="GET" class="border-bottom-light"  accept-charset="UTF-8">
                     <div class="input-group custom-search-form">
-                        <input  type="text"
-                                class="form-control input-solid"
-                                name="search"
-                                value="{{ Request::get('search') }}"
-                                placeholder="Search"/>
+                        <input  type="text" class="form-control input-solid" name="search" value="{{ Request::get('search') }}" placeholder="Search"/>
 
-                                            <span class="input-group-append">
-                                                  @if (Request::has('search') && Request::get('search') != '')
-                                                    <a href="{{ route('inventory.index') }}" 
-                                                    class="btn btn-light d-flex align-items-center"
-                                                    role="button">
-                                                        <i class="fas fa-times text-muted"></i>
-                                                    </a>
-                                                @endif
-                                                <button class="btn btn-light" type="submit" id="search-activities-btn">
-                                                    <i class="fas fa-search text-muted"></i>
-                                                </button>
-                                            </span>
+                        <span class="input-group-append">
+                            @if (Request::has('search') && Request::get('search') != '')
+                                <a href="{{ route('inventory.index') }}" class="btn btn-light d-flex align-items-center" role="button"> <i class="fas fa-times text-muted"></i> </a>
+                            @endif
+                            <button class="btn btn-light" type="submit" id="search-activities-btn"> <i class="fas fa-search text-muted"></i> </button>
+                        </span>
 
-                             </div>
+                    </div>
 
-                        {{ csrf_field() }}
+                    {{ csrf_field() }}
                 </form>
      
             </div> 
@@ -102,7 +92,7 @@
                         <tr>
                             <td class="text-center align-middle">{{ $loop->index + 1}}</td>
                             <td class="text-center align-middle">{{ $item->name }}</td>
-                            <td class="text-center align-middle">{{ $item->parent_warehouse->name }}</td>
+                            <td class="text-center align-middle">{{ $item->parent_warehouse->name ?? '' }}</td>
                             <td class="text-center align-middle">{{ $item->quantity }}</td>
                             <td class="text-center align-middle">{{ $item->quantity - $item->used }}</td>
                             <td class="text-center align-middle">${{ $item->price }}</td> 
