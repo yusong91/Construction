@@ -22,27 +22,15 @@
             
                 <form action="" method="GET" class="border-bottom-light"  accept-charset="UTF-8">
                     <div class="input-group custom-search-form">
-                        <input  type="text"
-                                class="form-control input-solid"
-                                name="search"
-                                value="{{ Request::get('search') }}"
-                                placeholder="Search"/>
+                        <input  type="text" class="form-control input-solid" name="search" value="{{ Request::get('search') }}" placeholder="Search"/>
 
-                                            <span class="input-group-append">
-                                                  @if (Request::has('search') && Request::get('search') != '')
-                                                    <a href="{{ route('equipment.index') }}" 
-                                                    class="btn btn-light d-flex align-items-center"
-                                                    role="button">
-                                                        <i class="fas fa-times text-muted"></i>
-                                                    </a>
-                                                @endif
-                                                <button class="btn btn-light" type="submit" id="search-activities-btn">
-                                                    <i class="fas fa-search text-muted"></i>
-                                                </button>
-                                            </span>
-
-                             </div>
-
+                        <span class="input-group-append">
+                            @if (Request::has('search') && Request::get('search') != '')
+                                <a href="{{ route('equipment.index') }}"  class="btn btn-light d-flex align-items-center" role="button"> <i class="fas fa-times text-muted"></i></a>
+                            @endif
+                            <button class="btn btn-light" type="submit" id="search-activities-btn"> <i class="fas fa-search text-muted"></i> </button>
+                        </span>
+                    </div>
                         {{ csrf_field() }}
                 </form>
      
@@ -92,16 +80,8 @@
                                 <td class="text-center align-middle">{{ $item['child_qeuipment']->count() }}</td>
                                 <td class="text-center align-middle">{{ $item['soldout'] }}</td>
                                 <td class="text-center align-middle">គ្រឿង</td>
-                                <td class="text-center align-middle"><img src="{{ url('/storage/song.jpg') }}" width="100"></td>
-                                <td class="text-center align-middle">
-
-                                    <a href="{{ route('equipment.show', $item['id']) }}"
-                                        class="btn btn-icon edit"
-                                        title="List Eqipment"
-                                        data-toggle="tooltip" data-placement="top">
-                                            <i class="fas fa-list"></i> 
-                                    </a>
-                                </td>
+                                <td class="text-center align-middle"><img src="{{ getUrl($item['image']) }}" width="100"></td>
+                                <td class="text-center align-middle"><a href="{{ route('equipment.show', $item['id']) }}" class="btn btn-icon edit" title="List Eqipment" data-toggle="tooltip" data-placement="top"> <i class="fas fa-list"></i> </a></td>
                             </tr>
                             
                         @endforeach
