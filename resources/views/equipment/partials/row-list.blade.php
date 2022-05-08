@@ -7,7 +7,6 @@
                 <th class="text-center align-middle" style="width: 300px;">Equipment Id</th>
                 <th class="text-center align-middle" style="width: 200px;">Purchased Date</th>
                 <th class="text-center align-middle" style="width: 200px;">Brand</th>
-
                 <th class="text-center align-middle" style="width: 80px;">Year</th>
                 <th class="text-center align-middle" style="width: 300px;">Chassis No</th>
                 <th class="text-center align-middle" style="width: 300px;">Engine No</th>
@@ -20,7 +19,6 @@
             </tr>
         </thead> 
         <tbody> 
-            
             @if(count($equipments))       
                 @foreach($equipments as $item)
                     <tr>
@@ -35,17 +33,11 @@
                         <td class="text-center align-middle">{{ $item->receipt_no }}</td>
                         <td class="text-center align-middle">{{ $item->weight }}</td>
                         <td class="text-center align-middle">{{ $item->vender }}</td>
-                        <td class="text-center align-middle">image</td>
+                        <td class="text-center align-middle"><img src="{{ getUrl($item->image) }}" width="100"></td> 
                         <td class="text-center align-middle">{{ $item->note }}</td>
                         <td class="text-center align-middle">
                             <a href="{{ route('equipment.edit', $item->id) }}" class="btn btn-icon edit" title="Update" data-toggle="tooltip" data-placement="top"> <i class="fas fa-edit"></i> </a>
-
-                            <a href="{{ route('equipment.destroy', $item->id) }}" class="btn btn-icon" data-action="" title="Delete" data-toggle="tooltip" data-placement="top" data-method="DELETE"
-                                data-confirm-title="@lang('app.please_confirm')"
-                                data-confirm-text="@lang('app.confirm_delete')"
-                                data-confirm-delete="@lang('app.yes_proceed')">
-                                <i class="fas fa-trash"></i>
-                            </a>
+                            <a href="{{ route('equipment.destroy', $item->id) }}" class="btn btn-icon" data-action="" title="Delete" data-toggle="tooltip" data-placement="top" data-method="DELETE" data-confirm-title="@lang('app.please_confirm')" data-confirm-text="@lang('app.confirm_delete')" data-confirm-delete="@lang('app.yes_proceed')"><i class="fas fa-trash"></i></a>
                         </td>
                     </tr>
                 @endforeach
@@ -53,8 +45,7 @@
                 <tr>
                     <td colspan="5"><em>@lang('app.no_records_found')</em></td>
                 </tr>
-            @endif
-                                           
+            @endif                                  
         </tbody>
     </table>
 </div> 
