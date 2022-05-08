@@ -43,6 +43,7 @@
         "laravelcollective/html": "^6.2",
         "proengsoft/laravel-jsvalidation": "^4.0.0",
         "spatie/laravel-query-builder": "^3.0",
+        "superbalist/laravel-google-cloud-storage": "^2.2",
         "vanguardapp/activity-log": "^3.0",
         "vanguardapp/announcements": "^3.0",
         "vanguardapp/plugins": "^3.0.0",
