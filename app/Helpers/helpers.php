@@ -99,6 +99,13 @@ if(!function_exists('getAllCustomer')){
     }
 }
 
+if(!function_exists('getUrl')){
+    function getUrl($path){
+        $data = "https://storage.googleapis.com/construction_bucket/" . $path;
+        return $data;
+    }
+}
+
 
 
 

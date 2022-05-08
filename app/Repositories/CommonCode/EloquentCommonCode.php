@@ -46,7 +46,7 @@ class EloquentCommonCode implements CommonCodeRepository
     {
         return CommonCode::all();
     }
-
+ 
     public function create(array $data) 
     {
         return CommonCode::create($data);

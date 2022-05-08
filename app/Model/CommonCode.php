@@ -17,7 +17,7 @@ class CommonCode extends Model
         'order_column_name' => 'ordering',
         'sort_when_creating' => true,
     ];
-
+ 
     protected $fillable = [
         'key', 'value', 'parent_id', 'link', 'image',
         'active', 'ordering', 'created_by', 'updated_by',

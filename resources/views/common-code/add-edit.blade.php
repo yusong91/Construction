@@ -25,7 +25,7 @@
 @include('partials.messages')
 
 @if (isset($commonCode))
-    {!! Form::model($commonCode, ['route' => ['common-codes.update', $commonCode->id], 'method' => 'PUT', 'id' => 'common-code-form']) !!}
+    {!! Form::model($commonCode, ['route' => ['common-codes.update', $commonCode->id], 'method' => 'PUT', 'enctype'=>'multipart/form-data' ,'id' => 'common-code-form']) !!}
 @else
     {!! Form::open(['route' => 'common-codes.store', 'enctype'=>'multipart/form-data', 'id' => 'common-code-form']) !!}
 @endif

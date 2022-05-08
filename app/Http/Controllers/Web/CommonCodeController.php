@@ -45,6 +45,7 @@ class CommonCodeController extends Controller
     }
 
     public function create(Request $request){
+
         $parentCommonCode = CommonCode::find($request->parent_id);
 
         $this->breadcrumbs[0]['isActive'] = false;
@@ -56,35 +57,23 @@ class CommonCodeController extends Controller
 
     public function store(CreateRequest $request){
         
-        $file_name = null;
+        $digital_file = "";
 
-        if($request->file('image')){
-            
-            $validator = Validator::make($request->all(), [
+        $file = $request->file('image');
 
-                'image'=> 'required|mimes:jpeg,jpg,png'
-            ]); 
-
-            if ($validator->passes()) {
-
-                $image = $request->file('image');
-
-                $file_name = $image->getClientOriginalName();
-
-                $save_path = storage_path('app/images');
-
-                $image->move($save_path, $file_name); 
-            }
+        if($file) 
+        { 
+            $digital_file = Storage::putFile('img', $file);
         }
 
-        $commonCode = CommonCode::create(['key'=>$request->input('key'), 'value'=>$request->input('value'), 'image'=>$file_name, 'parent_id'=>$request->input('parent_id')]);
+        $commonCode = CommonCode::create(['key'=>$request->input('key'), 'value'=>$request->input('value'), 'image'=>$digital_file, 'parent_id'=>$request->input('parent_id')]);
 
         if ($commonCode->parent_id) {
             return redirect()->route('common-codes.show', $commonCode->parent)->withSuccess(__('បង្កើតកូដនិងតម្លៃសម្រាប់ប្រព័ន្ធបានជោគជ័យ'));
         }
 
         return redirect()->route('common-codes.index')->withSuccess(__('បង្កើតកូដនិងតម្លៃសម្រាប់ប្រព័ន្ធបានជោគជ័យ'));
-    }
+    } 
 
 
     public function edit($id)
@@ -98,10 +87,22 @@ class CommonCodeController extends Controller
         ]);
     }
 
-    public function update($id, UpdateRequest $request)
+    public function update($id, Request $request)
     {
         $commonCode = CommonCode::find($id);
-        $commonCode->update($request->all());
+
+        $digital_file = "";
+
+        $file = $request->file('image');
+        
+        if($file) 
+        { 
+            $digital_file = Storage::putFile('img', $file);
+        }
+
+        $data = ['key'=>$request->input('key'), 'value'=>$request->input('value'), 'image'=>$digital_file];
+
+        $commonCode->update($data);
 
         if ($commonCode->parent_id) {
             return redirect()->route('common-codes.show',$commonCode->parent)->withSuccess(__('កែប្រែកូដនិងតម្លៃបានជោគជ័យ'));
