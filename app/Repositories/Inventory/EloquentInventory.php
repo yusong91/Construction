@@ -6,10 +6,12 @@ use Vanguard\Model\Inventory;
 use DB;
 use Carbon\Carbon;
 use Illuminate\Database\SQLiteConnection;
+use Illuminate\Support\Facades\Storage;
+use Google\Cloud\Storage\StorageClient;
 
 class EloquentInventory implements InventoryRepository
 { 
-
+ 
     public function paginate($perPage, $search = null)
     {   
         $query = Inventory::query()->with(['parent_sparepart', 'parent_warehouse']);
