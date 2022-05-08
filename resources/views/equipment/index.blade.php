@@ -73,7 +73,6 @@
                 <tbody>  
                     @if (count($equipments))
                         @foreach($equipments as $item) 
- 
                             <tr> 
                                 <td class="text-center align-middle">{{ $item['value'] }}</td>
                                 <td class="text-center align-middle">{{ str_replace( array('\'', '"',';', '[', ']'), ' ', $item['child_qeuipment']->pluck('equipment_id')) }}</td>
@@ -83,7 +82,6 @@
                                 <td class="text-center align-middle"><img src="{{ getUrl($item['image']) }}" width="100"></td>
                                 <td class="text-center align-middle"><a href="{{ route('equipment.show', $item['id']) }}" class="btn btn-icon edit" title="List Eqipment" data-toggle="tooltip" data-placement="top"> <i class="fas fa-list"></i> </a></td>
                             </tr>
-                            
                         @endforeach
                     @else
                         <tr>

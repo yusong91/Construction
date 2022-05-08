@@ -106,7 +106,7 @@ class EloquentEquipment implements EquipmentRepository
             { 
                 $file = $item['11'];
                 $digital_file = Storage::putFile('img', $file);
-            }
+            } 
 
             array_push($insert_data,[                 
                 'equip_type_id'=>$type_id,
@@ -129,6 +129,49 @@ class EloquentEquipment implements EquipmentRepository
         return DB::table('equipment')->insert($insert_data);
     }
 
+    public function update($id, array $data)
+    {
+        $now = Carbon::now();
+       
+        // $file_img = $item['image'];
+        // $file_name = $file_img->getClientOriginalName();
+        // $save_path_img = storage_path('images');
+        // $file_img->move($save_path_img, $file_name);
+
+        $digital_file = "";
+        if(isset($data['image'])) 
+        { 
+            $file = $data['image'];
+            $digital_file = Storage::putFile('img', $file);
+        } 
+
+        $insert_data =[                 
+            'equip_type_id'=>$data['equip_type_id'],
+            'equipment_id'=>$data['equipment_id'],
+            'brand_id'=>$data['brand_id'],
+            'chassis_no'=>$data['chassis_no'],
+            'engine_no'=>$data['engine_no'],
+            'historical_cost'=>$data['historical_cost'],
+            'purchase_date'=>$this->getDate($data['purchased_date']), 
+            'weight'=>$data['weight'],
+            'year'=>$data['year'],
+            'receipt_no'=>$data['receipt_no'],
+            'vender'=>$data['vender'],
+            'note'=>$data['note'],
+            'image'=>$digital_file,
+            'updated_at'=>$now
+        ];            
+        
+        return Equipment::find($id)->update($insert_data);
+    }
+
+    public function delete($id)
+    {
+        $data = Equipment::find($id);
+
+        return $data->delete();
+    }
+
     public function getDate($data){
 
         if(is_null($data)){
@@ -144,42 +187,6 @@ class EloquentEquipment implements EquipmentRepository
     {
         return Equipment::find($id);
     } 
-
-    public function update($id, array $data)
-    {
-        $now = Carbon::now();
-       
-        //dd($data);
-       
-        // $file_img = $item['image'];
-        // $file_name = $file_img->getClientOriginalName();
-        // $save_path_img = storage_path('images');
-        // $file_img->move($save_path_img, $file_name);
-        $insert_data =[                 
-            'equip_type_id'=>$data['equip_type_id'],
-            'equipment_id'=>$data['equipment_id'],
-            'brand_id'=>$data['brand_id'],
-            'chassis_no'=>$data['chassis_no'],
-            'engine_no'=>$data['engine_no'],
-            'historical_cost'=>$data['historical_cost'],
-            'purchase_date'=>$this->getDate($data['purchased_date']), 
-            'weight'=>$data['weight'],
-            'year'=>$data['year'],
-            'receipt_no'=>$data['receipt_no'],
-            'vender'=>$data['vender'],
-            'note'=>$data['note'],
-            'updated_at'=>$now
-        ];            
-        
-        return Equipment::find($id)->update($insert_data);
-    }
-
-    public function delete($id)
-    {
-        $data = Equipment::find($id);
-
-        return $data->delete();
-    }
 
     public function outstanding($key)
     {

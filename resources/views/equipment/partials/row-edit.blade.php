@@ -16,9 +16,7 @@
         </tr> 
     </thead>
     <tbody>
-
         @for($i = 1; $i <= 1; $i++)
-
             <tr>
                 <td>
                     <div class="form-control" style="width: 150px;">
@@ -94,8 +92,7 @@
                     </div>
                 </td>
             <tr>
-        @endfor
-                    
+        @endfor              
     </tbody>
 </table>
 
