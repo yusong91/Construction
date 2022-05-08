@@ -33,7 +33,7 @@ class EquipmentController extends Controller
         return view('equipment.index', compact('active', 'equipments'));
     }
 
-    public function create()
+    public function create() 
     {    
         $active = "equipment"; 
         $brands = getConmonCode('brand');

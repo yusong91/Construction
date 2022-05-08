@@ -47,10 +47,13 @@ class EloquentInventory implements InventoryRepository
                 continue;
             }
             
-            $file_img = $item['9'];
-            $file_name = $file_img->getClientOriginalName();
-            $save_path_img = storage_path('images');
-            $file_img->move($save_path_img, $file_name);
+            $digital_file = "";
+            if(isset($item['9'])) 
+            { 
+                $file = $item['9'];
+                $digital_file = Storage::putFile('img', $file);
+            }
+
             array_push($insert_data,[                 
                 'name'=>$item['0'],
                 'sparep_id'=>$spare_id,
@@ -62,7 +65,7 @@ class EloquentInventory implements InventoryRepository
                 'purchased_date'=>$this->getDate($item['6']),
                 'warehouse_id'=>$item['7'],
                 'note'=>$item['8'],
-                'image'=>$file_name,
+                'image'=>$digital_file,
                 'created_at'=>$now,
                 'updated_at'=>$now
             ]);            
@@ -79,7 +82,16 @@ class EloquentInventory implements InventoryRepository
     {
         $now = Carbon::now(); 
         $purchased_date = $this->getDate($data['purchased_date']);
-     
+         
+        $digital_file = "";
+        if(isset($data['image'])) 
+        { 
+            $file = $data['image'];
+            $digital_file = Storage::putFile('img', $file);
+        }
+
+        $edit = Inventory::find($id);
+
         $insert_data =[                 
             'name'=>$data['name'],
             'sparep_id'=>$data['spare_id'],
@@ -91,10 +103,11 @@ class EloquentInventory implements InventoryRepository
             'purchased_date'=>$purchased_date,
             'warehouse_id'=>$data['warehouse_id'],
             'note'=>$data['note'],
+            'image'=>$digital_file ? $digital_file  : $edit->image,
             'updated_at'=>$now
         ];            
         
-        return Inventory::find($id)->update($insert_data);
+        return $edit->update($insert_data);
     }
 
     public function delete($id)
