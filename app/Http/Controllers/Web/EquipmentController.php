@@ -10,6 +10,8 @@ use Illuminate\Http\Request;
 use Vanguard\Http\Controllers\Controller;
 use Vanguard\Http\Requests\CreateEquipmentRequest;
 use Vanguard\Repositories\Equipment\EquipmentRepository;
+use Illuminate\Support\Facades\Storage;
+use Google\Cloud\Storage\StorageClient;
 
 
 class EquipmentController extends Controller

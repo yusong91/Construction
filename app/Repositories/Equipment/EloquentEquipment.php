@@ -101,14 +101,12 @@ class EloquentEquipment implements EquipmentRepository
             // $save_path_img = storage_path('images');
             // $file_img->move($save_path_img, $file_name);
 
-
             $digital_file = "";
             if(isset($item['11'])) 
             { 
                 $file = $item['11'];
                 $digital_file = Storage::putFile('img', $file);
             }
-
 
             array_push($insert_data,[                 
                 'equip_type_id'=>$type_id,
