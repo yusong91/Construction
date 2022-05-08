@@ -101,7 +101,7 @@
                             <td class="text-center align-middle">{{ $item->vender }}</td>   
                             <td class="text-center align-middle">{{ $item->menufacture }}</td> 
                             <td class="text-center align-middle">{{ getDateFormat($item->purchased_date) }}</td>
-                            <td class="text-center align-middle"><img src="{{ url('/storage/song.jpg') }}" class="rounded mx-auto d-block" alt="" style="width: 100px;"></td>
+                            <td class="text-center align-middle"><img src="{{ getUrl($item->image) }}" class="rounded mx-auto d-block" alt="" style="width: 100px;"></td>
                             <td class="text-center align-middle">{{ $item->note }}</td>
                             <td class="text-center align-middle">
                                 <a href="{{ route('inventory.edit', $item->id) }}" class="btn btn-icon edit" title="Update" data-toggle="tooltip" data-placement="top"> <i class="fas fa-edit"></i></a>
