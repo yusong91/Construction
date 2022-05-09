@@ -40,15 +40,11 @@
                 <div class="float-right">
                     <div class="row">
 
-                        <div class="col-xl-1 col-md-1 pr-4"> 
-                            <a href="" class="vertical-center" ><img src="{{ url('assets/img/pdf.png') }}" width="25"></a> 
-                        </div>
-
-                        <div class="col-xl-1 col-md-5 pr-4">
-                            <a href="" class="vertical-center"  ><img src="{{ url('assets/img/excel.png') }}" width="25" ></a>
-                        </div>
-
-                        <div class="col-xl-5 col-md-5">
+                        <div class="col-xl-12 pr-4"> 
+                            <a href="" class="mr-2"><img src="{{ url('assets/img/pdf.png') }}" width="25"></a> 
+                        
+                            <a href="" class="mr-2"><img src="{{ url('assets/img/excel.png') }}" width="25" ></a>
+                        
                             <a href="{{ route('equipment.create') }}" class="btn btn-primary" style="width: 147px;" >New Equipment</a>
                         </div>
 
