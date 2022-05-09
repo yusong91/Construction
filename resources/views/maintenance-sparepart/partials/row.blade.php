@@ -1,18 +1,18 @@
 <div class="table-responsive" style="padding-top: 40px;">
-    <table class="table table-borderless table-striped">
+    <table class="table table-borderless table-striped" style="width: 2000px;">
         <thead> 
             <th class="text-center align-middle" style="width: 100px;">Date</th>
-            <th class="text-center align-middle" style="width: 200px;">Equipment ID</th>
-            <th class="text-center align-middle" style="width: 200px;">Spare Part</th>
+            <th class="text-center align-middle" style="width: 300px;">Equipment ID</th>
+            <th class="text-center align-middle" style="width: 300px;">Spare Part</th>
             <th class="text-center align-middle" style="width: 200px;">Service</th>
             <th class="text-center align-middle" style="width: 100px;">Quantity</th>
             <th class="text-center align-middle" style="width: 150px;">Unit Price</th>
             <th class="text-center align-middle" style="width: 100px;">Amount</th>
-            <th class="text-center align-middle" style="width: 200px;">Supplier Name</th>
-            <th class="text-center align-middle" style="width: 200px;">Responsible Person</th>
-            <th class="text-center align-middle" style="width: 400px;">Memo</th>
-            <th class="text-center align-middle">Image of Broken</th>
-            <th class="text-center align-middle">Image of Replacement</th> 
+            <th class="text-center align-middle" style="width: 250px;">Supplier Name</th>
+            <th class="text-center align-middle" style="width: 250px;">Responsible Person</th>
+            <th class="text-center align-middle" style="width: 500px;">Memo</th>
+            <th class="text-center align-middle" style="width: 100px;">Image of Broken</th>
+            <th class="text-center align-middle" style="width: 100px;">Image of Replacement</th> 
             <th class="text-center align-middle">Action</th>  
         </thead>
         <tbody> 
@@ -42,6 +42,6 @@
                     <td colspan="13"><em>@lang('app.no_records_found')</em></td>
                 </tr>
             @endif
-        </tbody>
+        </tbody> 
     </table> 
 </div>
