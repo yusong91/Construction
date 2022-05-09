@@ -23,8 +23,7 @@ class RevenueController extends Controller
         $raw_paginate = json_encode($revenues); 
         $paginate = json_decode($raw_paginate);
         $customers = getAllCustomer();
-        //dd($customers);
-        return view('revenue.test', compact('active', 'paginate', 'revenues', 'customers'));
+        return view('revenue.index', compact('active', 'paginate', 'revenues', 'customers'));
     }
 
     public function create()

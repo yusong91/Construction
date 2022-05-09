@@ -2,7 +2,7 @@
 
 namespace Vanguard\Http\Controllers\Web;
 
-use Illuminate\Http\Request;
+use Illuminate\Http\Request; 
 use Vanguard\Http\Controllers\Controller;
 use Vanguard\Repositories\Maintenance\MaintenanceRepository;
 
@@ -33,7 +33,6 @@ class MaintenanceController extends Controller
         $suppliers = getSupplier(); 
         $equipments = getEquipment();
         $types = ['new_spare_part'=>'New Spare Part', 'inventory'=>'From Inventory', 'service'=>'Service'];
-        
         return view('maintenance-sparepart.create', compact('active', 'staffs', 'suppliers', 'spare_parts', 'equipments', 'types'));
     }
 

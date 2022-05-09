@@ -54,42 +54,35 @@
     
 </style>
 
-
-
 <div class="card">
     <div class="card-body">
-
         @include('partials.button_group_transaction')
-
-        <fieldset class="border p-2 " style="overflow-x: scroll;">
-
+        <fieldset class="border p-2" >
             <legend>New Maintenance</legend>
-        
-            <div class="row">
+            <form action="{{ route('maintenance.store') }}" id="user-form" method="POST" enctype="multipart/form-data" accept-charset="UTF-8" autocomplete="off">
                 
-                <div class="col-4">
-                    <label for="invoice">@lang('Maintenance Date')</label>   
-                    <input class="form-control" type="text" id="a_date">        
+                <div class="row">
+                    
+                    <div class="col-4">
+                        <label for="invoice">@lang('Maintenance Date')</label>   
+                        <input class="form-control" type="text" id="a_date">        
+                    </div> 
+
+                    <div class="col-4"></div>
+
+                    <div class="col-4">
+                        <label for="invoice">@lang('Invoice Number/Other Attachment')</label>
+                        <div class="custom-file">
+                            <input type="file" class="custom-file-input" id="file_replacement" name="invoice" style="width: 350px;">
+                            <label class="custom-file-label" for="file_replacement"></label>
+                        </div>   
+                    </div> 
+
                 </div> 
-
-                <div class="col-4"></div>
-
-                <div class="col-4">
-                    <label for="invoice">@lang('Invoice Number/Other Attachment')</label>
-                    <div class="custom-file">
-                        <input type="file" class="custom-file-input" id="file_replacement" name="invoice" style="width: 350px;">
-                        <label class="custom-file-label" for="file_replacement"></label>
-                    </div>   
-                </div> 
-
-            </div> 
-
-            @include('maintenance-sparepart.partials.row-input')
-
-            <button type="submit" class="btn btn-primary">Create</button>
-
+                @include('maintenance-sparepart.partials.row-input')
+                <button type="submit" class="btn btn-primary">Create</button>
+            </form>
         </fieldset>
-
     </div>
 </div>
 

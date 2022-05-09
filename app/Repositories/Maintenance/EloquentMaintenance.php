@@ -7,6 +7,8 @@ use Validator;
 use DB;
 use Vanguard\Model\Maintenance;
 use Vanguard\Model\Inventory;
+use Illuminate\Support\Facades\Storage;
+use Google\Cloud\Storage\StorageClient;
 
 class EloquentMaintenance implements MaintenanceRepository
 { 
@@ -30,7 +32,7 @@ class EloquentMaintenance implements MaintenanceRepository
     {
         return Maintenance::with(['parent_equipment', 'parent_inventory', 'parent_supplier', 'parent_staff'])->get();
     }
-
+ 
     public function create(array $data)
     {   
         $now = Carbon::now(); 
@@ -41,6 +43,22 @@ class EloquentMaintenance implements MaintenanceRepository
             if(count($item) < 12){
                 continue;
             }
+
+            $digital_broken = "";
+            $digital_replace = "";
+
+            if(isset($item['10'])) 
+            { 
+                $file = $item['10'];
+                $digital_broken = Storage::putFile('img', $file);
+            }
+
+            if(isset($item['11'])) 
+            { 
+                $file = $item['11'];
+                $digital_replace = Storage::putFile('img', $file);
+            }
+
             $id = explode(' ', $item['2']);
 
             array_push($insert_data,[          
@@ -54,8 +72,8 @@ class EloquentMaintenance implements MaintenanceRepository
                 'unit_price'=>$item['5'],
                 'amount'=>$item['6'],
                 'note'=>$item['9'],
-                'image_broken'=>$item['10'],
-                'image_replace'=>$item['11'],
+                'image_broken'=>$digital_broken,
+                'image_replace'=>$digital_replace,
                 'date'=>$this->getDate($item['0']),
                 'created_at'=>$now,
                 'updated_at'=>$now
@@ -92,7 +110,24 @@ class EloquentMaintenance implements MaintenanceRepository
         
         $eq_id = explode(' ', $data['equipment_id']);
 
-        $edit = [          
+        $digital_broken = "";
+        $digital_replace = "";
+
+        if(isset($data['image_broken'])) 
+        { 
+            $file = $data['image_broken'];
+            $digital_broken = Storage::putFile('img', $file);
+        }
+
+        if(isset($data['image_replace'])) 
+        { 
+            $file = $data['image_replace'];
+            $digital_replace = Storage::putFile('img', $file);
+        }
+
+        $edit =  Maintenance::find($id);
+
+        $update = [          
                 'type_id'=>(int)$eq_id[0],       
                 'equipment_id'=>(int)$eq_id[1],
                 'supplier_id'=>$data['supplier_id'],
@@ -103,13 +138,13 @@ class EloquentMaintenance implements MaintenanceRepository
                 'unit_price'=>$data['unit_price'],
                 'amount'=>$data['amount'],
                 'note'=>$data['note'],
-                //'image_broken'=>$data['equipment_id'],
-                //'image_replace'=>$data['equipment_id'],
+                'image_broken'=>$digital_broken ? $digital_broken : $edit->image_broken ,
+                'image_replace'=>$digital_replace ? $digital_replace : $edit->image_replace,
                 'date'=>$this->getDate($data['date']),
                 'updated_at'=>$now
-        ];
-
-        return Maintenance::find($id)->update($edit);
+        ]; 
+        
+        return $edit->update($update);
     }
 
     public function delete($id)
