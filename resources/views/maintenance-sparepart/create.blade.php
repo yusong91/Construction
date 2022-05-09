@@ -57,10 +57,12 @@
 <div class="card">
     <div class="card-body">
         @include('partials.button_group_transaction')
-        <fieldset class="border p-2" >
-            <legend>New Maintenance</legend>
+        
             <form action="{{ route('maintenance.store') }}" id="user-form" method="POST" enctype="multipart/form-data" accept-charset="UTF-8" autocomplete="off">
                 
+            <fieldset class="border pl-2 pr-2" >
+            <legend>New Maintenance</legend>
+
                 <div class="row">
                     
                     <div class="col-4">
@@ -80,9 +82,11 @@
 
                 </div> 
                 @include('maintenance-sparepart.partials.row-input')
-                <button type="submit" class="btn btn-primary">Create</button>
+                
+                </fieldset>
+                <button type="submit" class="btn btn-primary mt-2">Create</button>
             </form>
-        </fieldset>
+        
     </div>
 </div>
 

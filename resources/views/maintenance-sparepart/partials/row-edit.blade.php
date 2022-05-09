@@ -10,6 +10,7 @@
                 <th scope="col" class="text-center align-middle">Equipment ID</th>
                 <th scope="col" class="text-center align-middle">Service</th>
                 <th scope="col" class="text-center align-middle">Quantity</th>
+                <th scope="col" class="text-center align-middle">Unit</th>
                 <th scope="col" class="text-center align-middle">Unit Price</th>
                 <th scope="col" class="text-center align-middle">Amount</th>
                 <th scope="col" class="text-center align-middle">Suplier Name</th>
@@ -57,6 +58,11 @@
                     <td>
                         <div class="form-floating">
                             <input type="number" class="form-control" name="quantity" style="width: 80px;" value="{{ $edit->quantity }}">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="form-floating">
+                            <input type="text" class="form-control" name="unit" style="width: 120px;" value="{{ $edit->unit }}">
                         </div>
                     </td>
                     <td>

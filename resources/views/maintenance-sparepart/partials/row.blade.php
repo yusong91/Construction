@@ -6,6 +6,7 @@
             <th class="text-center align-middle" style="width: 300px;">Spare Part</th>
             <th class="text-center align-middle" style="width: 200px;">Service</th>
             <th class="text-center align-middle" style="width: 100px;">Quantity</th>
+            <th class="text-center align-middle" style="width: 150px;">Unit</th>
             <th class="text-center align-middle" style="width: 150px;">Unit Price</th>
             <th class="text-center align-middle" style="width: 100px;">Amount</th>
             <th class="text-center align-middle" style="width: 250px;">Supplier Name</th>
@@ -24,6 +25,7 @@
                         <td class="text-center align-middle">{{ $item->parent_inventory->name }}</td>
                         <td class="text-center align-middle">{{ $item->service }}</td>
                         <td class="text-center align-middle">{{ $item->quantity }}</td>
+                        <td class="text-center align-middle">{{ $item->unit }}</td>
                         <td class="text-center align-middle">{{ $item->unit_price }}</td>
                         <td class="text-center align-middle">{{ $item->amount }}</td>
                         <td class="text-center align-middle">{{ $item->parent_supplier->company_name }}</td>

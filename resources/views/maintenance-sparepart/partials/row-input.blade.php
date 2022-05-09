@@ -63,7 +63,7 @@
 
                         <td>
                             <div class="form-floating">
-                                <input type="number" class="form-control form-borderless" name="{{$i}}unit" id="{{$i}}unit" style="width: 80px;">
+                                <input type="text" class="form-control form-borderless" name="{{$i}}unit" id="{{$i}}unit" style="width: 80px;">
                             </div>
                         </td>
 
