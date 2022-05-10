@@ -1,8 +1,8 @@
 <?php
 
-namespace Vanguard\Repositories\SparePart;
+namespace Vanguard\Repositories\Category;
 
-interface SparePartRepository
+interface CategoryRepository
 {
 
     public function all();

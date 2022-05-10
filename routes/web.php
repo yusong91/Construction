@@ -237,7 +237,7 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
     /**
      * Spart Part
      */
-    Route::resource('sparepart', 'SparePartController')->middleware('permission:spartpart.index');
+    Route::resource('category', 'CategoryController')->middleware('permission:spartpart.index');
 
     /**
      * Inventory

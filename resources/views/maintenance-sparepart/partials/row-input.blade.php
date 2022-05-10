@@ -9,6 +9,7 @@
                 <th scope="col" class="text-center align-middle">Unit</th>
                 <th scope="col" class="text-center align-middle">Unit Price</th>
                 <th scope="col" class="text-center align-middle">Invoice Number</th>
+                <th scope="col" class="text-center align-middle">Invoice Date</th>
                 <th scope="col" class="text-center align-middle">Suplier Name</th>
                 <th scope="col" class="text-center align-middle">Responsible Person</th>
                 <th scope="col" class="text-center align-middle">Note</th>
@@ -76,6 +77,12 @@
                         <td>
                             <div class="form-floating">
                                 <input type="number" class="form-control form-borderless" name="{{$i}}invoice_number" id="{{$i}}invoice_number" style="width: 150px;">
+                            </div>
+                        </td>
+
+                        <td>
+                            <div class="form-floating">
+                                <input type="text" class="form-control form-borderless" name="{{$i}}invoice_date" style="width: 80px;">
                             </div>
                         </td>
 

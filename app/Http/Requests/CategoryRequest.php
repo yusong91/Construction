@@ -4,7 +4,7 @@ namespace Vanguard\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class SparePartRequest extends FormRequest
+class CategoryRequest extends FormRequest
 {
     public function authorize()
     {

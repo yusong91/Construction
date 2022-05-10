@@ -1,16 +1,15 @@
 <?php
  
-namespace Vanguard\Repositories\SparePart;
+namespace Vanguard\Repositories\Category;
 
-use Vanguard\Model\SparePart;
 use Vanguard\Model\CommonCode;
 
-class EloquentSparePart implements SparePartRepository
+class EloquentCategory implements CategoryRepository
 {  
  
     public function all() 
     {
-        return getConmonCode('spare_part');
+        return getConmonCode('category');
     }
 
     public function create(array $data)
@@ -30,7 +29,13 @@ class EloquentSparePart implements SparePartRepository
 
     public function delete($id)
     {
-        return CommonCode::find($id)->delete();
+        $delete = CommonCode::with('children_inventory')->find($id);
+
+        if(count($delete->children_inventory) > 0)
+        {
+            return false;
+        }
+        return $delete->delete();
     }
 
 }

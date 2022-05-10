@@ -10,7 +10,7 @@
 @stop
 
 @section('content')
-    @include('partials.messages') 
+@include('partials.messages') 
 
 <style>
     .vertical-center {
@@ -64,8 +64,7 @@
             right: 1px;
             width: 20px
         }  
-
-        
+ 
    
 </style> 
  
@@ -80,15 +79,6 @@
             <button type="submit" class="btn btn-primary mt-4">Create</button>  
         </form>
     </div>
-</div>
+</div> 
  
-<script>
-// Add the following code if you want the name of the file appear on select
-$(".custom-file-input").on("change", function() {
-  var fileName = $(this).val().split("\\").pop();
-  $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
-});
-</script>
-
 @stop
-

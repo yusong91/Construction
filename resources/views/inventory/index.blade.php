@@ -52,7 +52,9 @@
                         
                             <a href="" class="mr-2"  ><img src="{{ url('assets/img/excel.png') }}" width="25" ></a>
                         
-                            <a href="{{ route('inventory.create') }}" class="btn btn-primary" style="width: 130px;" >+ New Item</a>
+                            <a href="{{ route('inventory.create') }}" class="btn btn-primary mr-2" style="width: 110px;" ><i class="fas fa-plus"></i> Item</a> 
+
+                            <a href="{{ route('category.index') }}" class="btn btn-primary" style="width: 110px;" >Category</a> 
                         </div>
                     </div>  
                 </div>           
@@ -60,9 +62,9 @@
         </div>
 
         <div class="table-responsive" style="padding-top: 40px;">
-             <table class="table table-borderless table-striped" style="width: 2000px;">
+             <table class="table table-borderless table-striped" style="width: 2100px;">
                 <thead> 
-                    <th class="text-center align-middle">No</th>
+                    <th class="text-center align-middle" style="width: 200px;">Category</th>
                     <th class="text-center align-middle" style="width: 200px;">Item Name</th>
                     <th class="text-center align-middle" style="width: 300px;">Warehouse Location</th>
                     <th class="text-center align-middle" style="width: 80px;">Quantity</th>
@@ -75,19 +77,21 @@
                     <th class="text-center align-middle" style="width: 150px;">Purchased Date</th>
                     <th class="text-center align-middle" style="width: 80px;">Image</th>
                     <th class="text-center align-middle" style="width: 400px;">Note</th>
-                    <th class="text-center align-middle">Action</th>
+                    <th class="text-center align-middle" style="width: 100px;">Action</th>
                 </thead>
                 <tbody> 
                     
                 @if($inventory_groups)
                     @foreach($inventory_groups as $items)
                     <tr>
+                        
+                        <th class="text-center align-middle" scope="row"><h5> {{ $items[0]->parent_category['value'] }}</h5></th>
+                        <th scope="row" colspan="12"></th>
                         <th></th>
-                        <th scope="row" colspan="13"><h5> {{ $items[0]->parent_sparepart['value'] }}</h5></th>
                     </tr>
                         @foreach($items as $item)
                         <tr>
-                            <td class="text-center align-middle">{{ $loop->index + 1}}</td>
+                            <th></th>
                             <td class="text-center align-middle">{{ $item->name }}</td>
                             <td class="text-center align-middle">{{ $item->parent_warehouse->name ?? '' }}</td>
                             <td class="text-center align-middle">{{ $item->quantity }}</td>

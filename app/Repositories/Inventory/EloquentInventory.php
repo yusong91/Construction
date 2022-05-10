@@ -11,10 +11,9 @@ use Google\Cloud\Storage\StorageClient;
 
 class EloquentInventory implements InventoryRepository
 { 
- 
     public function paginate($perPage, $search = null)
     {   
-        $query = Inventory::query()->with(['parent_sparepart', 'parent_warehouse']);
+        $query = Inventory::query()->with(['parent_category', 'parent_warehouse']);
 
         if ($search) {
             $query->where(function ($q) use ($search) {
@@ -25,7 +24,6 @@ class EloquentInventory implements InventoryRepository
             });
         } 
         
-        //->with(['symptom','hospital','sex','getProvince', 'health'])
         $result = $query->orderBy('created_at', 'desc')->paginate($perPage);
         if ($search) {
             $result->appends(['search' => $search]);
@@ -39,13 +37,13 @@ class EloquentInventory implements InventoryRepository
         return Inventory::all(); 
     } 
 
-    public function create($spare_id, array $data)
+    public function create($category_id, array $data)
     {   
         $now = Carbon::now(); 
         $insert_data = [];
         foreach($data as $item)
         {
-            if(count($item) < 10){
+            if(count($item) < 9){
                 continue;
             }
             
@@ -58,7 +56,7 @@ class EloquentInventory implements InventoryRepository
 
             array_push($insert_data,[                 
                 'name'=>$item['0'],
-                'sparep_id'=>$spare_id,
+                'category_id'=>$category_id,
                 'menufacture'=>$item['1'],
                 'vender'=>$item['2'],
                 'quantity'=>$item['3'],
@@ -96,7 +94,7 @@ class EloquentInventory implements InventoryRepository
 
         $insert_data =[                 
             'name'=>$data['name'],
-            'sparep_id'=>$data['spare_id'],
+            'category_id'=>$data['category_id'],
             'menufacture'=>$data['menufacture'],
             'vender'=>$data['vender'],
             'quantity'=>$data['quantity'],

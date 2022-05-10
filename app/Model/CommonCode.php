@@ -20,7 +20,7 @@ class CommonCode extends Model
  
     protected $fillable = [
         'key', 'value', 'parent_id', 'link', 'image',
-        'active', 'ordering', 'created_by', 'updated_by',
+        'active', 'description', 'ordering', 'created_by', 'updated_by',
     ];
 
     function children(){
@@ -43,7 +43,7 @@ class CommonCode extends Model
 
     public function children_inventory(){
 
-        return $this->hasMany('Vanguard\Model\Inventory','sparep_id');
+        return $this->hasMany('Vanguard\Model\Inventory','category_id');
     }
 
     public function children_revenue(){

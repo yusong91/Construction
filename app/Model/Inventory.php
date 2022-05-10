@@ -16,8 +16,8 @@ class Inventory extends Model
         'name', 'sparep_id', 'menufacture', 'vender', 'quantity', 'unit', 'price', 'purchased_date', 'warehouse_id', 'image'
     ];
 
-    public function parent_sparepart(){    
-        return $this->belongsTo('Vanguard\Model\CommonCode','sparep_id'); 
+    public function parent_category(){    
+        return $this->belongsTo('Vanguard\Model\CommonCode','category_id'); 
     }
 
     public function parent_customer(){    

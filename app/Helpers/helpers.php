@@ -13,7 +13,7 @@ if(!function_exists('getSupplier')){
         return $suppliers;
     }
 }
-
+ 
 if(!function_exists('getEquipmentAll')){
     function getEquipmentAll(){
         $equipments = \Vanguard\Model\Equipment::where('sold', 0)->get();
@@ -24,7 +24,6 @@ if(!function_exists('getEquipmentAll')){
 if(!function_exists('getConmonCode')){
     function getConmonCode($key){
         $communCode = \Vanguard\Model\CommonCode::where('key',$key)->first();
-
         return $communCode->children;
     }
 }

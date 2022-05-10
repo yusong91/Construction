@@ -186,24 +186,10 @@
 </div>
 
 <div class="row">
-    
     <div class="col-md-6">
-        <table class="table tbl-info table-light shadow"  style="height: 300px;">
-            <thead class="bg-primary">
-                <tr>
-                    <th>
-                        @lang('total_gender_title') ( 10 )
-                    </th>
-                </tr>
-            </thead>
-                <tbody>
-                    <tr>
-                        <td style="vertical-align: middle;">
-                            <div id="barchart_total_gender" style="width: auto;"></div>
-                        </td>
-                    </tr>
-                </tbody>
-        </table>
+        
+        <div id="barchart_total_gender" style="width: auto;"></div>
+                        
     </div>
 </div>
 

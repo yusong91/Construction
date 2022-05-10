@@ -22,14 +22,13 @@ class InventoryController extends Controller
 	} 
 
     public function index(Request $request) 
-    {   
+    {    
         $active = 'inventory';
         $inventory_groups = array(); 
         $inventorys = $this->inventory->paginate($perPage = 10, $request->search);
         foreach($inventorys as $item){
-            $inventory_groups[$item->parent_sparepart->id][] = $item;
+            $inventory_groups[$item->parent_category->id][] = $item;
         } 
-        //dd($inventorys);
         $raw_paginate = json_encode($inventorys); 
         $paginate = json_decode($raw_paginate);
         return view('inventory.index', compact('active' , 'paginate' , 'inventory_groups'));
@@ -39,29 +38,29 @@ class InventoryController extends Controller
     {
         $active = 'inventory';
         $warehouses = getAllWarehouse();
-        $spare_parts = getConmonCode('spare_part');
-        return view('inventory.create', compact('active', 'spare_parts', 'warehouses'));
-    }
+        $categorys = getConmonCode('category');
+        return view('inventory.create', compact('active', 'categorys', 'warehouses'));
+    } 
 
     public function store(Request $request)
     {
         $data = $request->all();
-        $spare_id = $request->input('spare_id');
+        $category_id = $request->category_id;
         $groups = array(); 
         foreach($data as $key => $value ){
             
-            if($key == 'spare_id' || is_null($value)){
+            if($key == 'category_id' || is_null($value)){
                 continue;
             }
             $groups[substr($key, 0, 1)][] = $value;
         } 
         array_pop($groups);
-        $create = $this->inventory->create($spare_id, $groups);
-        if($create)
+        $create = $this->inventory->create($category_id, $groups);
+        if($create) 
         {
-            return redirect()->route('inventory.index')->withSuccess("Success");
+            return redirect()->route('inventory.create')->withSuccess("Success");
         }
-        return redirect()->route('inventory.index')->withSuccess("Fail");
+        return redirect()->route('inventory.create')->withSuccess("Fail");
     }
 
     public function show($id)
@@ -73,11 +72,11 @@ class InventoryController extends Controller
     {
         $active = 'inventory';
         $warehouses = getAllWarehouse();
-        $spare_parts = getConmonCode('spare_part');
+        $categorys = getConmonCode('category');
         $edit = $this->inventory->find($id);
-        return view('inventory.edit', compact('active', 'spare_parts', 'edit' , 'warehouses'));
+        return view('inventory.edit', compact('active', 'categorys', 'edit' , 'warehouses'));
     }
-
+ 
     public function update(Request $request, $id)
     {
         $data = $this->inventory->update($id, $request->all());
@@ -89,7 +88,7 @@ class InventoryController extends Controller
     }
 
     public function destroy($id)
-    {
+    { 
         $data = $this->inventory->delete($id);
         if($data)
         {
