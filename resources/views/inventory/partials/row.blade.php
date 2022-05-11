@@ -30,25 +30,25 @@
 
                     <td>
                         <div class="form-floating">
-                            <input type="text" class="form-control" name="{{$i}}vender" style="width: 200px;">
+                            <input type="text" class="form-control" name="{{$i}}vender" id="{{$i}}vender" style="width: 200px;">
                         </div>
                     </td>
-                            
+                             
                     <td>
                         <div class="form-floating">
-                            <input type="number" class="form-control" name="{{$i}}quantity" style="width: 100px;">
-                        </div>
-                    </td>
-
-                    <td>
-                        <div class="form-floating">
-                            <input type="text" class="form-control" name="{{$i}}unit" style="width: 100px;">
+                            <input type="number" class="form-control" name="{{$i}}quantity" id="{{$i}}quantity" style="width: 100px;">
                         </div>
                     </td>
 
                     <td>
                         <div class="form-floating">
-                            <input type="number" class="form-control" name="{{$i}}price" style="width: 100px;">
+                            <input type="text" class="form-control" name="{{$i}}unit" id="{{$i}}unit" style="width: 100px;">
+                        </div>
+                    </td>
+
+                    <td>
+                        <div class="form-floating">
+                            <input type="number" class="form-control" name="{{$i}}price" id="{{$i}}price" style="width: 100px;">
                         </div>
                     </td>
 
@@ -59,7 +59,7 @@
                     </td>
             
                     <td>
-                        <select class="form-control select-warehouse"  name="{{$i}}warehouse_id" data-live-search="true" style="width: 250px; border: 2px solid #ccc;">    
+                        <select class="form-control select-warehouse"  name="{{$i}}warehouse_id" id="{{$i}}warehouse_id" data-live-search="true" style="width: 250px; border: 2px solid #ccc;" >    
                             @foreach($warehouses as $item)
                                 <option value="{{ $item->id }}">{{ $item->name }}</option>
                             @endforeach     
@@ -68,7 +68,7 @@
 
                     <td>
                         <textarea name="{{$i}}note" class="form-control" rows="1" style="width: 350px;"></textarea>   
-                    </td>
+                    </td> 
 
                     <td>
                         <div class="form-floating">

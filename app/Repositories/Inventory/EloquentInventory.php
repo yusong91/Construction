@@ -43,8 +43,14 @@ class EloquentInventory implements InventoryRepository
         $insert_data = [];
         foreach($data as $item)
         {
-            if(count($item) < 9){
+            if(count($item) < 8){
                 continue;
+            }
+
+            $note = "";
+            if(isset($item['8'])) 
+            { 
+                $note = $item['8'];
             }
             
             $digital_file = "";
@@ -64,7 +70,7 @@ class EloquentInventory implements InventoryRepository
                 'price'=>(int)$item['5'],
                 'purchased_date'=>$this->getDate($item['6']),
                 'warehouse_id'=>$item['7'],
-                'note'=>$item['8'],
+                'note'=>$note,
                 'image'=>$digital_file,
                 'created_at'=>$now,
                 'updated_at'=>$now

@@ -54,12 +54,10 @@ class AvatarController extends ApiController
 
             event(new UpdatedByAdmin($user));
 
-            return redirect()->route('users.edit', $user)
-                ->withSuccess(__('Avatar changed successfully.'));
+            return redirect()->route('users.edit', $user)->withSuccess(__('Avatar changed successfully.'));
         }
 
-        return redirect()->route('users.edit', $user)
-            ->withErrors(__('Avatar image cannot be updated. Please try again.'));
+        return redirect()->route('users.edit', $user)->withErrors(__('Avatar image cannot be updated. Please try again.'));
     }
 
     /**
@@ -77,7 +75,6 @@ class AvatarController extends ApiController
 
         event(new UpdatedByAdmin($user));
 
-        return redirect()->route('users.edit', $user)
-            ->withSuccess(__('Avatar changed successfully.'));
+        return redirect()->route('users.edit', $user)->withSuccess(__('Avatar changed successfully.'));
     }
 }
