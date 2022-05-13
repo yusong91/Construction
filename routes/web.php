@@ -235,7 +235,13 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
     Route::delete('common-codes/destroy/{id}', [CommonCodeController::class,'destroy'])->name('common-codes.destroy');
 
     /**
-     * Spart Part
+     * Spare-Part
+     */
+    Route::resource('sparepart', 'SparepartController')->middleware('permission:spartpart.index');
+
+
+    /**
+     * Category Inventory
      */
     Route::resource('category', 'CategoryController')->middleware('permission:spartpart.index');
 

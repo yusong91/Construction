@@ -41,7 +41,7 @@ class InventoryController extends Controller
         $categorys = getConmonCode('category');
         return view('inventory.create', compact('active', 'categorys', 'warehouses'));
     } 
-
+ 
     public function store(Request $request)
     {
         $data = $request->all();

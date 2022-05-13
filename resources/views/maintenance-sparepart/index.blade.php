@@ -49,7 +49,7 @@
                 <div class="float-right">
                     <div class="row">
                         <div class="col-xl-5 col-md-5">
-                            <a href="{{ route('maintenance.create') }}" class="btn btn-primary" style="width: 150px;" >+ Maintenance</a>
+                            <a href="{{ route('maintenance.create') }}" class="btn btn-primary" style="width: 150px;" ><i class="fas fa-plus"></i> Maintenance</a>
                         </div>
                     </div> 
                 </div>      

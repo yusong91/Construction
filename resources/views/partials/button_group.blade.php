@@ -6,7 +6,7 @@
                     
             <a type="button" id="equipment" href="{{ route('equipment.index') }}" style="width: 150px;" class="btn btn-light" >Equipment List</a>
             
-            <a type="button" id="sparepart" href="" style="width: 150px;" class="btn btn-light" >Spare-Part</a>
+            <a type="button" id="sparepart" href="{{ route('sparepart.index') }}" style="width: 150px;" class="btn btn-light" >Spare-Part</a>
 
             <a type="button" id="inventory" href="{{ route('inventory.index') }}" style="width: 135px;" class="btn btn-light">Inventory List</a>
 

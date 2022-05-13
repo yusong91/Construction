@@ -10,7 +10,7 @@
                     
             <a type="button" id="revenue" href="{{ route('revenue.index') }}" style="width: 115px;" class="btn btn-light">Revenue</a>
 
-            <a type="button" id="maintenance" href="{{ route('maintenance.index') }}" style="width: 230px;" class="btn btn-light">Maintenance & Spartparts</a>
+            <a type="button" id="maintenance" href="{{ route('maintenance.index') }}" style="width: 230px;" class="btn btn-light">Maintenance & Spare-Part</a>
 
         </div>
 

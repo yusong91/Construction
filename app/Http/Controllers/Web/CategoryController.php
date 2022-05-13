@@ -20,7 +20,7 @@ class CategoryController extends Controller
     public function index()
     {   
         $active = 'inventory'; // sparepart
-        $categorys = $this->category->all();
+        $categorys = $this->category->all(); 
         return view('category.index', compact('active', 'categorys')); 
     }
 

@@ -63,30 +63,13 @@
             <fieldset class="border pl-2 pr-2" >
             <legend>New Maintenance</legend>
 
-                <div class="row">
-                    
-                    <div class="col-4">
-                        <label for="invoice">@lang('Maintenance Date')</label>   
-                        <input class="form-control" type="text" id="a_date">        
-                    </div> 
-
-                    <div class="col-4"></div>
-
-                    <div class="col-4">
-                        <label for="invoice">@lang('Invoice Number/Other Attachment')</label>
-                        <div class="custom-file">
-                            <input type="file" class="custom-file-input" id="file_replacement" name="invoice" style="width: 350px;">
-                            <label class="custom-file-label" for="file_replacement"></label>
-                        </div>   
-                    </div> 
-
-                </div> 
                 @include('maintenance-sparepart.partials.row-input')
                 
-                </fieldset>
+            </fieldset>
+            @csrf
                 <button type="submit" class="btn btn-primary mt-2">Create</button>
             </form>
-        
+         
     </div>
 </div>
 
