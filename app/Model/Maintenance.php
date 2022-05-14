@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Maintenance extends Model
 {
     use HasFactory;
-
+ 
     protected $table = 'maintenances';
 
     protected $fillable = ['type_id', 'equipment_id', 'supplier_id', 'staff_id', 'inventory_id', 'service', 'quantity', 'unit_price', 'amount', 'note', 'image_broken', 'image_replace', 'date'];
@@ -31,6 +31,16 @@ class Maintenance extends Model
     public function parent_staff(){    
   
         return $this->belongsTo('Vanguard\Model\Staff','staff_id'); 
+    }
+
+    public function inventory(){    
+  
+        return $this->belongsTo('Vanguard\Model\Inventory','inventory_id'); 
+    }
+
+    public function supplier(){    
+  
+        return $this->belongsTo('Vanguard\Model\Supplier','supplier_id'); 
     }
     
 }

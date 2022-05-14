@@ -45,6 +45,15 @@
 
             <fieldset class="border p-2">
             <legend>Result Report</legend> 
+
+                <div class="row">
+                    <div class="col-12">
+                        <div class="float-right">
+                            <a href="" class="mr-2"><img src="{{ url('assets/img/pdf.png') }}" width="25"></a>   
+                        </div>      
+                    </div>
+                </div>
+
                 @include('report.equipment-report.partials.input-form') 
 
                 @include('report.equipment-report.partials.row-result')

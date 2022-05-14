@@ -33,7 +33,7 @@
         var fileName = $(this).val().split("\\").pop();
         $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
     });
-
+ 
     $("#category_id").change(function () {
 
         var element = $('#category_id' + ' option:selected');

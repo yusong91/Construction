@@ -30,11 +30,11 @@ class ReportEquipmentController extends Controller
         $key_sort = ['asc'=>'A-Z', 'desc'=>'Z-A'];
         $sort = '';
         return view('report.equipment-report.index', compact('active', 'key_sort', 'sort'));
-    }
+    } 
  
     public function create()
     {
-        //
+        // 
     }
 
     public function store(Request $request)
@@ -44,6 +44,7 @@ class ReportEquipmentController extends Controller
         $key_sort = ['asc'=>'A-Z', 'desc'=>'Z-A'];
         $equipment = $this->common->getEquipmentReport($data);
         $sort = $data['sort_by'];
+        //dd($equipment); 
         return view('report.equipment-report.result', compact('active', 'equipment', 'data', 'key_sort', 'sort'));
     }
 

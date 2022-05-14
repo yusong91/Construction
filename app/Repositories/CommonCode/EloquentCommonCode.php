@@ -11,9 +11,9 @@ class EloquentCommonCode implements CommonCodeRepository
 { 
     public function getEquipmentReport($key) 
     {   
-        return CommonCode::where('parent_id', 10)->with('children_equipment')->with('children_equipment.child_revenue')->with('children_equipment.child_maintenance')->whereHas('children_equipment.child_revenue', function($q) use ($key) {
+        return CommonCode::where('parent_id', 10)->with('children_equipment')->with('children_equipment.child_revenue')->with('children_equipment.child_maintenance')->with('children_equipment.child_maintenance.inventory')->with('children_equipment.child_maintenance.supplier')->with('children_equipment.child_revenue.parent_customer')->whereHas('children_equipment.child_revenue', function($q) use ($key) {
 
-            $q->whereDate('from_date', '>=', getStringDate($key['from_date'])); 
+            $q->whereDate('from_date', '>=', getStringDate($key['from_date']));   
 
             $q->whereDate('to_date', '>=', getStringDate($key['to_date']));
 
@@ -25,12 +25,12 @@ class EloquentCommonCode implements CommonCodeRepository
 
         })->get();
     } 
-
-    public function getEquipmentMovement($key)
+ 
+    public function getEquipmentMovement($key) 
     {       
-        return CommonCode::where('parent_id', 10)->with('children_equipment')->with('children_equipment.child_movement')->whereHas('children_equipment.child_movement', function($q) use ($key) {
+        return CommonCode::where('parent_id', 10)->with('children_equipment')->with('children_equipment.child_movement')->with('children_equipment.child_movement.parent_customer')->with('children_equipment.child_movement.parent_customer.child_revenue')->whereHas('children_equipment.child_movement', function($q) use ($key) {
 
-            $q->whereBetween('date', [getStringDate($key['from_date']), getStringDate($key['to_date'])]);
+            $q->whereBetween('date', [getStringDate($key['from_date']), getStringDate($key['to_date'])]); 
 
             $q->orderBy('date', $key['sort_by']);
 

@@ -31,6 +31,12 @@
 
             break;
 
+        case 'sparepart': 
+        
+            $('#sparepart').addClass('active');
+
+            break;
+
         case 'inventory': 
             
             $('#inventory').addClass('active');

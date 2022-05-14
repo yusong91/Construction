@@ -28,9 +28,9 @@ class ReportMovementController extends Controller
 
     public function create()
     {
-         
-    }
- 
+          
+    } 
+  
     public function store(Request $request)
     {
         $active = 'reportmovement'; 
@@ -38,9 +38,10 @@ class ReportMovementController extends Controller
         $equipments = $this->common->getEquipmentMovement($data);
         $key_sort = ['asc'=>'A-Z', 'desc'=>'Z-A'];
         $sort = $data['sort_by'];
+        //dd($equipments); 
         return view('report.movement-report.result', compact('active', 'equipments', 'key_sort', 'sort', 'data')); 
     }
-
+ 
     public function show($id)
     {
         //

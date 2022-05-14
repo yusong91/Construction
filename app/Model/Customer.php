@@ -28,6 +28,8 @@ class Customer extends Model
         return $this->hasMany('Vanguard\Model\Equipment','equipment_id'); 
     }
 
+    
+
      
     
 }

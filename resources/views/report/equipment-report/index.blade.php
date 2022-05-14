@@ -45,6 +45,7 @@
 
             <fieldset class="border p-2">
             <legend>Report</legend> 
+
                 @include('report.equipment-report.partials.input-form') 
 
                 @include('report.equipment-report.partials.row')

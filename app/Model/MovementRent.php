@@ -27,4 +27,5 @@ class MovementRent extends Model
   
         return $this->belongsTo('Vanguard\Model\Customer','customer_id'); 
     }
+
 }

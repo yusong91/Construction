@@ -41,16 +41,22 @@
 
         @include('partials.button_group_report') 
 
-    <fieldset class="border p-2">
-    <legend>Report</legend> 
+        <fieldset class="border p-2">
+            <legend>Report</legend> 
 
-        @include('report.equipmentoutstand-report.partials.input-form') 
+            <div class="row">
+                <div class="col-12">
+                    <div class="float-right">
+                        <a href="" class="mr-2"><img src="{{ url('assets/img/pdf.png') }}" width="25"></a>   
+                    </div>      
+                </div>
+            </div>
 
-        @include('report.equipmentoutstand-report.partials.row')
-        
-    </fieldset>
+            @include('report.equipmentoutstand-report.partials.input-form') 
 
-    <button type="submit" class="btn btn-primary mt-3">OK</button>
+            @include('report.equipmentoutstand-report.partials.row')
+            
+        </fieldset>
         
     </div>
 </div>

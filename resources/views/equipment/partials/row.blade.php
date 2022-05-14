@@ -22,7 +22,7 @@
             <tr>
                 <td>
                     <div class="form-floating" style="width: 150px;">
-                        <input type="text" class="form-control" name="{{$i}}equipment_id" >
+                        <input type="text" class="form-control" name="{{$i}}equipment_id" id="{{$i}}equipment_id">
                     </div>    
                 </td>
 
@@ -115,5 +115,15 @@
             allowClear: true
         
     }).val(null).trigger('change');
+
+    for (let i = 0; i <=8; i++) {
+       
+        $("#"+ i +"equipment_id").change(function () {
+        
+            console.log('song');
+        });
+    }
+
+    
   
 </script>
