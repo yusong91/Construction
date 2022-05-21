@@ -42,6 +42,7 @@ class ReportEquipmentController extends Controller
         $active = 'reportequipment'; 
         $data = $request->all();
         $key_sort = ['asc'=>'A-Z', 'desc'=>'Z-A'];
+        
         $equipment = $this->common->getEquipmentReport($data);
         $sort = $data['sort_by'];
         //dd($equipment); 

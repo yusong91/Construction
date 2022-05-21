@@ -22,7 +22,7 @@
                     <tr>
                         <td class="text-center align-middle">{{ getDateFormat($item->date) }}</td>
                         <td class="text-center align-middle">{{ $item->parent_equipment->equipment_id}}</td>
-                        <td class="text-center align-middle">{{ $item->parent_inventory->name }}</td>
+                        <td class="text-center align-middle">{{ $item->parent_inventory->name ?? "" }}</td>
                         <td class="text-center align-middle">{{ $item->service }}</td>
                         <td class="text-center align-middle">{{ $item->quantity }}</td>
                         <td class="text-center align-middle" style="width: 100px;">{{ $item->unit }}</td>

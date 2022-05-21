@@ -13,15 +13,10 @@
     <tbody>
         @for($i = 1; $i <= 8; $i++)
             <tr>
-                <!-- <td> 
-                    <select class="form-control" required name="equipment_type" style="width: 150px;">
-                        <option value=""></option>                                                 
-                        </select>
-                </td> -->
                 <td>
-                    <select class="form-control js-example-responsive"  name="{{$i}}equipment_id" data-live-search="true" style="width: 250px;">    
+                    <select class="form-control js-example-responsive"  name="{{$i}}equipment_id" id="{{$i}}equipment_id" data-live-search="true" style="width: 250px;">    
                         @foreach($equipments as $item)
-                            <option value="{{$item->equip_type_id}} {{ $item->id }}">{{ $item->equipment_id }}</option>
+                            <option value="{{$item->equip_type_id}} {{ $item->id }}" select_type="{{ $item->id }}">{{ $item->equipment_id }}</option>
                         @endforeach     
                     </select>
                 </td>    
@@ -37,7 +32,7 @@
                 </td>
                 <td>
                     <div class="form-floating">
-                        <input type="number" class="form-control" name="{{$i}}sale_price" style="width: 130px;">
+                        <input type="number" class="form-control" name="{{$i}}sale_price" id="{{$i}}sale_price" style="width: 130px;">
                     </div>
                 </td>
                 <td>
@@ -60,5 +55,30 @@
         placeholder: '',
         allowClear: true
     }).val(null).trigger('change');
+
+    for (let index = 1; index <= 8; index++) {
+
+        $("#" + index +"equipment_id").change(function () {
+
+            var element = $('#' + index + 'equipment_id' + ' option:selected');
+
+            var equipment_id = element.attr("select_type");
+
+            $("#purchased_date" + index).attr("required", "true"); 
+
+            $("#"+ index +"sale_price").attr("required", "true");
+        });
+
+        var data = $("#" + index + 'equipment_id option:selected').val() ?? 'remove';
+
+        if(data == 'remove') 
+        {
+            $("#purchased_date" + index).removeAttr('required'); 
+
+            $("#"+ index +"sale_price").removeAttr('required');
+        }
+    }
+
+
 
 </script>

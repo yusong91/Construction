@@ -5,20 +5,20 @@
                 <th scope="col" class="text-center align-middle">Type *</th>
                 <th scope="col" class="text-center align-middle">Spare-Part/Service Name *</th>
                 <th scope="col" class="text-center align-middle">Equipment ID *</th>
+                <th scope="col" class="text-center align-middle">Suplier Name *</th>
+                <th scope="col" class="text-center align-middle">Responsible Person *</th>
                 <th scope="col" class="text-center align-middle">Quantity *</th>
                 <th scope="col" class="text-center align-middle">Unit *</th>
                 <th scope="col" class="text-center align-middle">Unit Price *</th>
-                <th scope="col" class="text-center align-middle">Invoice Number *</th>
                 <th scope="col" class="text-center align-middle">Invoice Date *</th>
-                <th scope="col" class="text-center align-middle">Suplier Name *</th>
-                <th scope="col" class="text-center align-middle">Responsible Person *</th>
+                <th scope="col" class="text-center align-middle">Invoice Number *</th>
                 <th scope="col" class="text-center align-middle">Invoice Number/Other Attachment</th>
                 <th scope="col" class="text-center align-middle">Note</th>
                 <th scope="col" class="text-center align-middle">Image of Broken</th>
                 <th scope="col" class="text-center align-middle">Image of Replacement</th>
             </tr>
         </thead>
-        <tbody> 
+        <tbody>  
             @for($i = 1; $i <= 8; $i++)
                     <tr>
                         <td> 
@@ -58,6 +58,22 @@
                         </td>
 
                         <td>
+                            <select class="form-control js-example-responsive"  name="{{$i}}supplier_id" id="{{$i}}supplier_id" data-live-search="true" style="width: 200px;"> 
+                                @foreach($suppliers as $item)
+                                    <option value="{{ $item->id }}">{{ $item->company_name }}</option>
+                                @endforeach
+                            </select>
+                        </td>
+                        
+                        <td>
+                            <select class="form-control js-example-responsive"  name="{{$i}}staff_id" id="{{$i}}staff_id" data-live-search="true" style="width: 200px;"> 
+                                @foreach($staffs as $item)
+                                    <option value="{{ $item->id }}">{{ $item->name }}</option>
+                                @endforeach
+                            </select>
+                        </td>
+
+                        <td>
                             <div class="form-floating">
                                 <input type="number" class="form-control form-borderless" name="{{$i}}quantity" id="{{$i}}quantity" style="width: 100px;">
                             </div>
@@ -77,30 +93,16 @@
 
                         <td>
                             <div class="form-floating">
-                                <input type="number" class="form-control form-borderless" name="{{$i}}invoice_number" id="{{$i}}invoice_number" style="width: 170px;">
-                            </div>
-                        </td>
-
-                        <td>
-                            <div class="form-floating">
                                 <input type="text" class="form-control form-borderless" name="{{$i}}invoice_date" id="a_date{{$i}}" style="width: 130px;">
                             </div>
                         </td> 
 
-                        <td>
-                            <select class="form-control js-example-responsive"  name="{{$i}}supplier_id" id="{{$i}}supplier_id" data-live-search="true" style="width: 200px;"> 
-                                @foreach($suppliers as $item)
-                                    <option value="{{ $item->id }}">{{ $item->company_name }}</option>
-                                @endforeach
-                            </select>
-                        </td>
-                        
-                        <td>
-                            <select class="form-control js-example-responsive"  name="{{$i}}staff_id" id="{{$i}}staff_id" data-live-search="true" style="width: 200px;"> 
-                                @foreach($staffs as $item)
-                                    <option value="{{ $item->id }}">{{ $item->name }}</option>
-                                @endforeach
-                            </select>
+                         
+
+                        <td> 
+                            <div class="form-floating">
+                                <input type="number" class="form-control form-borderless" name="{{$i}}invoice_number" id="{{$i}}invoice_number" style="width: 170px;">
+                            </div>
                         </td>
 
                         <td>
@@ -241,15 +243,6 @@
                 
             });
         }
-
-
-        
-
-
-
-
-
     }
-
 
 </script>

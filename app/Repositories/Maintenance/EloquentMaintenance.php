@@ -40,58 +40,119 @@ class EloquentMaintenance implements MaintenanceRepository
         
         foreach($data as $item)
         {
-            if(count($item) < 12){
-                continue;
-            }
-
-            $digital_broken = "";
-            $digital_replace = "";
-
-            if(isset($item['10'])) 
-            { 
-                $file = $item['10'];
-                $digital_broken = Storage::putFile('img', $file);
-            }
-
-            if(isset($item['11'])) 
-            { 
-                $file = $item['11'];
-                $digital_replace = Storage::putFile('img', $file);
-            }
-
-            $id = explode(' ', $item['2']);
-
-            array_push($insert_data,[          
-                'type_id'=>(int)$id[0],       
-                'equipment_id'=>(int)$id[1],
-                'supplier_id'=>$item['7'],
-                'staff_id'=>$item['8'],
-                'inventory_id'=>$item['1'],
-                'service'=>$item['3'],
-                'quantity'=>$item['4'],
-                'unit_price'=>$item['5'],
-                'amount'=>$item['6'],
-                'note'=>$item['9'],
-                'image_broken'=>$digital_broken,
-                'image_replace'=>$digital_replace,
-                'date'=>$this->getDate($item['0']),
-                'created_at'=>$now,
-                'updated_at'=>$now
-            ]);            
-        }
-
-        $create = DB::table('maintenances')->insert($insert_data);
-
-        if($create)
-        {
-            foreach($insert_data as $insert) 
+            if($item[0] == "new_spare_part")
             {
-                $inventory = Inventory::find($insert['inventory_id']);
-                $inventory->used = (int)$item['4'];
-                $inventory->save();
-            }
+                //dd($item);
+                $digital_invoice = "";
+                $digital_broken = "";
+                $digital_replace = "";
+
+                if(isset($item['11'])) 
+                { 
+                    $file = $item['11'];
+                    $digital_invoice = Storage::putFile('img', $file) ?? "";
+                }
+
+                if(isset($item['12'])) 
+                { 
+                    $file = $item['12'];
+                    $digital_broken = Storage::putFile('img', $file) ?? "";
+                }
+
+                if(isset($item['13'])) 
+                { 
+                    $file = $item['13'];
+                    $digital_replace = Storage::putFile('img', $file) ?? "";
+                }
+
+                $id = explode(' ', $item['2']);
+
+                array_push($insert_data,[
+                    'type'=>$item[0],          
+                    'type_id'=>(int)$id[0],       
+                    'equipment_id'=>(int)$id[1],
+                    'supplier_id'=>$item[3],
+                    'staff_id'=>$item[4],
+                    'inventory_id'=>null,
+                    'service'=>$item[1],
+                    'quantity'=>$item[5],
+                    'unit'=>$item[6],
+                    'unit_price'=>$item[7],
+                    'amount'=>0,
+                    'invoice_number'=>$item[9],
+                    'invoice_file'=>$digital_invoice,
+                    'note'=>$item[10] ?? "",
+                    'image_broken'=>$digital_broken,
+                    'image_replace'=>$digital_replace,
+                    'date'=>$this->getDate($item[8]) ?? null, 
+                    'created_at'=>$now,
+                    'updated_at'=>$now
+                ]);  
+
+                $create = DB::table('maintenances')->insert($insert_data);
+
+                // if($create)
+                // {
+                //     foreach($insert_data as $insert) 
+                //     {
+                //         $inventory = Inventory::find($insert['inventory_id']);
+                //         $inventory->used = (int)$item['4'];
+                //         $inventory->save();
+                //     }
+                // }
+                return $create;
+
+                
+            }elseif($item[0] == "inventory"){
+
+                $digital_broken = "";
+                $digital_replace = "";
+
+                if(isset($item['7'])) 
+                { 
+                    $file = $item['7'];
+                    $digital_broken = Storage::putFile('img', $file) ?? "";
+                }
+
+                if(isset($item['8'])) 
+                { 
+                    $file = $item['8'];
+                    $digital_replace = Storage::putFile('img', $file) ?? "";
+                }
+
+                $id = explode(' ', $item['2']);
+
+                array_push($insert_data,[
+                    'type'=>$item[0],          
+                    'type_id'=>(int)$id[0],       
+                    'equipment_id'=>(int)$id[1],
+                    'supplier_id'=>$item[3],
+                    'staff_id'=>$item[4],
+                    'inventory_id'=>$item[1],
+                    'quantity'=>$item[5],
+                    'note'=>$item[6] ?? "",
+                    'image_broken'=>$digital_broken,
+                    'image_replace'=>$digital_replace,
+                    'date'=>null,
+                    'created_at'=>$now,
+                    'updated_at'=>$now
+                ]);  
+
+                $create = DB::table('maintenances')->insert($insert_data);
+
+                if($create)
+                {
+                    foreach($insert_data as $insert) 
+                    {
+                        $inventory = Inventory::find($insert['inventory_id']);
+                        $inventory->used = (int)$item['4'];
+                        $inventory->save();
+                    }
+                }
+                return $create;
+            }             
         }
-        return $create;
+        
     }
 
     public function findByKey($key)

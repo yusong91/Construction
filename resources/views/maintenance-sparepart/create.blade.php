@@ -60,7 +60,7 @@
         
             <form action="{{ route('maintenance.store') }}" id="user-form" method="POST" enctype="multipart/form-data" accept-charset="UTF-8" autocomplete="off">
                 
-            <fieldset class="border pl-2 pr-2" >
+            <fieldset class="border pl-2 pr-2" > 
             <legend>New Maintenance</legend>
 
                 @include('maintenance-sparepart.partials.row-input')
@@ -73,10 +73,15 @@
     </div>
 </div>
 
-<script>
+<script> 
 
     for(var i = 1; i <= 8; i++)
     {
+        $("#"+ i +"invoice_file").on("change", function() {
+        var fileName = $(this).val().split("\\").pop();
+        $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+        });
+
         $("#file_broken" + i).on("change", function() {
         var fileName = $(this).val().split("\\").pop();
         $(this).siblings(".custom-file-label").addClass("selected").html(fileName);

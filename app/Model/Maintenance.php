@@ -11,7 +11,7 @@ class Maintenance extends Model
  
     protected $table = 'maintenances';
 
-    protected $fillable = ['type_id', 'equipment_id', 'supplier_id', 'staff_id', 'inventory_id', 'service', 'quantity', 'unit_price', 'amount', 'note', 'image_broken', 'image_replace', 'date'];
+    protected $fillable = ['type', 'type_id', 'equipment_id', 'supplier_id', 'staff_id', 'inventory_id', 'service', 'quantity', 'unit_price', 'amount', 'note', 'image_broken', 'image_replace', 'date'];
 
     public function parent_inventory(){    
   

@@ -3,7 +3,7 @@
         <thead> 
             <tr>
                 <th scope="col" class="text-center align-middle">Item Name</th>
-                <th scope="col" class="text-center align-middle">Menufacture</th>
+                <th scope="col" class="text-center align-middle">Manufacture</th>
                 <th scope="col" class="text-center align-middle">Vender</th>
                 <th scope="col" class="text-center align-middle">Quantity</th>
                 <th scope="col" class="text-center align-middle">Unit</th>

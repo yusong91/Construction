@@ -32,13 +32,13 @@ class MaintenanceController extends Controller
         $staffs = getStaff();
         $suppliers = getSupplier(); 
         $equipments = getEquipment();
-        $types = ['new_spare_part'=>'New Spare Part', 'inventory'=>'From Inventory', 'service'=>'Service'];
+        $types = ['new_spare_part'=>'Spare Part', 'inventory'=>'From Inventory', 'service'=>'Service'];
         return view('maintenance-sparepart.create', compact('active', 'staffs', 'suppliers', 'spare_parts', 'equipments', 'types'));
     }
 
     public function store(Request $request)
     {
-        $data = $request->all();
+        $data = $request->all(); 
         $groups = array(); 
         
         foreach($data as $key => $value ){            
@@ -47,7 +47,7 @@ class MaintenanceController extends Controller
             } 
             $groups[substr($key, 0, 1)][] = $value;
         } 
-        array_pop($groups);
+        array_pop($groups); 
 
         $create = $this->maintenance->create($groups);
         
