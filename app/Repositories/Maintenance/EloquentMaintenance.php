@@ -140,7 +140,6 @@ class EloquentMaintenance implements MaintenanceRepository
                         $inventory->save();
                     }
                 }
-                
             }             
         }
         return true;

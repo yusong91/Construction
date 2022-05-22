@@ -204,7 +204,6 @@
                     $("#" + index + "unit_price").removeAttr('required');
                     $("#" + index + "invoice_number").removeAttr('required');
                     $("#a_date" + i).removeAttr('required');
-
                     $("#" + index + "supplier_id").attr("required", "true");
                     $("#" + index + "staff_id").attr("required", "true");
 
