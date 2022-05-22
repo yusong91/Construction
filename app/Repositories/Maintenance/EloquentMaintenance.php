@@ -42,7 +42,7 @@ class EloquentMaintenance implements MaintenanceRepository
         {
             if($item[0] == "new_spare_part")
             {
-                //dd($item);
+                
                 $digital_invoice = "";
                 $digital_broken = "";
                 $digital_replace = "";
@@ -67,6 +67,9 @@ class EloquentMaintenance implements MaintenanceRepository
 
                 $id = explode(' ', $item['2']);
 
+                $quantity = $item[5] ?? 0;
+                $unit_price = $item[7] ?? 0;
+
                 array_push($insert_data,[
                     'type'=>$item[0],          
                     'type_id'=>(int)$id[0],       
@@ -78,7 +81,7 @@ class EloquentMaintenance implements MaintenanceRepository
                     'quantity'=>$item[5],
                     'unit'=>$item[6],
                     'unit_price'=>$item[7],
-                    'amount'=>0,
+                    'amount'=>$quantity * $unit_price,
                     'invoice_number'=>$item[9],
                     'invoice_file'=>$digital_invoice,
                     'note'=>$item[10] ?? "",
@@ -91,17 +94,7 @@ class EloquentMaintenance implements MaintenanceRepository
 
                 $create = DB::table('maintenances')->insert($insert_data);
 
-                // if($create)
-                // {
-                //     foreach($insert_data as $insert) 
-                //     {
-                //         $inventory = Inventory::find($insert['inventory_id']);
-                //         $inventory->used = (int)$item['4'];
-                //         $inventory->save();
-                //     }
-                // }
                 return $create;
-
                 
             }elseif($item[0] == "inventory"){
 

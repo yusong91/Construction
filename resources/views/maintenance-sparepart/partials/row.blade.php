@@ -3,8 +3,7 @@
         <thead> 
             <th class="text-center align-middle" style="width: 100px;">Date</th>
             <th class="text-center align-middle" style="width: 300px;">Equipment ID</th>
-            <th class="text-center align-middle" style="width: 300px;">Spare Part</th>
-            <th class="text-center align-middle" style="width: 200px;">Service</th>
+            <th class="text-center align-middle" style="width: 300px;">Spare-Part/Service</th>
             <th class="text-center align-middle" style="width: 100px;">Quantity</th>
             <th class="text-center align-middle" style="width: 150px;">Unit</th>
             <th class="text-center align-middle" style="width: 150px;">Unit Price</th>
@@ -22,8 +21,8 @@
                     <tr>
                         <td class="text-center align-middle">{{ getDateFormat($item->date) }}</td>
                         <td class="text-center align-middle">{{ $item->parent_equipment->equipment_id}}</td>
-                        <td class="text-center align-middle">{{ $item->parent_inventory->name ?? "" }}</td>
-                        <td class="text-center align-middle">{{ $item->service }}</td>
+                        <td class="text-center align-middle">{{ $item->parent_inventory->name ?? $item->service }}</td>
+                       
                         <td class="text-center align-middle">{{ $item->quantity }}</td>
                         <td class="text-center align-middle" style="width: 100px;">{{ $item->unit }}</td>
                         <td class="text-center align-middle" style="width: 200px;">{{ $item->unit_price }}</td>
