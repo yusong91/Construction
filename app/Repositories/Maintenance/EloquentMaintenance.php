@@ -93,9 +93,7 @@ class EloquentMaintenance implements MaintenanceRepository
                 ]);  
 
                 $create = DB::table('maintenances')->insert($insert_data);
-
-                return $create;
-                
+    
             }elseif($item[0] == "inventory"){
 
                 $digital_broken = "";
@@ -142,10 +140,10 @@ class EloquentMaintenance implements MaintenanceRepository
                         $inventory->save();
                     }
                 }
-                return $create;
+                
             }             
         }
-        
+        return true;
     }
 
     public function findByKey($key)
