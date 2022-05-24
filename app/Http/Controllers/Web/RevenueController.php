@@ -30,6 +30,7 @@ class RevenueController extends Controller
     {
         $active = "revenue";
         $customers = getCustomer();
+        //dd($customers);
         $equipments = getEquipmentAll();
         return view('revenue.create', compact('active', 'customers', 'equipments'));
     }
@@ -40,9 +41,9 @@ class RevenueController extends Controller
         $groups = array(); 
         foreach($data as $key => $value ){
             
-            if(is_null($value)){
-                continue; 
-            }
+            // if(is_null($value)){
+            //     continue; 
+            // }
             $groups[substr($key, 0, 1)][] = $value;
         } 
         array_pop($groups);

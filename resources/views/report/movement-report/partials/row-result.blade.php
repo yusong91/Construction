@@ -31,6 +31,8 @@
                     <table class="table table-bordered collapse" id="first{{$first}}" style="padding: 0; margin: 0; border: hidden"> 
 
                     @foreach($item->children_equipment as $equipment)
+
+                        @if (count($equipment->child_movement) < 1) @continue; @endif
                     
                         <tr data-toggle="collapse" data-target="#second{{$second}}" class="accordion-toggle" style="padding: 0; margin: 0;">
                             <td colspan="6"><i class="fa fa-caret-down ml-4"></i><span class="m-2">{{ $equipment->equipment_id }}</span> </td>                    
@@ -40,6 +42,7 @@
                             <table class="table table-bordered collapse row-child" id="second{{$second}}" style="padding: 0; margin: 0; border: hidden">
 
                             @foreach($equipment->child_movement as $move) 
+
                                 <tr data-toggle="collapse" data-target="#third{{$third}}" class="accordion-toggle" style="padding: 0; margin: 0;">
                                     <td style="width: 25%;"><i class="fa fa-caret-down ml-5"></i><span class="m-2">{{ $move->parent_customer->company_name ?? '' }} / {{ $move->parent_customer->customer_name ?? '' }} </span> </td>
                                     <td style="width: 23%;">{{ $move->from_location }}</td>

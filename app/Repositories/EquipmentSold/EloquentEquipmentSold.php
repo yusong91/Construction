@@ -38,7 +38,7 @@ class EloquentEquipmentSold implements EquipmentSoldRepository
         $insert_data = []; 
         foreach($data as $item)
         {
-            if(count($item) < 6){
+            if($item[0] == null){ 
                 continue;
             }
             $id = explode(' ', $item['0']);

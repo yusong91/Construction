@@ -36,21 +36,22 @@ class EloquentMovement implements MovementRepository
         $insert_data = []; 
         foreach($data as $item)
         {
-            if(count($item) < 7){
+            
+            if($item[0] == null){
                 continue;
             }
-            $id = explode(' ', $item['0']);
-
+            $id = explode(' ', $item[0]);
+            
             array_push($insert_data,[          
-                'type_id'=>(int)$id[0],       
-                'equipment_id'=>(int)$id[1],
-                'customer_id'=>$item['1'],
-                'customer_name'=>$item['2'],
-                'customer_phone'=>$item['3'],
-                'date'=>$this->getDate($item['4']),
-                'from_location'=>$item['5'],
-                'to_location'=>$item['6'],
-                'expected_date'=>$item['7'],
+                'type_id'=>$id[0],       
+                'equipment_id'=>$id[1],
+                'customer_id'=>$item[1],
+                'customer_name'=>$item[2],
+                'customer_phone'=>$item[3],
+                'date'=>$this->getDate($item[4]),
+                'from_location'=>$item[5],
+                'to_location'=>$item[6],
+                'expected_date'=>$item[7],
                 'created_at'=>$now,
                 'updated_at'=>$now
             ]);            

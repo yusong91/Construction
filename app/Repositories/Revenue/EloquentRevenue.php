@@ -22,10 +22,10 @@ class EloquentRevenue implements RevenueRepository
         $result = $query->orderBy('created_at', 'desc')->paginate($perPage);
         if ($search) {
             $result->appends(['search' => $search]);
-        }
+        } 
         return $result; 
     }
- 
+  
     public function all()  
     {
         return Revenue::with(['parent_equipment', 'parent_customer'])->get();
@@ -33,7 +33,9 @@ class EloquentRevenue implements RevenueRepository
 
     public function findByKey($key)
     {
-        return Revenue::where('from_date', '>=', $key[0])->where('to_date', '<=', $key[1])->orderBy('from_date', $key[2])->get();
+        return Revenue::where('from_date', '>=', $key[0])->where('to_date', '<=', $key[1])->orderBy('from_date', $key[2])->get()->groupBy(function($date) {
+            return Carbon::parse($date->from_date)->format('Y-m-d');
+        });
     }
 
     public function find($id)
@@ -47,14 +49,18 @@ class EloquentRevenue implements RevenueRepository
         $insert_data = []; 
         foreach($data as $item)
         {
-            if(count($item) < 10){
-                continue;
+            if(count($item) < 5){
+                continue; 
             }
 
-            $file_img = $item['9'];
-            $file_name = $file_img->getClientOriginalName();
-            $save_path_img = storage_path('images');
-            $file_img->move($save_path_img, $file_name);
+            dd($item);
+
+            $digital_file = "";
+            if(isset($item['8'])) 
+            { 
+                $file = $item['8'];
+                $digital_file = Storage::putFile('img', $file) ?? "";
+            }
 
             $id = explode(' ', $item['2']);
 
@@ -65,11 +71,12 @@ class EloquentRevenue implements RevenueRepository
                 'customer_name'=>$item['1'],
                 'from_date'=>$this->getDate($item['3']),
                 'to_date'=>$this->getDate($item['4']),
+
                 'number_working_day'=>$item['5'],
                 'rent_price'=>$item['6'],
-                'amount'=>$item['7'],
-                'note'=>$item['8'],
-                'file'=>$file_name,
+                'amount'=>$item['5'] * $item['6'],
+                'note'=>$item['7'] ?? "",
+                'file'=>$digital_file,
                 'created_at'=>$now, 
                 'updated_at'=>$now
             ]);            
