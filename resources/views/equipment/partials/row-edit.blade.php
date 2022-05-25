@@ -19,7 +19,7 @@
         @for($i = 1; $i <= 1; $i++)
             <tr>
                 <td>
-                    <div class="form-control" style="width: 150px;">
+                    <div class="form-floating" style="width: 150px;">
                         <input type="text" class="form-control" name="equipment_id" value="{{ $edit->	equipment_id }}">
                     </div>    
                 </td>

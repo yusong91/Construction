@@ -53,9 +53,6 @@ class EquipmentController extends Controller
         $groups = array(); 
         foreach($data as $key => $value ){
             
-            if($key == 'equip_type_id' || is_null($value)){
-                continue;
-            }
             $groups[substr($key, 0, 1)][] = $value;
         } 
         array_pop($groups);

@@ -20,16 +20,16 @@
             <tr>
                     
                 <td>
-                    <select class="js-example-responsive form-control" name="customer_id" style="width: 200px;">
+                    <select class="js-example-responsive form-control" name="customer_id" id="customer_id" style="width: 200px;">
                         @foreach($customers as $item)
-                            <option value="{{ $item->id }}" {{ $item->id == $edit->customer_id ? 'selected' : '' }} >{{ $item->company_name }}</option> 
+                            <option value="{{ $item->id }}" customer_name="{{$item->customer_name}}" {{ $item->id == $edit->customer_id ? 'selected' : '' }} >{{ $item->company_name }}</option> 
                         @endforeach
                     </select>
                 </td>
 
                 <td>
                     <div class="form-floating">
-                        <input type="text" class="form-control" name="customer_name" style="width: 200px;" value="{{ $edit->customer_name }}">
+                        <input type="text" class="form-control" name="customer_name" id="customer_name" style="width: 200px;" value="{{ $edit->customer_name }}">
                     </div>
                 </td>
                         
@@ -87,3 +87,15 @@
         @endfor            
     </tbody>
 </table>
+
+<script>
+
+    $("#customer_id").change(function () {
+
+        var element = $('#customer_id' + ' option:selected');
+        var customer_name = element.attr("customer_name");
+        $("#customer_name").val(customer_name);
+
+    });
+
+</script>

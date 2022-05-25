@@ -91,9 +91,11 @@ class EloquentEquipment implements EquipmentRepository
     {   
         $now = Carbon::now();
         $insert_data = [];
+
         foreach($data as $item)
         {
-            if(count($item) < 12){
+            if(count($item) == 1 || $item[1] == null){ 
+                
                 continue;
             }
             //$file_img = $item['11'];
@@ -102,25 +104,25 @@ class EloquentEquipment implements EquipmentRepository
             // $file_img->move($save_path_img, $file_name);
 
             $digital_file = "";
-            if(isset($item['11'])) 
+            if(isset($item[11])) 
             { 
-                $file = $item['11'];
+                $file = $item[11];
                 $digital_file = Storage::putFile('img', $file);
             } 
 
             array_push($insert_data,[                 
                 'equip_type_id'=>$type_id,
-                'equipment_id'=>$item['0'],
-                'brand_id'=>$item['1'],
-                'chassis_no'=>$item['5'],
-                'engine_no'=>$item['6'],
-                'historical_cost'=>$item['2'],
-                'purchase_date'=> $this->getDate($item['3']),
-                'weight'=>$item['7'],
-                'year'=>$item['8'],
-                'receipt_no'=>$item['9'],
-                'vender'=>$item['4'],
-                'note'=>$item['10'],
+                'equipment_id'=>$item[0],
+                'brand_id'=>$item[1],
+                'chassis_no'=>$item[5],
+                'engine_no'=>$item[6],
+                'historical_cost'=>$item[2],
+                'purchase_date'=> $this->getDate($item[3]) ?? null,
+                'weight'=>$item[7],
+                'year'=>$item[8],
+                'receipt_no'=>$item[9],
+                'vender'=>$item[4],
+                'note'=>$item[10],
                 'image'=>$digital_file,
                 'created_at'=>$now,
                 'updated_at'=>$now

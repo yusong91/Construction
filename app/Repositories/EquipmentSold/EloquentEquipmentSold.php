@@ -85,7 +85,7 @@ class EloquentEquipmentSold implements EquipmentSoldRepository
         return EquipmentSold::find($id)->update($edit);
     }
 
-    public function delete($id)
+    public function delete($id) 
     {
         $data = EquipmentSold::find($id);
 

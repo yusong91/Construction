@@ -7,7 +7,7 @@
             <th scope="col" class="text-center">Purchased Date</th>
             <th scope="col" class="text-center">Vendor Name</th>
             <th scope="col" class="text-center">Chassis No.</th>
-            <th scope="col" class="text-center">Engine No *</th>
+            <th scope="col" class="text-center">Engine No.</th>
             <th scope="col" class="text-center">Weight</th>
             <th scope="col" class="text-center">Years</th>
             <th scope="col" class="text-center">Tax Receipt No.</th>
@@ -27,17 +27,16 @@
                 </td>
 
                 <td>
-                    <select class="form-control js-example-basic-single"  name="{{$i}}brand_id" data-live-search="true" style="width: 250px;">
-                        
-                            @foreach($brands as $item)
-                                <option value="{{ $item->id }}">{{ $item->value }}</option>
-                            @endforeach     
+                    <select class="form-control js-example-basic-single"  name="{{$i}}brand_id" id="{{$i}}brand_id" data-live-search="true" style="width: 250px;">
+                        @foreach($brands as $item)
+                            <option value="{{ $item->id }}">{{ $item->value }}</option>
+                        @endforeach     
                     </select>
                 </td>
  
                 <td>
                     <div class="form-floating">
-                        <input type="number" class="form-control" name="{{$i}}historical_cost" style="width: 150px;">
+                        <input type="number" class="form-control" name="{{$i}}historical_cost" id="{{$i}}historical_cost" style="width: 150px;">
                     </div>
                 </td>
                         
@@ -49,33 +48,33 @@
 
                 <td>
                     <div class="form-floating">
-                        <input type="text" class="form-control" name="{{$i}}vendor" style="width: 200px;">
+                        <input type="text" class="form-control" name="{{$i}}vendor" id="{{$i}}vendor" style="width: 200px;">
                     </div>
                 </td>
 
                 <td>
                     <div class="form-floating">
-                        <input type="text" class="form-control" name="{{$i}}chassis_no" style="width: 150px;">
+                        <input type="text" class="form-control" name="{{$i}}chassis_no" id="{{$i}}chassis_no" style="width: 150px;">
                     </div>
                 </td>
 
                 <td>
                     <div class="form-floating">
-                        <input type="text" class="form-control" name="{{$i}}engine_no" style="width: 150px;">
+                        <input type="text" class="form-control" name="{{$i}}engine_no" id="{{$i}}engine_no" style="width: 150px;">
                     </div>   
                 </td>
          
                 <td>
-                    <input type="number" class="form-control" name="{{$i}}weight" style="width: 80px;">
+                    <input type="number" class="form-control" name="{{$i}}weight" id="{{$i}}weight" style="width: 80px;">
                 </td>
 
                 <td>
-                    <input type="number" class="form-control" name="{{$i}}year" style="width: 80px;">   
+                    <input type="number" class="form-control" name="{{$i}}year" id="{{$i}}year" style="width: 80px;">   
                 </td>
 
                 <td>
                     <div class="form-floating">
-                        <input type="text" class="form-control" name="{{$i}}receipt_no" style="width: 150px;">
+                        <input type="text" class="form-control" name="{{$i}}receipt_no" id="{{$i}}receipt_no" style="width: 150px;">
                     </div> 
                 </td>
 
@@ -120,10 +119,18 @@
        
         $("#"+ i +"equipment_id").change(function () {
         
-            console.log('song');
+            $("#"+ i +"brand_id").attr("required", "true");
+            $("#"+ i +"historical_cost").attr("required", "true");
+
+            var data = $("#" + i + 'equipment_id').val();
+
+            if(data == '') 
+            { 
+                $("#"+ i +"brand_id").removeAttr('required'); 
+                $("#"+ i +"historical_cost").removeAttr('required');
+            } 
+
         });
     }
 
-    
-  
 </script>

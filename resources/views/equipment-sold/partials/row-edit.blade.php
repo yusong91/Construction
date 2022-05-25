@@ -17,15 +17,10 @@
         <tbody>
             @for($i = 1; $i <= 1; $i++)
                 <tr>
-                    <!-- <td> 
-                        <select class="form-control" required name="equipment_type" style="width: 150px;">
-                            <option value=""></option>                                                 
-                            </select>
-                    </td> -->
+                    
                     <td>
-                        <select class="js-example-responsive form-control" name="equipment_id" style="width: 150px;">
+                        <select class="js-example-responsive form-control" name="equipment_id" style="width: 150px;" required>
                             @foreach($equipments as $item)
-                                
                                 <option value="{{$item->equip_type_id}} {{$item->id}}" >{{ $item->equipment_id }}</option>
                             @endforeach                    
                         </select>
