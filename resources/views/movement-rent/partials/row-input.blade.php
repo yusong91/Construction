@@ -69,7 +69,7 @@
 </div>
 
 <script>
-
+ 
     $('.js-example-responsive').select2({
         placeholder: '',
         allowClear: true

@@ -13,7 +13,7 @@ class Inventory extends Model
 
     protected $fillable = [
             
-        'name', 'sparep_id', 'menufacture', 'vender', 'quantity', 'unit', 'price', 'purchased_date', 'warehouse_id', 'image'
+        'name', 'category_id', 'menufacture', 'vender', 'quantity', 'unit', 'price', 'purchased_date', 'warehouse_id', 'note', 'image'
     ];
 
     public function parent_category(){    

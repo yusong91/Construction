@@ -31,7 +31,7 @@
         cursor: pointer
     }
     .row-child {
-        background-color: #EFF2F4;
+        background-color: #EFF2F4; 
         color: #0B0B0B
     }
 
@@ -65,7 +65,7 @@
             width: 20px
         } 
    
-</style> 
+</style>  
  
 <div class="card">
     <div class="card-body">
@@ -81,23 +81,60 @@
 </div>
 
 <script>
-// Add the following code if you want the name of the file appear on select
-$(".custom-file-input").on("change", function() {
-  var fileName = $(this).val().split("\\").pop();
-  $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
-});
-</script>
+      
+    $(".custom-file-input").on("change", function() {
+        var fileName = $(this).val().split("\\").pop();
+        $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+    });
+   
+    var warehouse_id = <?php echo $edit->warehouse_id; ?>
 
-<script>
+    $('.warehouse').select2({
+        placeholder: '',
+        allowClear: true
+    }).val(warehouse_id).trigger('change');
 
-var warehouse_id = <?php echo $edit->warehouse_id; ?>
+    var sub_category = $("#category_id option:selected" ).attr("sub_category");
+
+    var sub_categorys = sub_category == '' ? [] : sub_category.split(',');
+    
+    for (let index = 0; index < sub_categorys.length; index++) {
+
+        $("#name").append($('<option>', { value: sub_categorys[index], text: sub_categorys[index] }));
+    }
+
+    var name = "<?php echo $edit->name; ?>";
+
+    $('.select-subcategory').select2({
+        placeholder: 'Select Category',
+        allowClear: true
+    }).val(name).trigger('change');
 
 
-$('.warehouse').select2({
-    placeholder: '',
-    allowClear: true
-}).val(warehouse_id).trigger('change');
+    $("#category_id").change(function () {
 
+        console.log('----');
+        var element = $('#category_id' + ' option:selected');
+        var sub_category = element.attr("sub_category") ?? '';
+        var sub_categorys = sub_category == '' ? [] : sub_category.split(',');
+
+        if(sub_categorys.length > 0){
+
+            for (let index = 0; index < sub_categorys.length; index++) {
+
+                $("#name").append($('<option>', { value: sub_categorys[index], text: sub_categorys[index] }));
+            }
+        } else {
+
+            $("#name").find('option').remove().end();
+        }
+
+
+       
+
+
+    });
+    
 </script>
 
 @stop

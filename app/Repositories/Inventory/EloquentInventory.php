@@ -41,35 +41,39 @@ class EloquentInventory implements InventoryRepository
     {   
         $now = Carbon::now(); 
         $insert_data = [];
+
+        
+
         foreach($data as $item)
         {
-            if(count($item) < 8){
+            if(count($item) == 1 || $item[1] == null){ 
+                
                 continue;
             }
-
+            
             $note = "";
-            if(isset($item['8'])) 
+            if(isset($item[8])) 
             { 
-                $note = $item['8'];
+                $note = $item[8];
             }
             
             $digital_file = "";
-            if(isset($item['9'])) 
+            if(isset($item[9])) 
             { 
                 $file = $item['9'];
                 $digital_file = Storage::putFile('img', $file);
             }
 
             array_push($insert_data,[                 
-                'name'=>$item['0'],
+                'name'=>$item[0],
                 'category_id'=>$category_id,
-                'menufacture'=>$item['1'],
-                'vender'=>$item['2'],
-                'quantity'=>$item['3'],
-                'unit'=>$item['4'],
-                'price'=>(int)$item['5'],
-                'purchased_date'=>$this->getDate($item['6']),
-                'warehouse_id'=>$item['7'],
+                'menufacture'=>$item[1],
+                'vender'=>$item[2],
+                'quantity'=>$item[3],
+                'unit'=>$item[4],
+                'price'=>(int)$item[5],
+                'purchased_date'=>$this->getDate($item[6]),
+                'warehouse_id'=>$item[7],
                 'note'=>$note,
                 'image'=>$digital_file,
                 'created_at'=>$now,
@@ -95,7 +99,7 @@ class EloquentInventory implements InventoryRepository
             $file = $data['image'];
             $digital_file = Storage::putFile('img', $file);
         }
-
+ 
         $edit = Inventory::find($id);
 
         $insert_data =[                 

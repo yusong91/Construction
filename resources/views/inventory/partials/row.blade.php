@@ -2,14 +2,14 @@
     <table class="table table-bordered">
         <thead> 
             <tr>
-                <th scope="col" class="text-center align-middle">Item Name</th>
+                <th scope="col" class="text-center align-middle">Item Name *</th>
                 <th scope="col" class="text-center align-middle">Manufacture</th>
                 <th scope="col" class="text-center align-middle">Vender</th>
-                <th scope="col" class="text-center align-middle">Quantity</th>
-                <th scope="col" class="text-center align-middle">Unit</th>
-                <th scope="col" class="text-center align-middle">Price</th>
-                <th scope="col" class="text-center align-middle">Purchased Date</th>
-                <th scope="col" class="text-center align-middle">Warehouse Location</th>
+                <th scope="col" class="text-center align-middle">Quantity *</th>
+                <th scope="col" class="text-center align-middle">Unit *</th>
+                <th scope="col" class="text-center align-middle">Price *</th>
+                <th scope="col" class="text-center align-middle">Purchased Date *</th>
+                <th scope="col" class="text-center align-middle">Warehouse Location *</th>
                 <th scope="col" class="text-center align-middle">Notes</th>
                 <th scope="col" class="text-center align-middle">Attached Image</th>
             </tr> 
@@ -19,7 +19,7 @@
                 <tr>
                     <td>
                         <select class="form-control select-subcategory"  name="{{$i}}name" id="{{$i}}name" data-live-search="true" style="width: 250px; border: 2px solid #ccc;">    
-                               
+                                
                         </select>            
                     </td>
                     <td> 

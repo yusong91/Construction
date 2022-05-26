@@ -18,9 +18,10 @@
         @for($i = 1; $i <= 1; $i++)
                 <tr>
                     <td>
-                        <div class="form-floating" style="width: 200px;">
-                            <input type="text"  class="form-control" name="name" value="{{ $edit->name }}">
-                        </div>    
+                         
+                        <select class="form-control select-subcategory"  name="name" id="name" data-live-search="true" style="width: 250px; border: 2px solid #ccc;">    
+                            
+                        </select>  
                     </td>
                     <td>
                         <div class="form-floating">

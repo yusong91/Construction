@@ -58,7 +58,7 @@
                 $("#" + i + "name").find('option').remove().end();
             }
         }
-    });
+    }); 
 
     for (let i = 0; i <= 7; i++){
        
@@ -67,8 +67,8 @@
             var data = $("#" + i + 'name option:selected').val() ?? 'remove';
             if(data == 'remove') 
             {
-                $("#"+ i + "menufacture").removeAttr('required');
-                $("#"+ i + "vender").removeAttr('required');
+                //$("#"+ i + "menufacture").removeAttr('required');
+                //$("#"+ i + "vender").removeAttr('required');
                 $("#"+ i + "quantity").removeAttr('required');
                 $("#"+ i + "unit").removeAttr('required');
                 $("#"+ i + "price").removeAttr('required');
@@ -76,9 +76,9 @@
                 $("#"+ i +"warehouse_id").removeAttr('required');
 
             } else {
-                $("#"+ i + "menufacture").attr("required", "true");
-                $("#"+ i + "menufacture").attr("required", "true");
-                $("#"+ i + "vender").attr("required", "true");
+                
+                //$("#"+ i + "menufacture").attr("required", "true");
+                //$("#"+ i + "vender").attr("required", "true");
                 $("#"+ i + "quantity").attr("required", "true");
                 $("#"+ i + "unit").attr("required", "true");
                 $("#"+ i + "price").attr("required", "true");

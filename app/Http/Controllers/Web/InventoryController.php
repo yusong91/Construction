@@ -49,9 +49,6 @@ class InventoryController extends Controller
         $groups = array(); 
         foreach($data as $key => $value ){
             
-            if($key == 'category_id' || is_null($value)){
-                continue;
-            }
             $groups[substr($key, 0, 1)][] = $value;
         } 
         array_pop($groups);
@@ -79,7 +76,7 @@ class InventoryController extends Controller
         $categorys = getConmonCode('category');
         $edit = $this->inventory->find($id);
         return view('inventory.edit', compact('active', 'categorys', 'edit' , 'warehouses'));
-    }
+    } 
  
     public function update(Request $request, $id)
     {

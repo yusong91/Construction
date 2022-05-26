@@ -26,19 +26,20 @@ class EloquentSupplier implements SupplierRepository
         }
         return $result;
     }
-
+ 
     public function all() 
     {
         return Supplier::all();
-    }
+    } 
 
     public function create(array $data)
     {   
+        
         $now = Carbon::now(); 
         $insert_data = [];
-        foreach($data as $item)
+        foreach($data as $item) 
         {
-            if(count($item) < 8){
+            if($item[2] == null){
                 continue;
             }
             array_push($insert_data,[                 

@@ -40,9 +40,6 @@ class SupplierController extends Controller
         $groups = array(); 
         foreach($data as $key => $value ){
             
-            if(is_null($value)){
-                continue;
-            }
             $groups[substr($key, 0, 1)][] = $value;
         } 
         array_pop($groups);
