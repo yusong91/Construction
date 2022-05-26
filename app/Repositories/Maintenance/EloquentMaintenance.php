@@ -53,28 +53,50 @@ class EloquentMaintenance implements MaintenanceRepository
                     $digital_invoice = Storage::putFile('img', $file) ?? "";
                 }
 
-                if(isset($item['12'])) 
+                if(isset($item[12])) 
                 { 
                     $file = $item['12'];
                     $digital_broken = Storage::putFile('img', $file) ?? "";
                 }
 
-                if(isset($item['13'])) 
+                if(isset($item[13])) 
                 { 
                     $file = $item['13'];
                     $digital_replace = Storage::putFile('img', $file) ?? "";
                 }
 
-                $id = explode(' ', $item['2']);
+                $id = explode(' ', $item[2]);
 
                 $quantity = $item[5] ?? 0;
                 $unit_price = $item[7] ?? 0;
 
-                array_push($insert_data,[
+                // array_push($insert_data,[
+                //     'type'=>$item[0],          
+                //     'type_id'=>(int)$id[0],       
+                //     'equipment_id'=>(int)$id[1],
+                //     'supplier_id'=>$item[3], 
+                //     'staff_id'=>$item[4],
+                //     'inventory_id'=>null,
+                //     'service'=>$item[1],
+                //     'quantity'=>$item[5],
+                //     'unit'=>$item[6],
+                //     'unit_price'=>$item[7],
+                //     'amount'=>$quantity * $unit_price,
+                //     'invoice_number'=>$item[9],
+                //     'invoice_file'=>$digital_invoice,
+                //     'note'=>$item[10] ?? "",
+                //     'image_broken'=>$digital_broken,
+                //     'image_replace'=>$digital_replace,
+                //     'date'=>$this->getDate($item[8]) ?? null, 
+                //     'created_at'=>$now,
+                //     'updated_at'=>$now
+                // ]); 
+                
+                $insert_data = [
                     'type'=>$item[0],          
                     'type_id'=>(int)$id[0],       
                     'equipment_id'=>(int)$id[1],
-                    'supplier_id'=>$item[3],
+                    'supplier_id'=>$item[3], 
                     'staff_id'=>$item[4],
                     'inventory_id'=>null,
                     'service'=>$item[1],
@@ -90,11 +112,38 @@ class EloquentMaintenance implements MaintenanceRepository
                     'date'=>$this->getDate($item[8]) ?? null, 
                     'created_at'=>$now,
                     'updated_at'=>$now
-                ]);  
+                ]; 
 
-                $create = DB::table('maintenances')->insert($insert_data);
-    
-            }elseif($item[0] == "inventory"){
+                $create = Maintenance::create($insert_data);
+
+                if($create)
+                {
+                   // dd($create);
+                    $q = $create->quantity;
+                    $unit_price = $create->unit_price;
+
+                   // dd($q);
+
+                   $insert = [];
+
+                    array_push($insert,[
+                        'maintenance_id'=>$create->id,          
+                        'name'=>$create->service,       
+                        'quantity'=>$q,
+                        'unit'=>$create->unit, 
+                        'unit_price'=> $unit_price,
+                        'amount'=> $q * $unit_price,
+                        'created_at'=>$now,
+                        'updated_at'=>$now
+                    ]); 
+
+                    DB::table('spareparts')->insert($insert);
+                }
+
+                //$create = DB::table('maintenances')->insert($insert_data);
+
+
+            } elseif($item[0] == "inventory"){
 
                 $digital_broken = "";
                 $digital_replace = "";

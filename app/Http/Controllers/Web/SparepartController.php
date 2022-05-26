@@ -4,14 +4,22 @@ namespace Vanguard\Http\Controllers\Web;
 
 use Illuminate\Http\Request;
 use Vanguard\Http\Controllers\Controller;
+use Vanguard\Repositories\Sparepart\SparepartRepository;
 
 class SparepartController extends Controller
 {
+    private $sparepart;
+     
+    public function __construct(SparepartRepository $sparepart)
+    {  
+		$this->sparepart = $sparepart;
+	}
     
-    public function index()
+    public function index(Request $request)
     {
         $active = "sparepart";
-        return view('spare-part.index', compact('active'));
+        $spareparts = $this->sparepart->paginate(50, $request->search);
+        return view('spare-part.index', compact('active', 'spareparts'));
     }
 
     public function create()

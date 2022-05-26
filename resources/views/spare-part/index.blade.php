@@ -52,46 +52,15 @@
                         
                             <a href="" class="mr-2"  ><img src="{{ url('assets/img/excel.png') }}" width="25" ></a>
                         
-                            <a href="{{ route('customer.create') }}" class="btn btn-primary" style="width: 125px;" ><i class="fas fa-plus"></i> Company</a>
+                            <!-- <a href="{{ route('customer.create') }}" class="btn btn-primary" style="width: 125px;" ><i class="fas fa-plus"></i> Company</a> -->
                         </div>
                     </div>
                 </div>              
             </div>
         </div>
 
-        <div class="table-responsive" style="padding-top: 40px;">
-             <table class="table table-borderless table-striped">
-                <thead> 
-                <th class="text-center verticel-center">No</th>
-                    <th class="text-center verticel-center">Company Name</th>
-                    <th class="text-center verticel-center">Customer Name</th>
-                    <th class="text-center verticel-center">Customer Phone</th>
-                    <th class="text-center verticel-center">Email</th>
-                    <th class="text-center verticel-center">Job</th>
-                    <th class="text-center verticel-center">Address</th>
-                    <th class="text-center verticel-center">Other</th>
-                    <th class="text-center verticel-center">Action</th>
-                </thead>
-                <tbody>  
+        @include('spare-part.partials.row-index')    
 
-                     
-                            <tr>
-                                <td class="text-center verticel-center" ></td>
-                                
-                                <td class="text-center verticel-center text-center">
-                                    <a href="" class="btn btn-icon edit" title="Update" data-toggle="tooltip" data-placement="top"> <i class="fas fa-edit"></i></a>
-                                    <a href="" class="btn btn-icon" data-action="" data-toggle="tooltip" data-placement="top" data-method="DELETE" data-confirm-title="@lang('app.please_confirm')" data-confirm-text="@lang('app.confirm_delete')" data-confirm-delete="@lang('app.yes_proceed')"><i class="fas fa-trash"></i></a>
-                                </td>
-                            </tr>
-                            
-                       
-                        <tr>
-                            <td colspan="4"><em>@lang('app.no_records_found')</em></td>
-                        </tr>
-                    
-                </tbody>
-            </table> 
-        </div>
     </div>
 </div>
 
