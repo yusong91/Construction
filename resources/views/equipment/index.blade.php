@@ -45,7 +45,7 @@
                         
                             <a href="" class="mr-2"><img src="{{ url('assets/img/excel.png') }}" width="25" ></a>
                         
-                            <a href="{{ route('equipment.create') }}" class="btn btn-primary" style="width: 147px;" >New Equipment</a>
+                            <a href="{{ route('equipment.create') }}" class="btn btn-primary" style="width: 145px;" ><i class="fas fa-plus"></i> Equipment</a>
                         </div>
 
                     </div>

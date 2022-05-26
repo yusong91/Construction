@@ -40,17 +40,17 @@ class EloquentCustomer implements CustomerRepository
         $insert_data = [];
         foreach($data as $item)
         {
-            if(count($item) < 7){
+            if($item[3] == null){
                 continue;
             }
             array_push($insert_data,[                 
-                'company_name'=>$item['0'],
-                'customer_name'=>$item['1'],
-                'customer_phone'=>$item['2'],
-                'email'=>$item['3'],
-                'job'=>$item['4'],
-                'address'=>(int)$item['5'],
-                'other'=>$item['6'],
+                'company_name'=>$item[0],
+                'customer_name'=>$item[1],
+                'customer_phone'=>$item[2],
+                'email'=>$item[3],
+                'job'=>$item[4],
+                'address'=>$item[5],
+                'other'=>$item[6],
                 'created_at'=>$now,
                 'updated_at'=>$now
             ]);            

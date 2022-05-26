@@ -54,7 +54,7 @@
                 <div class="float-right">
                     <div class="row">
                         <div class="col-xl-5 col-md-5">
-                            <a href="{{ route('transaction.create') }}" class="btn btn-primary" style="width: 100px;" >+ Sold</a>
+                            <a href="{{ route('transaction.create') }}" class="btn btn-primary" style="width: 100px;" ><i class="fas fa-plus"></i> Sold</a>
                         </div> 
                     </div> 
                 </div>      

@@ -1,16 +1,16 @@
 <div class="table-responsive">
-    <table class="table table-borderless table-striped" style="width: 1500px;">
+    <table class="table table-borderless table-striped" style="width: 100%;">
         <thead> 
-            <th class="text-center align-middle">No</th>
-            <th class="text-center align-middle" style="width: 120px;">Equipment ID</th>
-            <th class="text-center align-middle" style="width: 200px;">Customer</th>
-            <th class="text-center align-middle" style="width: 100px;">From Date</th>
-            <th class="text-center align-middle" style="width: 100px;">To Date</th>
-            <th class="text-center align-middle" style="width: 200px;">Number of Working Days</th>
-            <th class="text-center align-middle" style="width: 150px;">Rental Price</th>
-            <th class="text-center align-middle" style="width: 100px;">Amount</th>
-            <th class="text-center align-middle" style="width: 300px;">Notes</th>
-            <th class="text-center align-middle">Action</th>            
+            <th class="text-center align-middle" style="width: 5%;">No</th>
+            <th class="text-center align-middle" style="width: 10%;">Equipment ID</th>
+            <th class="text-center align-middle" style="width: 10%;">Customer</th>
+            <th class="text-center align-middle" style="width: 10%;">From Date</th>
+            <th class="text-center align-middle" style="width: 10%;">To Date</th>
+            <th class="text-center align-middle" style="width: 10%;">Number of Working Days</th>
+            <th class="text-center align-middle" style="width: 10%;">Rental Price</th>
+            <th class="text-center align-middle" style="width: 10%;">Amount</th>
+            <th class="text-center align-middle" style="width: 20%;">Notes</th>
+            <th class="text-center align-middle" style="width: 5%;">Action</th>            
         </thead>
         <tbody>  
             
@@ -20,7 +20,6 @@
                     <td class="text-center align-middle">{{ 1 + $loop->index }}</td>
                     <td class="text-center align-middle">{{ $item->parent_equipment->equipment_id }}</td>
                     <td class="text-center align-middle">{{ $item->parent_customer->company_name }}</td>
-                    
                     <td class="text-center align-middle">{{ getDateFormat($item->from_date) }}</td>
                     <td class="text-center align-middle">{{ getDateFormat($item->to_date) }}</td>
                     <td class="text-center align-middle">{{ $item->number_working_day }}</td>

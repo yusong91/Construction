@@ -57,7 +57,7 @@
                                 <div class="float-right">
                                     <div class="row">
                                         <div class="col-xl-5">
-                                            <a href="{{ route('revenue.create') }}" class="btn btn-primary" style="width: 115px;" >+ Revenue</a>
+                                            <a href="{{ route('revenue.create') }}" class="btn btn-primary" style="width: 120px;" > <i class="fas fa-plus"></i> Revenue</a>
                                         </div>
                                     </div> 
                                 </div>      

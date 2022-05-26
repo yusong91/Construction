@@ -52,7 +52,7 @@
                         
                             <a href="" class="mr-2"  ><img src="{{ url('assets/img/excel.png') }}" width="25" ></a>
                         
-                            <a href="{{ route('customer.create') }}" class="btn btn-primary" style="width: 120px;" >+ Company</a>
+                            <a href="{{ route('customer.create') }}" class="btn btn-primary" style="width: 125px;" ><i class="fas fa-plus"></i> Company</a>
                         </div>
                     </div>
                 </div>              

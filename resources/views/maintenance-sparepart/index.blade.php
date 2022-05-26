@@ -45,7 +45,7 @@
                 </form>
             </div> 
 
-            <div class="col-8">
+            <div class="col-8"> 
                 <div class="float-right">
                     <div class="row">
                         <div class="col-xl-5 col-md-5">
