@@ -9,5 +9,10 @@ class Sparepart extends Model
 {
     use HasFactory;
     protected $table = 'spareparts';
-    protected $fillable = ['name'];
+    protected $fillable = ['maintenance_id', 'name', 'quantity', 'unit', 'unit_price', 'amount'];
+
+    public function parent_maintenance(){    
+  
+        return $this->belongsTo('Vanguard\Model\Maintenance','maintenance_id'); 
+    }
 }

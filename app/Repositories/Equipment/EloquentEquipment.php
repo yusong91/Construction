@@ -165,7 +165,7 @@ class EloquentEquipment implements EquipmentRepository
         ];            
         
         return Equipment::find($id)->update($insert_data);
-    }
+    } 
 
     public function delete($id)
     {

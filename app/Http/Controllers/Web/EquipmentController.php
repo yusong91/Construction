@@ -25,11 +25,10 @@ class EquipmentController extends Controller
   
     public function index(Request $request) 
     {            
-
         $brand = getConmonCode('brand');
-        
         $active = "equipment";
         $equipments = $this->equipment->paginate(20, $request->search);
+        //dd($equipments);
         return view('equipment.index', compact('active', 'equipments'));
     }
 
@@ -71,7 +70,6 @@ class EquipmentController extends Controller
         $equipments = $this->equipment->paginateList($id, 10, $request->search);
         $raw_paginate = json_encode($equipments); 
         $paginate = json_decode($raw_paginate);
-        
         return view('equipment.list', compact('active', 'equipments', 'paginate', 'id'));
     }
 
@@ -96,6 +94,11 @@ class EquipmentController extends Controller
 
     public function destroy($id)
     {
-        //
+        $delete = $this->equipment->delete($id);
+        if($delete)
+        {
+            return redirect()->route('equipment.index')->withSuccess("Success");
+        }
+        return redirect()->route('equipment.index')->withSuccess("Fail");
     }
 }

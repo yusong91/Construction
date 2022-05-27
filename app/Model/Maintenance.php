@@ -42,6 +42,21 @@ class Maintenance extends Model
   
         return $this->belongsTo('Vanguard\Model\Supplier','supplier_id'); 
     }
+
+    public function sparepart_children(){ 
+
+        return $this->hasMany('Vanguard\Model\Sparepart','maintenance_id'); 
+    }
+
+    public static function boot() {
+         
+        parent::boot();    
+
+        static::deleting(function($sparepart) {
+             
+            $sparepart->sparepart_children()->delete();
+        });
+    }
     
 }
  

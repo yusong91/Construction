@@ -73,7 +73,7 @@
                                 <td class="text-center align-middle">{{ $item['value'] }}</td>
                                 <td class="text-center align-middle">{{ str_replace( array('\'', '"',';', '[', ']'), ' ', $item['child_qeuipment']->pluck('equipment_id')) }}</td>
                                 <td class="text-center align-middle">{{ $item['child_qeuipment']->count() }}</td>
-                                <td class="text-center align-middle">{{ $item['soldout'] }}</td>
+                                <td class="text-center align-middle"></td>
                                 <td class="text-center align-middle">គ្រឿង</td>
                                 <td class="text-center align-middle"><img src="{{ getUrl($item['image']) }}" width="100"></td>
                                 <td class="text-center align-middle"><a href="{{ route('equipment.show', $item['id']) }}" class="btn btn-icon edit" title="List Eqipment" data-toggle="tooltip" data-placement="top"> <i class="fas fa-list"></i> </a></td>

@@ -40,9 +40,8 @@ class EloquentMaintenance implements MaintenanceRepository
         
         foreach($data as $item)
         {
-            if($item[0] == "new_spare_part")
+            if($item[0] == "new_spare_part" || $item[0] == "service")
             {
-                
                 $digital_invoice = "";
                 $digital_broken = "";
                 $digital_replace = "";
@@ -69,29 +68,7 @@ class EloquentMaintenance implements MaintenanceRepository
 
                 $quantity = $item[5] ?? 0;
                 $unit_price = $item[7] ?? 0;
-
-                // array_push($insert_data,[
-                //     'type'=>$item[0],          
-                //     'type_id'=>(int)$id[0],       
-                //     'equipment_id'=>(int)$id[1],
-                //     'supplier_id'=>$item[3], 
-                //     'staff_id'=>$item[4],
-                //     'inventory_id'=>null,
-                //     'service'=>$item[1],
-                //     'quantity'=>$item[5],
-                //     'unit'=>$item[6],
-                //     'unit_price'=>$item[7],
-                //     'amount'=>$quantity * $unit_price,
-                //     'invoice_number'=>$item[9],
-                //     'invoice_file'=>$digital_invoice,
-                //     'note'=>$item[10] ?? "",
-                //     'image_broken'=>$digital_broken,
-                //     'image_replace'=>$digital_replace,
-                //     'date'=>$this->getDate($item[8]) ?? null, 
-                //     'created_at'=>$now,
-                //     'updated_at'=>$now
-                // ]); 
-                
+ 
                 $insert_data = [
                     'type'=>$item[0],          
                     'type_id'=>(int)$id[0],       
