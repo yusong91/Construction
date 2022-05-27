@@ -9,7 +9,6 @@ use Carbon\Carbon;
 use Illuminate\Support\Facades\Storage;
 
 
-
 class EloquentEquipment implements EquipmentRepository
 { 
 
