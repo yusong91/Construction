@@ -1,5 +1,5 @@
 <div class="table-responsive">
-    <table class="table table-borderless table-striped" style="width: 100%;">
+    <table class="table table-borderless table-striped" style="width: 150%;">
         <thead> 
             <th class="text-center align-middle" style="width: 5%;">No</th>
             <th class="text-center align-middle" style="width: 10%;">Equipment ID</th>

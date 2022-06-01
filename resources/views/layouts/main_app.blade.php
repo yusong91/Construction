@@ -36,6 +36,14 @@
         thead {
             background: #dddcdc
         }
+
+        <style>
+      input.larger {
+        transform: scale(5);
+        margin: 30px;
+      }
+    </style>
+
 </style>
 
     @yield('styles')
@@ -71,6 +79,10 @@
         {
             $('#a_date'+i).datepicker({
                 format: 'dd/mm/yyyy'
+            });
+
+            $('#a_date'+i).datepicker().on('changeDate', function (ev) {
+                console.log("selected " + ev.format(0,"dd/mm/yyyy"));
             });
         }
 

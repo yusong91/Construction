@@ -49,33 +49,30 @@ class EloquentRevenue implements RevenueRepository
         $insert_data = []; 
         foreach($data as $item)
         {
-            if(count($item) < 5){
-                continue; 
+            if($item[0] == null || $item[2] == null || $item[3] == null || $item[4] == null || $item[5] == null || $item[6] == null){
+                continue;
             }
-
-            dd($item);
-
+  
             $digital_file = "";
-            if(isset($item['8'])) 
+            if(isset($item[8])) 
             { 
-                $file = $item['8'];
+                $file = $item[8];
                 $digital_file = Storage::putFile('img', $file) ?? "";
             }
 
-            $id = explode(' ', $item['2']);
+            $id = explode(' ', $item[2]);
 
             array_push($insert_data,[          
-                'type_id'=>(int)$id[0],       
-                'equipment_id'=>(int)$id[1],
-                'customer_id'=>$item['0'],
-                'customer_name'=>$item['1'],
-                'from_date'=>$this->getDate($item['3']),
-                'to_date'=>$this->getDate($item['4']),
-
-                'number_working_day'=>$item['5'],
-                'rent_price'=>$item['6'],
-                'amount'=>$item['5'] * $item['6'],
-                'note'=>$item['7'] ?? "",
+                'type_id'=>$id[0],       
+                'equipment_id'=>$id[1],
+                'customer_id'=>$item[0],
+                'customer_name'=>$item[1] ?? null,
+                'from_date'=>$this->getDate($item[3]),
+                'to_date'=>$this->getDate($item[4]),
+                'number_working_day'=>$item[5],
+                'rent_price'=>$item[6],
+                'amount'=>$item[5] * $item[6],
+                'note'=>$item[7] ?? "",
                 'file'=>$digital_file,
                 'created_at'=>$now, 
                 'updated_at'=>$now

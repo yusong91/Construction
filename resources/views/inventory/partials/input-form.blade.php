@@ -9,7 +9,7 @@
             </select>
         </div> 
     </div>
-    @include('inventory.partials.row') 
+    @include('inventory.partials.row-input') 
 </fieldset>
  
 <script> 

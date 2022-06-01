@@ -165,97 +165,121 @@
 
             switch (select_type) {
 
-                case "new_spare_part":
-                    $("#" + index + "select_spart_part").hide();
-                    $("#" + index + "service_name").show();
-                    $("#" + index + "unit").prop( "disabled", false);
-                    $("#" + index + "unit_price").prop( "disabled", false);
-                    $("#" + index + "invoice_number").prop( "disabled", false);
-                    $("#a_date" + index).prop( "disabled", false);
-                    $("#" + index + "invoice_file").prop( "disabled", false);
+                    case "new_spare_part":
+                        $("#" + index + "select_spart_part").hide();
+                        $("#" + index + "service_name").show();
+                        $("#" + index + "unit").prop( "disabled", false);
+                        $("#" + index + "unit_price").prop( "disabled", false);
+                        $("#" + index + "invoice_number").prop( "disabled", false);
+                        $("#a_date" + index).prop( "disabled", false);
+                        $("#" + index + "invoice_file").prop( "disabled", false);
 
-                    $("#service_name" + index).val('');
-                    $("#service_name" + index).show();
+                        $("#service_name" + index).val('');
+                        $("#service_name" + index).show();
 
-                    $("#service_name" + index).attr("required", "true");
-                    $("#" + index + "quantity").attr("required", "true");
-                    $("#" + index + "unit").attr("required", "true");
-                    $("#" + index + "unit_price").attr("required", "true");
-                    //$("#" + index + "invoice_number").attr("required", "true");
-                    //$("#a_date" + index).attr("required", "true");
-                    $("#" + index + "supplier_id").attr("required", "true");
-                    $("#" + index + "staff_id").attr("required", "true");
-                    break;
+                        $("#service_name" + index).attr("required", "true");
+                        $("#" + index + "quantity").attr("required", "true");
+                        $("#" + index + "unit").attr("required", "true");
+                        $("#" + index + "unit_price").attr("required", "true");
+                        
+                        $("#" + index + "supplier_id").attr("required", "true");
+                        $("#" + index + "staff_id").attr("required", "true");
+        
+                        break;
 
-                case "service":
-                    $("#" + index + "select_spart_part").hide();
-                    $("#" + index + "service_name").show();
-                    $("#" + index + "unit").prop( "disabled", false);
-                    $("#" + index + "unit_price").prop( "disabled", false);
-                    $("#" + index + "invoice_number").prop( "disabled", false);
-                    $("#a_date" + index).prop( "disabled", false);
-                    $("#" + index + "invoice_file").prop( "disabled", false);
+                    case "service":
+                        $("#" + index + "select_spart_part").hide();
+                        $("#" + index + "service_name").show();
+                        $("#" + index + "unit").prop( "disabled", false);
+                        $("#" + index + "unit_price").prop( "disabled", false);
+                        $("#" + index + "invoice_number").prop( "disabled", false);
+                        $("#a_date" + index).prop( "disabled", false);
+                        $("#" + index + "invoice_file").prop( "disabled", false);
 
-                    $("#service_name" + index).val('');
-                    $("#service_name" + index).show();
+                        $("#service_name" + index).val('');
+                        $("#service_name" + index).show();
 
-                    $("#service_name" + index).attr("required", "true");
-                    $("#" + index + "quantity").attr("required", "true");
-                    $("#" + index + "unit").attr("required", "true");
-                    $("#" + index + "unit_price").attr("required", "true");
-                    //$("#" + index + "invoice_number").attr("required", "true");
-                    //$("#a_date" + index).attr("required", "true");
-                    $("#" + index + "supplier_id").attr("required", "true");
-                    $("#" + index + "staff_id").attr("required", "true");
-                    break;
+                        $("#service_name" + index).attr("required", "true");
+                        $("#" + index + "quantity").attr("required", "true");
+                        $("#" + index + "unit").attr("required", "true");
+                        $("#" + index + "unit_price").attr("required", "true");
+                        $("#" + index + "supplier_id").attr("required", "true");
+                        $("#" + index + "staff_id").attr("required", "true");
+                        break;
 
-                case "inventory":
-                    $("#" + index + "select_spart_part").show();
-                    $("#service_name" + index).hide();
-                    $("#" + index + "unit").prop( "disabled", true );
-                    $("#" + index + "unit_price").prop( "disabled", true );
-                    $("#" + index + "invoice_number").prop( "disabled", true );
-                    $("#a_date" + index).prop( "disabled", true );
-                    $("#" + index + "invoice_file").prop( "disabled", true );
+                    case "inventory":
+                        $("#" + index + "select_spart_part").show();
+                        $("#service_name" + index).hide();
+                        $("#" + index + "unit").prop( "disabled", true );
+                        $("#" + index + "unit_price").prop( "disabled", true );
+                        $("#" + index + "invoice_number").prop( "disabled", true );
+                        $("#a_date" + index).prop( "disabled", true );
+                        $("#" + index + "invoice_file").prop( "disabled", true );
 
-                    $("#" + index + "quantity").removeAttr('required');
-                    $("#service_name" + i).removeAttr('required');
-                    $("#" + index + "equipment_id").removeAttr('required');
-                    $("#" + index + "unit").removeAttr('required');
-                    $("#" + index + "unit_price").removeAttr('required');
-                    //$("#" + index + "invoice_number").removeAttr('required');
-                    //$("#a_date" + i).removeAttr('required');
-                    $("#" + index + "supplier_id").attr("required", "true");
-                    $("#" + index + "staff_id").attr("required", "true");
-                    break;
+                        $("#" + index + "quantity").removeAttr('required');
+                        $("#service_name" + i).removeAttr('required');
+                        $("#" + index + "equipment_id").removeAttr('required');
+                        $("#" + index + "unit").removeAttr('required');
+                        $("#" + index + "unit_price").removeAttr('required');
+                        $("#" + index + "supplier_id").attr("required", "true");
+                        $("#" + index + "staff_id").attr("required", "true");
+                        break;
 
-                default:
-                    break;
+                    default:
+                        break;
             }
-
         });
 
-        for (let i=0; i<=8; i++){
-       
-            $("#" + i + "category_select").change(function () {
+        $("#"+ index +"invoice_number").change(function () {
 
-                var data = $("#" + i + 'category_select option:selected').val() ?? 'remove';
+            var first_invoice_number = $("#"+ index +"invoice_number").val();
 
-                if(data == 'remove') 
+            var first_invoice_date = $("#a_date" + index).val();
+
+            for (let i = 1; i <= 8; i++) {
+
+                var invoice_number = $("#" + i + "invoice_number").val();
+
+                var invoice_date = $("#a_date"+i).val();
+
+                if(first_invoice_date == invoice_date && first_invoice_number == invoice_number && i != index)
                 {
-                    $("#" + i + "quantity").removeAttr('required');
-                    $("#service_name" + i).removeAttr('required');
-                    $("#" + i + "equipment_id").removeAttr('required');
-                    $("#" + i + "unit").removeAttr('required');
-                    $("#" + i + "unit_price").removeAttr('required');
-                    $("#" + i + "invoice_number").removeAttr('required');
-                    $("#a_date" + i).removeAttr('required');
-                    $("#" + i + "supplier_id").removeAttr('required');
-                    $("#" + i + "staff_id").removeAttr('required');
-                }
-                
-            });
-        }
+                    $("#" + index + "invoice_file").prop( "disabled", true);
+
+                } 
+            }
+        });
+
+       
+ 
+
     }
+
+    for (let i=0; i<=8; i++){
+       
+        $("#" + i + "category_select").change(function () {
+
+           var data = $("#" + i + 'category_select option:selected').val() ?? 'remove';
+
+           if(data == 'remove') 
+           {
+               $("#" + i + "quantity").removeAttr('required');
+               $("#service_name" + i).removeAttr('required');
+               $("#" + i + "equipment_id").removeAttr('required');
+               $("#" + i + "unit").removeAttr('required');
+               $("#" + i + "unit_price").removeAttr('required');
+               $("#" + i + "invoice_number").removeAttr('required');
+               $("#a_date" + i).removeAttr('required');
+               $("#" + i + "supplier_id").removeAttr('required');
+               $("#" + i + "staff_id").removeAttr('required');
+           }
+           
+        });
+    }
+
+   
+
+
+
 
 </script>

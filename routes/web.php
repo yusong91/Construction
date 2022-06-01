@@ -290,6 +290,16 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
      * Staff
      */
     Route::resource('staff', 'StaffController')->middleware('permission:staff.index');
+
+    /**
+     * Claim Invoice
+     */
+    Route::resource('claim', 'ClaimInvoiceController');
+
+    /**
+     * UnClaim Invoice
+     */
+    Route::resource('unclaim', 'UnclaimInvoiceController');
    
 
 });

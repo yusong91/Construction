@@ -75,7 +75,7 @@
                                 <td class="text-center align-middle">{{ $item['child_qeuipment']->count() }}</td>
                                 <td class="text-center align-middle"></td>
                                 <td class="text-center align-middle">គ្រឿង</td>
-                                <td class="text-center align-middle"><img src="{{ getUrl($item['image']) }}" width="100"></td>
+                                <td class="text-center align-middle"><img src="{{ $item['image'] ? getUrl($item['image']) : url('assets/img/no_photo.png') }}" width="80"></td>
                                 <td class="text-center align-middle"><a href="{{ route('equipment.show', $item['id']) }}" class="btn btn-icon edit" title="List Eqipment" data-toggle="tooltip" data-placement="top"> <i class="fas fa-list"></i> </a></td>
                             </tr>
                         @endforeach
