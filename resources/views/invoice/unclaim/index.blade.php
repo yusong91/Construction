@@ -15,10 +15,7 @@
 
         @include('partials.button_claim') 
 
-        <form action="{{ route('unclaim.store') }}" method="POST"  accept-charset="UTF-8" autocomplete="off">
-           
             <div class="row ">
-                
                 <div class="col-3">
                     <div class="form-floating mb-3">
                         <label for="a_date">@lang('Filter From Date')</label>
@@ -32,9 +29,9 @@
                         <input type="text" id="b_date" class="form-control" name="to_date" value="" >
                     </div>
                 </div>
-
             </div>
 
+        <form action="{{ route('unclaim.store') }}" method="POST"  accept-charset="UTF-8" autocomplete="off">
 
             @include('invoice.unclaim.partials.row') 
                     
