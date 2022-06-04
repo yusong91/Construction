@@ -64,7 +64,7 @@
             </li>
 
             <li class="nav-item d-flex align-items-center visible-lg">
-                <a class="nav-link {{ Request::is('equipment*', 'sparepart*', 'inventory*', 'supplier*', 'customer*') ? 'active' : ''  }}"  href="{{ route('equipment.index') }}"><h5 class="header mb-0">List</h5></a>
+                <a class="nav-link {{ Request::is('equipment*', 'sparepart*', 'inventory*', 'category*', 'supplier*', 'customer*') ? 'active' : ''  }}"  href="{{ route('equipment.index') }}"><h5 class="header mb-0">List</h5></a>
             </li>
 
             <li class="nav-item d-flex align-items-center visible-lg">
@@ -95,13 +95,7 @@
             @hook('navbar:items')
 
             <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle"
-                   href="#"
-                   id="navbarDropdown"
-                   role="button"
-                   data-toggle="dropdown"
-                   aria-haspopup="true"
-                   aria-expanded="false">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 
                     <?php
 
@@ -113,32 +107,20 @@
                         }
                     ?>
 
-                    <img src="{{ url('assets/img/profile.png') }}"
-                         width="50"
-                         height="50"
-                         class="rounded-circle img-thumbnail img-responsive">
+                    <img src="{{ url('assets/img/profile.png') }}" width="50" height="50" class="rounded-circle img-thumbnail img-responsive">
                 </a>
                 <div class="dropdown-menu dropdown-menu-right position-absolute p-0" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item py-2" href="{{ route('profile') }}">
-                        <i class="fas fa-user text-muted mr-2"></i>
-                        @lang('My Profile')
-                    </a>
+                    <a class="dropdown-item py-2" href="{{ route('profile') }}"> <i class="fas fa-user text-muted mr-2"></i> @lang('My Profile')</a>
 
                     @if (config('session.driver') == 'database')
-                        <a href="{{ route('profile.sessions') }}" class="dropdown-item py-2">
-                            <i class="fas fa-list text-muted mr-2"></i>
-                            @lang('Active Sessions')
-                        </a>
+                        <a href="{{ route('profile.sessions') }}" class="dropdown-item py-2"> <i class="fas fa-list text-muted mr-2"></i> @lang('Active Sessions')</a>
                     @endif
 
                     @hook('navbar:dropdown')
 
                     <div class="dropdown-divider m-0"></div>
 
-                    <a class="dropdown-item py-2" href="{{ route('auth.logout') }}">
-                        <i class="fas fa-sign-out-alt text-muted mr-2"></i>
-                        @lang('Logout')
-                    </a>
+                    <a class="dropdown-item py-2" href="{{ route('auth.logout') }}"><i class="fas fa-sign-out-alt text-muted mr-2"></i>@lang('Logout')</a>
                 </div>
             </li>
         </ul>
