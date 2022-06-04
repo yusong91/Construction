@@ -51,7 +51,7 @@
             @endforeach
         @else 
                     <tr>
-                        <td colspan="14"><em>@lang('app.no_records_found')</em></td>
+                        <td colspan="15"><em>@lang('app.no_records_found')</em></td>
                     </tr>
         @endif
 
