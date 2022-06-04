@@ -8,7 +8,6 @@
                     <th class="text-center verticel-center">Unit</th>
                     <th class="text-center verticel-center">Unit Price</th>
                     <th class="text-center verticel-center">Amount</th>
-                    
                     <th class="text-center verticel-center">Action</th>
                 </thead>
                 <tbody>  
@@ -34,7 +33,7 @@
                     @else  
                        
                         <tr>
-                            <td colspan="4"><em>@lang('app.no_records_found')</em></td>
+                            <td colspan="8"><em>@lang('app.no_records_found')</em></td>
                         </tr>
                     @endif
                     
