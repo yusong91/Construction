@@ -1,13 +1,13 @@
 <?php
  
-namespace Vanguard\Repositories\Unclaim;
+namespace Vanguard\Repositories\Claim;
 use Vanguard\Model\Maintenance;
-use Vanguard\Model\Unclaim;
+use Vanguard\Model\Claim;
 use Carbon\Carbon;
 use Validator;
 use DB;
  
-class EloquentUnclaim implements UnclaimRepository
+class EloquentClaim implements ClaimRepository
 {  
     public function paginate($perPage, $search = null)
     {   
@@ -16,7 +16,7 @@ class EloquentUnclaim implements UnclaimRepository
             $query->where(function ($q) use ($search) {
                 $q->where('service', "like", "%{$search}%");
                 $q->orWhere('note', 'like', "%{$search}%");
-            });  
+            }); 
         } 
         $result = $query->orderBy('created_at', 'desc')->paginate($perPage);
         if ($search) {
@@ -27,11 +27,12 @@ class EloquentUnclaim implements UnclaimRepository
  
     public function all() 
     {
-        return Maintenance::with(['parent_staff'])->where(['unclaim'=> 0, 'inventory_id'=> null])->get();
+        return Maintenance::with('parent_staff')->where('unclaim', 1)->get();
     } 
 
     public function create(array $data)
     {  
+        
         $create = Unclaim::create($data);
         if($create)
         {

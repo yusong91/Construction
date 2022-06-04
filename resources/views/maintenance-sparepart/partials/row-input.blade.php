@@ -97,8 +97,6 @@
                             </div>
                         </td> 
 
-                         
-
                         <td> 
                             <div class="form-floating">
                                 <input type="number" class="form-control form-borderless" name="{{$i}}invoice_number" id="{{$i}}invoice_number" style="width: 170px;">

@@ -27,7 +27,7 @@ class MaintenanceController extends Controller
 
     public function create()
     {   
-        $active = "maintenance";
+        $active = "maintenance"; 
         $spare_parts = getSparePart();
         $staffs = getStaff();
         $suppliers = getSupplier(); 
@@ -39,6 +39,7 @@ class MaintenanceController extends Controller
     public function store(Request $request)
     {
         $data = $request->all(); 
+        //dd($data);
         $groups = array(); 
         
         foreach($data as $key => $value ){            
@@ -46,7 +47,7 @@ class MaintenanceController extends Controller
             $groups[substr($key, 0, 1)][] = $value;
         } 
         array_pop($groups); 
-
+        //dd($groups);
         $create = $this->maintenance->create($groups);
         
         if($create)

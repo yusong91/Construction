@@ -33,7 +33,7 @@ class Maintenance extends Model
         return $this->belongsTo('Vanguard\Model\Staff','staff_id'); 
     }
 
-    public function inventory(){    
+    public function inventory(){     
   
         return $this->belongsTo('Vanguard\Model\Inventory','inventory_id'); 
     }

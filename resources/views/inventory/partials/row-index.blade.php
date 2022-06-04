@@ -1,20 +1,21 @@
 <div class="table-responsive" style="padding-top: 40px;">
-    <table class="table table-borderless table-striped" style="width: 200%;">
+    <table class="table table-borderless table-striped" style="width: 270%;">
         <thead> 
-            <th class="text-center align-middle" style="width: 200px;">Category</th>
-            <th class="text-center align-middle" style="width: 200px;">Item Name</th>
-            <th class="text-center align-middle" style="width: 300px;">Warehouse Location</th>
-            <th class="text-center align-middle" style="width: 80px;">Quantity</th>
-            <th class="text-center align-middle" style="width: 100px;">In Stock</th>
-            <th class="text-center align-middle" style="width: 100px;">Price</th>
-            <th class="text-center align-middle" style="width: 100px;">Unit</th>
-            <th class="text-center align-middle" style="width: 100px;">Used</th>
-            <th class="text-center align-middle" style="width: 200px;">Vender</th>
-            <th class="text-center align-middle" style="width: 200px;">Menufacture</th>
-            <th class="text-center align-middle" style="width: 150px;">Purchased Date</th>
-            <th class="text-center align-middle" style="width: 80px;">Image</th>
-            <th class="text-center align-middle" style="width: 400px;">Note</th>
-            <th class="text-center align-middle" style="width: 100px;">Action</th>
+            <th class="text-center align-middle" style="width: 5%;">Category</th>
+            <th class="text-center align-middle" style="width: 5%;">Item Name</th>
+            <th class="text-center align-middle" style="width: 5%;">Warehouse Location</th>
+            <th class="text-center align-middle" style="width: 3%;">Quantity</th>
+            <th class="text-center align-middle" style="width: 3%;">In Stock</th>
+            <th class="text-center align-middle" style="width: 3%;">Price</th>
+            <th class="text-center align-middle" style="width: 3%;">Total</th>
+            <th class="text-center align-middle" style="width: 5%;">Unit</th>
+            <th class="text-center align-middle" style="width: 3%;">Used</th>
+            <th class="text-center align-middle" style="width: 6%;">Vender</th>
+            <th class="text-center align-middle" style="width: 6%;">Menufacture</th>
+            <th class="text-center align-middle" style="width: 4%;">Purchased Date</th>
+            <th class="text-center align-middle" style="width: 3%;">Image</th>
+            <th class="text-center align-middle" style="width: 9%;">Note</th>
+            <th class="text-center align-middle" style="width: 5%;">Action</th>
         </thead>
     <tbody> 
                     
@@ -33,6 +34,7 @@
                             <td class="text-center align-middle">{{ $item->quantity }}</td>
                             <td class="text-center align-middle">{{ $item->quantity - $item->used }}</td>
                             <td class="text-center align-middle">${{ $item->price }}</td> 
+                            <td class="text-center align-middle">${{ $item->price * $item->quantity }}</td> 
                             <td class="text-center align-middle">{{ $item->unit }}</td>   
                             <td class="text-center align-middle">{{ $item->used }}</td>   
                             <td class="text-center align-middle">{{ $item->vender }}</td>   

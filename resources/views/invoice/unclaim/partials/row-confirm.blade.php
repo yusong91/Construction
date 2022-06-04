@@ -7,6 +7,10 @@
                         @continue
                     @endif
                     <tr>
+                    <input type="hidden" name="maintenance_id" value="{{ $item[0] }}" >
+                        <input type="hidden" name="invoice_number" value="{{ $item[1] }}" >
+                        <input type="hidden" name="invoice_date" value="{{ $item[2] }}" >
+                        <input type="hidden" name="momo" value="{{ $item[3] }}" >
                         <td class="text-center align-middle" style="width: 10%;">{{ 1 + $loop->index }}</td>
                         <td class="align-middle">{{ $item[1] }}</td> 
                     </tr>

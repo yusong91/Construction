@@ -12,13 +12,15 @@
                 @foreach($unclaims as $item)
                     <tr>
                         <td class="text-center align-middle">{{ $item->date ? getDateFormat($item->date) : '' }}</td>
-                        <td class="text-center align-middle">{{ $item->invoice_number  }}</td>
+                        <td class="text-center align-middle">{{ $item->invoice_number }}</td>
                         <td class="text-center align-middle">{{ $item->parent_staff->name }}</td>
                         <td class="text-center align-middle">{{ $item->note }}</td> 
                         <td class="text-center align-middle">
                             <input type="hidden" name="{{$loop->index}}id" value="{{$item->id}}"> 
+                            <input type="hidden" name="staff_id" value="{{ $item->parent_staff->id }}">  
                             <input type="hidden" name="{{$loop->index}}invoice_number" value="{{ $item->invoice_number }}"> 
-                            <input type="hidden" name="staff_id" value="{{ $item->parent_staff->id }}">                       
+                            <input type="hidden" name="{{$loop->index}}invoice_date" value="{{ $item->date }}">  
+                            <input type="hidden" name="{{$loop->index}}memo" value="{{ $item->note }}">  
                             <input type="checkbox" class="larger" name="{{$loop->index}}unclaim">
                         </td>
                     </tr>

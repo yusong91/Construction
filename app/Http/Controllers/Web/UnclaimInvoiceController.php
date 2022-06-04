@@ -9,7 +9,7 @@ use Vanguard\Repositories\Unclaim\UnclaimRepository;
 
 class UnclaimInvoiceController extends Controller
 {
-    private $unclaim;
+    private $unclaim; 
 
     public function __construct(UnclaimRepository $unclaim)
     {  
@@ -23,9 +23,15 @@ class UnclaimInvoiceController extends Controller
         return view('invoice.unclaim.index', compact('active', 'unclaims'));
     }
 
-    public function create()
+    public function create(Request $request)
     {
-        //
+        $create = $this->unclaim->create($request->all());
+
+        if($create)
+        {
+            return redirect()->route('unclaim.index')->withSuccess("Success");
+        }
+        return redirect()->route('unclaim.index')->withErrors("No Insert");
     }
 
     public function store(Request $request)
@@ -36,7 +42,7 @@ class UnclaimInvoiceController extends Controller
         
         $data = $request->all();
         $list_unclaim = array(); 
-
+        
         foreach($data as $key => $value ){
 
             if(substr($key, 0, 1) == 's'){
@@ -46,13 +52,12 @@ class UnclaimInvoiceController extends Controller
             $list_unclaim[substr($key, 0, 1)][] = $value;
         } 
         array_pop($list_unclaim);
-        //dd($list_unclaim);
         return view('invoice.unclaim.confirm', compact('active', 'list_unclaim', 'staffs', 'staff_id'));
     }
 
     public function show($id)
     {
-        //
+        dd('ok');
     }
 
     public function edit($id)

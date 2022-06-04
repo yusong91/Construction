@@ -43,6 +43,8 @@ use Vanguard\Repositories\Sparepart\EloquentSparepart;
 use Vanguard\Repositories\Sparepart\SparepartRepository;
 use Vanguard\Repositories\Unclaim\EloquentUnclaim;
 use Vanguard\Repositories\Unclaim\UnclaimRepository;
+use Vanguard\Repositories\Claim\EloquentClaim;
+use Vanguard\Repositories\Claim\ClaimRepository;
 
 
 
@@ -81,6 +83,8 @@ class AppServiceProvider extends ServiceProvider
         $this->app->singleton(WarehouseRepository::class, EloquentWarehouse::class);
         $this->app->singleton(SparepartRepository::class, EloquentSparepart::class); 
         $this->app->singleton(UnclaimRepository::class, EloquentUnclaim::class);
+        $this->app->singleton(ClaimRepository::class, EloquentClaim::class);
+        
 
         if ($this->app->environment('local')) {
             $this->app->register(\Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class);

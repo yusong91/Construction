@@ -111,7 +111,14 @@ function check_string($my_string){
        return true;
     else
        return false;
- }
+}
+
+if(!function_exists('getClaimed')){
+    function getClaimed(){
+        $data = \Vanguard\Model\Unclaim::with('staff_parent')->get();
+        return $data;
+    }
+}
 
 
 

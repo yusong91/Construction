@@ -45,32 +45,35 @@
 </style> 
 
 <div class="card">
-    <div class="card-body">
+    <div class="card-body"> 
 
         @include('partials.button_claim') 
+
+        <form action="{{ route('unclaim.create') }}" method="PATCH"  accept-charset="UTF-8" autocomplete="off">
            
-        @include('invoice.unclaim.partials.row-confirm') 
+            @include('invoice.unclaim.partials.row-confirm') 
 
-        <div class="row mt-5">
+            <div class="row mt-5">
+                    
+                <div class="col-3">
+                    <label for="a_date">@lang('Claim To')</label>
+                    <select class="form-control js-example-responsive" required name="staff_id" data-live-search="true">
+                        @foreach($staffs as $item)   
+                            <option value="{{ $item->id }}">{{$item->name}}</option>   
+                        @endforeach
+                    </select>
                 
-            <div class="col-3">
-                <label for="a_date">@lang('Claim To')</label>
-                <select class="form-control js-example-responsive" required name="category_id" id="category_id" data-live-search="true">
-                    @foreach($staffs as $item)   
-                        <option value="{{ $item->id }}">{{$item->name}}</option>   
-                    @endforeach
-                </select>
-               
-            </div> 
-    
-            <div class="col-3">
-                <label for="a_date">@lang('Total Price')</label>
-                <input type="text" class="form-control" name="to_date" value="" required >
+                </div> 
+        
+                <div class="col-3">
+                    <label for="a_date">@lang('Total Price')</label>
+                    <input type="number" class="form-control" name="price" required >
+                </div>
+
             </div>
-
-        </div>
-
-        <button type="submit" class="btn btn-primary mt-4">CONFIRM</button>
+            @csrf
+            <button type="submit" class="btn btn-primary mt-4">CONFIRM</button>
+        </form>
                   
     </div>
 </div>

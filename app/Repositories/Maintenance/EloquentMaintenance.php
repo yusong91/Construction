@@ -122,32 +122,36 @@ class EloquentMaintenance implements MaintenanceRepository
 
             } elseif($item[0] == "inventory"){
 
+                //dd($item);
+
+                $id = explode(' ', $item[3]);
+
+                //dd($id);
+
                 $digital_broken = "";
                 $digital_replace = "";
 
-                if(isset($item['7'])) 
+                if(isset($item[8])) 
                 { 
-                    $file = $item['7'];
+                    $file = $item[8];
                     $digital_broken = Storage::putFile('img', $file) ?? "";
                 }
 
-                if(isset($item['8'])) 
+                if(isset($item[9])) 
                 { 
-                    $file = $item['8'];
+                    $file = $item[9];
                     $digital_replace = Storage::putFile('img', $file) ?? "";
                 }
 
-                $id = explode(' ', $item['2']);
-
                 array_push($insert_data,[
                     'type'=>$item[0],          
-                    'type_id'=>(int)$id[0],       
-                    'equipment_id'=>(int)$id[1],
-                    'supplier_id'=>$item[3],
-                    'staff_id'=>$item[4],
-                    'inventory_id'=>$item[1],
-                    'quantity'=>$item[5],
-                    'note'=>$item[6] ?? "",
+                    'type_id'=>$id[0],       
+                    'equipment_id'=>$id[1],
+                    'supplier_id'=>$item[4],
+                    'staff_id'=>$item[5],
+                    'inventory_id'=>$item[2],
+                    'quantity'=>$item[6],
+                    'note'=>$item[7] ?? "",
                     'image_broken'=>$digital_broken,
                     'image_replace'=>$digital_replace,
                     'date'=>null,
