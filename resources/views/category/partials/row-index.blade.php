@@ -1,10 +1,10 @@
 <div class="table-responsive">
     <table class="table table-borderless table-striped">
         <thead> 
-            <th class="text-center align-middle">No</th>
-            <th class="text-center align-middle">Category</th>
-            <th class="text-center align-middle">Sub Category</th>
-            <th class="text-center align-middle">Action</th>
+            <th class="text-center align-middle" style="width: 5%;">No</th>
+            <th class="text-center align-middle" style="width: 30%;">Category</th>
+            <th class="text-center align-middle" style="width: 50%;">Sub Category</th>
+            <th class="text-center align-middle" style="width: 10%;">Action</th>
         </thead>
         <tbody>    
             @if($categorys)
