@@ -1,10 +1,10 @@
 <div class="table-responsive" style="padding-top: 40px;">
-    <table class="table table-borderless table-striped" style="width: 180%;">
+    <table class="table table-borderless table-striped" style="width: 130%;">
         <thead> 
             <th class="text-center align-middle" style="width: 2%;">No</th>
             <th class="text-center align-middle" style="width: 6%;">Company Name</th>
             <th class="text-center align-middle" style="width: 6%;">Supplier/Sale Name</th>
-            <th class="text-center align-middle" style="width: 5%;">Phone</th>
+            <th class="text-center align-middle" style="width: 4%;">Phone</th>
             <th class="text-center align-middle" style="width: 7%;">E-mail</th>
             <th class="text-center align-middle" style="width: 5%;">Job Title</th>
             <th class="text-center align-middle" style="width: 5%;">Address</th>
