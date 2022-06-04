@@ -1,16 +1,16 @@
 <div class="table-responsive" style="padding-top: 40px;">
     <table class="table table-borderless table-striped" style="width: 180%;">
         <thead> 
-            <th class="text-center align-middle" style="width: 5%;">No</th>
-            <th class="text-center align-middle" style="width: 10%;">Company Name</th>
-            <th class="text-center align-middle" style="width: 10%;">Supplier/Sale Name</th>
-            <th class="text-center align-middle" style="width: 10%;">Phone</th>
-            <th class="text-center align-middle" style="width: 15%;">E-mail</th>
-            <th class="text-center align-middle" style="width: 10%;">Job Title</th>
-            <th class="text-center align-middle" style="width: 15%;">Address</th>
-            <th class="text-center align-middle" style="width: 10%;">Other</th>
-            <th class="text-center align-middle" style="width: 20%;">Note</th>
-            <th class="text-center align-middle" style="width: 5%;">Action</th>     
+            <th class="text-center align-middle" style="width: 2%;">No</th>
+            <th class="text-center align-middle" style="width: 6%;">Company Name</th>
+            <th class="text-center align-middle" style="width: 6%;">Supplier/Sale Name</th>
+            <th class="text-center align-middle" style="width: 5%;">Phone</th>
+            <th class="text-center align-middle" style="width: 7%;">E-mail</th>
+            <th class="text-center align-middle" style="width: 5%;">Job Title</th>
+            <th class="text-center align-middle" style="width: 5%;">Address</th>
+            <th class="text-center align-middle" style="width: 8%;">Other</th>
+            <th class="text-center align-middle" style="width: 8%;">Note</th>
+            <th class="text-center align-middle" style="width: 2%;">Action</th>     
         </thead> 
         <tbody> 
 

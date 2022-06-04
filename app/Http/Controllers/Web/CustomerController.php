@@ -27,7 +27,7 @@ class CustomerController extends Controller
         return view('customer.index', compact('active', 'paginate', 'customers'));
     }
 
-    public function create()
+    public function create() 
     {   
         $active = "customer";
         return view('customer.create', compact('active'));

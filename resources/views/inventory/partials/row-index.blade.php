@@ -1,5 +1,5 @@
 <div class="table-responsive" style="padding-top: 40px;">
-    <table class="table table-borderless table-striped" style="width: 270%;">
+    <table class="table table-borderless table-striped" style="width: 200%;">
         <thead> 
             <th class="text-center align-middle" style="width: 5%;">Category</th>
             <th class="text-center align-middle" style="width: 5%;">Item Name</th>
@@ -21,9 +21,9 @@
                     
         @if($inventory_groups)
             @foreach($inventory_groups as $items)
-                <tr>  
+                <tr style="background-color:#f0f8ff;">  
                     <th class="text-center align-middle" scope="row"><h5> {{ $items[0]->parent_category['value'] }}</h5></th>
-                    <th scope="row" colspan="12"></th>
+                    <th scope="row" colspan="13"></th>
                     <th></th>
                 </tr>
                 @foreach($items as $item)
