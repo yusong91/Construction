@@ -1,25 +1,25 @@
 <div class="table-responsive" style="margin-top: 40px;" >
-    <table class="table table-borderless table-striped" style="width: 250%;">
+    <table class="table table-borderless table-striped" style="width: 200%;">
         <thead>
             <tr>
-                <th class="text-center align-middle" style="width: 2%;">No</th>
+                <th class="text-center align-middle" style="width: 1%;">No</th>
                 <th class="text-center align-middle" style="width: 5%;">Equipment Type</th>
                 <th class="text-center align-middle" style="width: 5%;">Equipment Id</th>
-                <th class="text-center align-middle" style="width: 4%;">Purchased Date</th>
+                <th class="text-center align-middle" style="width: 3%;">Purchased Date</th>
                 <th class="text-center align-middle" style="width: 5%;">Brand</th>
-                <th class="text-center align-middle" style="width: 3%;">Year</th>
+                <th class="text-center align-middle" style="width: 2%;">Year</th>
                 <th class="text-center align-middle" style="width: 5%;">Chassis No</th>
                 <th class="text-center align-middle" style="width: 5%;">Engine No</th>
                 <th class="text-center align-middle" style="width: 5%;">Receipt No</th>
-                <th class="text-center align-middle" style="width: 3%;">Weight</th>
+                <th class="text-center align-middle" style="width: 2%;">Weight</th>
                 <th class="text-center align-middle" style="width: 5%;">Vender</th>
-                <th class="text-center align-middle" style="width: 5%;">Image</th>
+                <th class="text-center align-middle" style="width: 3%;">Image</th>
                 <th class="text-center align-middle" style="width: 8%;">Note</th>
                 <th class="text-center align-middle" style="width: 3%;">Action</th>
             </tr>
         </thead>  
         <tbody> 
-            @if(count($equipments))       
+            @if(count($equipments) >0)       
                 @foreach($equipments as $item)
                     <tr>
                         <td class="text-center align-middle">{{ 1 + $loop->index }}</td>
@@ -43,7 +43,7 @@
                 @endforeach
             @else
                 <tr>
-                    <td colspan="5"><em>@lang('app.no_records_found')</em></td>
+                    <td colspan="14"><em>@lang('app.no_records_found')</em></td>
                 </tr>
             @endif                                  
         </tbody>
