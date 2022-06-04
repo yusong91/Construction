@@ -72,12 +72,14 @@
             </li>
 
             <li class="nav-item d-flex align-items-center visible-lg">
-                <a class="nav-link {{ Request::is('report-standard*' , 'report-equipment*', 'report-movement*') ? 'active' : ''  }}"  href="{{ route('report-standard.index') }}"><h5 class="header mb-0">Report</h5></a>
+                <a class="nav-link {{ Request::is('unclaim*', 'claim*') ? 'active' : ''  }}"  href="{{ route('unclaim.index') }}"><h5 class="header mb-0">Claim Invoice</h5></a>
             </li>
 
             <li class="nav-item d-flex align-items-center visible-lg">
-                <a class="nav-link {{ Request::is('unclaim*', 'claim*') ? 'active' : ''  }}"  href="{{ route('unclaim.index') }}"><h5 class="header mb-0">Claim Invoice</h5></a>
+                <a class="nav-link {{ Request::is('report-standard*' , 'report-equipment*', 'report-movement*') ? 'active' : ''  }}"  href="{{ route('report-standard.index') }}"><h5 class="header mb-0">Report</h5></a>
             </li>
+
+            
 
             <li class="nav-item dropdown d-flex align-items-center visible-lg {{ Request::is('common-codes*', 'staff*', 'warehouse*') ? 'active' : ''  }} ">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-expanded="false">

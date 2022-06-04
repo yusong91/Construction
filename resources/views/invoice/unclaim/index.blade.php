@@ -36,7 +36,7 @@
             @include('invoice.unclaim.partials.row') 
                     
             @csrf 
-            <button type="submit" class="btn btn-primary mt-4">OK</button>
+            <button type="submit" class="btn btn-primary mt-4">Claim</button>
         </form>
 
     </div>
