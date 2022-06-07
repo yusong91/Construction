@@ -122,11 +122,7 @@ class EloquentMaintenance implements MaintenanceRepository
 
             } elseif($item[0] == "inventory"){
 
-                //dd($item);
-
                 $id = explode(' ', $item[3]);
-
-                //dd($id);
 
                 $digital_broken = "";
                 $digital_replace = "";
@@ -210,20 +206,32 @@ class EloquentMaintenance implements MaintenanceRepository
 
         $edit =  Maintenance::find($id);
 
+        //dd($data);
+        $amount = null;
+        if(isset($data['quantity']) && isset($data['unit_price']))
+        {
+            $amount = $data['unit_price'] * $data['quantity'];
+        }
+
         $update = [          
-                'type_id'=>(int)$eq_id[0],       
-                'equipment_id'=>(int)$eq_id[1],
+                'type'=>$data['category_id'],          
+                'type_id'=>$eq_id[0],       
+                'equipment_id'=>$eq_id[1],
                 'supplier_id'=>$data['supplier_id'],
                 'staff_id'=>$data['staff_id'],
-                'inventory_id'=>$data['type_id'],
-                'service'=>$data['service'],
-                'quantity'=>$data['quantity'],
-                'unit_price'=>$data['unit_price'],
-                'amount'=>$data['amount'],
-                'note'=>$data['note'],
+                'inventory_id'=>$data['inventory_id'] ?? $edit->inventory_id,
+                'service'=>$data['service'] ?? $edit->service,
+                'quantity'=>$data['quantity'] ?? $edit->quantity,
+                'unit'=>$data['unit'] ?? $edit->unit,
+                'unit_price'=>$data['unit_price'] ?? $edit->unit_price,
+                'amount'=>$amount,
+                'note'=>$data['note'] ?? "",
+                'image_broken'=>$digital_broken,
+                'image_replace'=>$digital_replace,
+                'date'=>null,
                 'image_broken'=>$digital_broken ? $digital_broken : $edit->image_broken ,
                 'image_replace'=>$digital_replace ? $digital_replace : $edit->image_replace,
-                'date'=>$this->getDate($data['date']),
+                'date'=> isset($data['date']) ? $this->getDate($data['date']) : null,
                 'updated_at'=>$now
         ]; 
         

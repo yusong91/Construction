@@ -54,7 +54,7 @@
     
 </style>
 
-<div class="card">
+<div class="card"> 
     <div class="card-body">
         @include('partials.button_group_transaction')
         

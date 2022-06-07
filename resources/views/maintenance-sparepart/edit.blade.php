@@ -57,9 +57,15 @@
     <div class="card-body">
         @include('partials.button_group_transaction') 
         <form action="{{ route('maintenance.update', $edit->id) }}" id="user-form" method="POST" enctype="multipart/form-data" accept-charset="UTF-8" autocomplete="off">
-            @method('PUT')
-            @include('maintenance-sparepart.partials.row-edit')
-            {{ csrf_field() }}
+            
+            <fieldset class="border pl-2 pr-2" > 
+                <legend>Update Maintenance & Spare-Part</legend>
+        
+                @method('PUT')
+                @include('maintenance-sparepart.partials.row-edit')
+                {{ csrf_field() }}
+                
+            </fieldset>
             <button type="submit" class="btn btn-primary mt-4">Update</button>
         </form>
     </div>
@@ -80,7 +86,7 @@
     $('.js-example-responsive').select2({
         placeholder: '',
         allowClear: true
-    }).val().trigger('change');
+    });
     
 </script>
 

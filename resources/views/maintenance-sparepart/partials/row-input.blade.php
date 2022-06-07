@@ -11,8 +11,8 @@
                 <th scope="col" class="text-center align-middle">Unit *</th>
                 <th scope="col" class="text-center align-middle">Unit Price *</th>
                 <th scope="col" class="text-center align-middle">Invoice Date</th>
-                <th scope="col" class="text-center align-middle">Invoice Number</th>
-                <th scope="col" class="text-center align-middle">Invoice Number/Other Attachment</th>
+                <th scope="col" class="text-center align-middle">Invoice Number *</th>
+                <th scope="col" class="text-center align-middle">Invoice Number/Other Attachment *</th>
                 <th scope="col" class="text-center align-middle">Note</th>
                 <th scope="col" class="text-center align-middle">Image of Broken</th>
                 <th scope="col" class="text-center align-middle">Image of Replacement</th>
@@ -171,7 +171,7 @@
                         $("#" + index + "invoice_number").prop( "disabled", false);
                         $("#a_date" + index).prop( "disabled", false);
                         $("#" + index + "invoice_file").prop( "disabled", false);
-
+                            
                         $("#service_name" + index).val('');
                         $("#service_name" + index).show();
 
@@ -179,7 +179,8 @@
                         $("#" + index + "quantity").attr("required", "true");
                         $("#" + index + "unit").attr("required", "true");
                         $("#" + index + "unit_price").attr("required", "true");
-                        
+                        $("#" + index + "invoice_number").attr("required", "true");
+                        $("#" + index + "invoice_file").attr("required", "true");
                         $("#" + index + "supplier_id").attr("required", "true");
                         $("#" + index + "staff_id").attr("required", "true");
         
@@ -190,8 +191,8 @@
                         $("#" + index + "service_name").show();
                         $("#" + index + "unit").prop( "disabled", false);
                         $("#" + index + "unit_price").prop( "disabled", false);
-                        $("#" + index + "invoice_number").prop( "disabled", false);
                         $("#a_date" + index).prop( "disabled", false);
+                        $("#" + index + "invoice_number").prop( "disabled", false);
                         $("#" + index + "invoice_file").prop( "disabled", false);
 
                         $("#service_name" + index).val('');
@@ -201,6 +202,8 @@
                         $("#" + index + "quantity").attr("required", "true");
                         $("#" + index + "unit").attr("required", "true");
                         $("#" + index + "unit_price").attr("required", "true");
+                        $("#" + index + "invoice_file").attr("required", "true");
+                        $("#" + index + "invoice_number").attr("required", "true");
                         $("#" + index + "supplier_id").attr("required", "true");
                         $("#" + index + "staff_id").attr("required", "true");
                         break;
@@ -219,6 +222,8 @@
                         $("#" + index + "equipment_id").removeAttr('required');
                         $("#" + index + "unit").removeAttr('required');
                         $("#" + index + "unit_price").removeAttr('required');
+                        $("#" + index + "invoice_file").removeAttr('required');
+                        $("#" + index + "invoice_number").removeAttr('required');
                         $("#" + index + "supplier_id").attr("required", "true");
                         $("#" + index + "staff_id").attr("required", "true");
                         break;
@@ -248,9 +253,6 @@
             }
         });
 
-       
- 
-
     }
 
     for (let i=0; i<=8; i++){
@@ -274,10 +276,6 @@
            
         });
     }
-
-   
-
-
 
 
 </script>
