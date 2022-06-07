@@ -72,7 +72,7 @@ class MaintenanceController extends Controller
         return view('maintenance-sparepart.edit', compact('active', 'edit', 'staffs', 'suppliers', 'spare_parts', 'equipments', 'types'));
     }
 
-    public function update(Request $request, $id)
+    public function update(Request $request, $id) 
     {
         $maintenance = $this->maintenance->update($id, $request->all());
         if($maintenance){

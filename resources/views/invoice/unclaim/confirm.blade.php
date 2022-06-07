@@ -66,7 +66,7 @@
                 </div> 
         
                 <div class="col-3">
-                    <label for="a_date">@lang('Total Price')</label>
+                    <label for="a_date">@lang('Total Price')($)</label>
                     <input type="number" class="form-control" name="price" required >
                 </div>
 
