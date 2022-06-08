@@ -20,7 +20,7 @@
     -ms-transform: translateY(-50%);
     transform: translateY(-50%);
     }
-</style>
+</style> 
 
 <div class="card">
     <div class="card-body">
@@ -28,7 +28,7 @@
             @method('PUT')
             <fieldset class="border p-2 ">
 
-                <legend>New Staff</legend>
+                <legend>Update Staff</legend>
 
                 <div class="row">
                     <div class="col-3">

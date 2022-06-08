@@ -1,99 +1,6 @@
 @extends('layouts.main_app')
 
-<style>
 
-    .rounded {
-        border-radius:.50rem!important
-    }
-
-    .highcharts-figure,
-    .highcharts-data-table table {
-        min-width: 320px;
-        max-width: 800px;
-        margin: 1em auto;
-    }
-
-    .highcharts-data-table table {
-        font-family: Verdana, sans-serif;
-        border-collapse: collapse;
-        border: 1px solid #ebebeb;
-        margin: 10px auto;
-        text-align: center;
-        width: 100%;
-        max-width: 500px;
-    }
-
-    .highcharts-data-table caption {
-        padding: 1em 0;
-        font-size: 1.2em;
-        color: #555;
-    }
-
-    .highcharts-data-table th {
-        font-weight: 600;
-        padding: 0.5em;
-    }
-
-    .highcharts-data-table td,
-    .highcharts-data-table th,
-    .highcharts-data-table caption {
-        padding: 0.5em;
-    }
-
-    .highcharts-data-table thead tr,
-    .highcharts-data-table tr:nth-child(even) {
-        background: #f8f8f8;
-    }
-
-    .highcharts-data-table tr:hover {
-        background: #f1f7ff;
-    }
-
-    input[type="number"] {
-        min-width: 50px;
-    }
-    
-    .tbl-info {
-        border-bottom-left-radius: .5rem;
-        border-bottom-right-radius: .5rem;
-    }
-    .tbl-info thead th:first-child {
-        border-top-left-radius: .5rem;
-        color: #fff;
-    }
-    .tbl-info thead th:last-child {
-        border-top-right-radius: .5rem;
-        /* color: #fff; */
-    }
-   
-    .tbl-info tbody td:first-child {
-        border-bottom-left-radius: .5rem;
-    }
-   
-    .tbl-info tbody td:last-child {
-        border-bottom-right-radius: .5rem;
-    }
-
-    .tbl-info td {
-        vertical-align: top !important;
-    }
-    
-    .user-list li {
-        margin-bottom: .5rem;
-    }
-    
-    .user-list li::before {
-        content: "-";
-        /* display: inline-block; */
-        margin-right: 10px;
-    }
-
-    th{
-        color: white;
-        background: #31BDE4;
-    }
-        
-</style>
 
 @section('page-title', __('Dashboard'))
 @section('page-heading', __('Dashboard'))
@@ -146,8 +53,8 @@
 
 <div class="row">
     <div class="col-md-6">
-        <table class="table tbl-info table-light shadow rounded"  style="height: 300px;">
-            <thead class="bg-primary">
+        <table class="table tbl-info table-light"  style="height: 300px;">
+            <thead>
                 
                 <th>
                     @lang('Data_patient_4_day_later')
@@ -165,11 +72,11 @@
     </div>
 
     <div class="col-md-6">
-        <table class="table tbl-info table-light shadow"  style="height: 300px;">
-            <thead class="bg-primary">
+        <table class="table tbl-info table-light"  style="height: 300px;">
+            <thead>
                 <tr>
                     <th>
-                    @lang('Data_patient_dialy')
+                            dfd
                     </th>
                 </tr>
             </thead>
@@ -186,48 +93,49 @@
 </div>
 
 <div class="row">
-    
     <div class="col-md-6">
-        <table class="table tbl-info table-light shadow"  style="height: 300px;">
-            <thead class="bg-primary">
-                <tr>
-                    <th>
-                        @lang('total_gender_title') ( 10 )
-                    </th>
-                </tr>
+        <table class="table tbl-info table-light"  >
+            <thead>
+                <th>
+                    ---
+                </th> 
             </thead>
-                <tbody>
-                    <tr>
-                        <td style="vertical-align: middle;">
-                            <div id="barchart_total_gender" style="width: auto;"></div>
-                        </td>
-                    </tr>
-                </tbody>
+            <tbody>
+                <tr>
+                    <td>
+                        <div id="barchart_total_gender" style="width: auto;"></div>
+                    </td>
+                </tr>
+            </tbody>
         </table>
     </div>
 </div>
 
-<div class="card">
-    <div class="card-body">
-        <div class="row">
-            <div class="col-12">
-                <h5 class="card-title"></h5>
-                <div class="pt-4 px-3">
-                <canvas id="myChart" height="365"></canvas>
-                </div>
-            </div>
-        </div>
+<div class="row">
+    <div class="col-md-12">
+        <table class="table tbl-info table-light"  style="height: 400px;">
+            <thead>
+                <tr>
+                    <th>
+                        @lang('total_line_chart')
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td style="vertical-align: middle;">
+                        <div id="curve_chart" style="width: auto"></div>
+                    </td>
+                </tr>
+            </tbody>
+        </table> 
     </div>
 </div>
 
 @stop
 
 @section('scripts')
-    @foreach (\Vanguard\Plugins\Vanguard::availableWidgets(auth()->user()) as $widget)
-        @if (method_exists($widget, 'scripts'))
-            {!! app()->call([$widget, 'scripts']) !!}
-        @endif
-    @endforeach
+   
 
 <script>
 
@@ -280,6 +188,91 @@
     }
     
 
+</script>
+
+<script>
+
+    var total_female = 5;
+    var total_male = 3;
+
+    google.charts.load("current", {packages:["corechart"]});
+    google.charts.setOnLoadCallback(drawChart);
+    function drawChart() {
+      var data = google.visualization.arrayToDataTable([
+        ["Element", "", { role: "style" } ],
+        ["Female", total_female, "red"],
+        ["Male", total_male, "blue"],
+      ]);
+
+      var view = new google.visualization.DataView(data);
+      view.setColumns([0, 1,
+                       { calc: "stringify",
+                         sourceColumn: 1,
+                         type: "string",
+                         role: "annotation" },
+                       2]);
+
+      var options = {
+        title: "",
+        width: 550,
+        height: 200,
+        
+        bar: {groupWidth: "50%"},
+        legend: { position: 'none' },
+        backgroundColor: 'none',
+
+      };
+      var chart = new google.visualization.BarChart(document.getElementById("barchart_total_gender"));
+      chart.draw(view, options);
+  }
+    
+</script>
+
+<script type="text/javascript">
+      google.charts.load('current', {'packages':['corechart']});
+      google.charts.setOnLoadCallback(drawChart);
+
+      function drawChart() {
+        var data = google.visualization.arrayToDataTable([
+          ['Year', 'Testing', 'Testing'],
+          ['2004',  1000,      400],
+          ['2005',  110070,      460],
+          ['2006',  660,       1120],
+          ['2007',  1030,      540],
+          ['2007',  1030,      540],
+          ['2007',  1030,      540],
+          ['2007',  1030,      540],
+          ['2007',  1030,      540],
+          ['2007',  1030,      540],
+          ['2007',  1030,      540],
+          ['2007',  1030,      540],
+          ['2007',  1030,      540],
+          ['2007',  1030,      540]
+        ]);
+
+        var options = {
+            title: '',
+            curveType: 'function',
+            legend: { position: 'bottom' },
+            backgroundColor: 'none',
+            width: "100%",
+            height: 400,
+            chartArea:{
+                left:100,
+                right:50,
+                bottom:40,
+                top:20,
+                width:"100%",
+                height:"100%"
+            }
+                        
+          
+        };
+
+        var chart = new google.visualization.LineChart(document.getElementById('curve_chart'));
+
+        chart.draw(data, options);
+      }
 </script>
 
 @stop

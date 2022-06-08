@@ -26,7 +26,7 @@
     <div class="card-body">
        
         <div class="row ">
-            <div class="col-4">
+            <div class="col-5">
                         
                 <form action="" method="GET" class="border-bottom-light"  accept-charset="UTF-8">
                     <div class="input-group custom-search-form">
@@ -44,12 +44,12 @@
                 </form>
             </div> 
     
-            <div class="col-8"> 
+            <div class="col-7"> 
                 <div class="float-right">
                     <div class="row">
                         
                         <div class="col-xl-5 col-md-5">
-                            <a href="{{ route('warehouse.create') }}" class="btn btn-primary" style="width: 156px;" >+ Warehouse</a>
+                            <a href="{{ route('warehouse.create') }}" class="btn btn-primary" style="width: 156px;" ><i class="fas fa-plus mr-2"></i>Warehouse</a>
                         </div>
                     </div>
                 </div>              

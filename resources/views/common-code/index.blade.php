@@ -36,12 +36,12 @@
                             @if (isset($parentCommonCode))
                             <a href="{{ route('common-codes.create') }}?parent_id={{ $parentCommonCode->id }}" class="btn btn-primary">
                                 <i class="fas fa-plus mr-2"></i>
-                                @lang('បន្ថែម')
+                                @lang('Add')
                             </a>
                             @else
                             <a href="{{ route('common-codes.create') }}" class="btn btn-primary">
                                 <i class="fas fa-plus mr-2"></i>
-                                @lang('បន្ថែម')
+                                @lang('Add')
                             </a>
                             @endif
                         @endif
@@ -57,7 +57,7 @@
                         <th>#</th>
                         <th class="min-width-150">Key</th>
                         <th class="min-width-150">Value</th>
-                        <th class="min-width-80"># Children</th>
+                        <!-- <th class="min-width-80"># Children</th> -->
                         <th class="text-center min-width-150">@lang('Action')</th>
                     </tr>
                     </thead>
@@ -69,9 +69,9 @@
                                 <td class="align-middle no">{{ ($commonCodes->perPage() * ($commonCodes->currentPage() - 1)) + $index + 1 }}</td>
                                 <td class="align-middle min-width-150">{{$item->key}}</td>
                                 <td class="align-middle min-width-150">{{$item->value}}</td>
-                                <td class="align-middle min-width-80">
+                                <!-- <td class="align-middle min-width-80">
                                     <a href="{{ route('common-codes.show', $item) }}">{{ $item->children_count }} តម្លៃ</a>
-                                </td>
+                                </td> -->
                                 <td class="text-center">
                                     @if (auth()->user()->hasPermission('common-codes.edit'))
                                     <a href="{{ route('common-codes.edit', $item) }}" class="btn btn-icon border-primary"

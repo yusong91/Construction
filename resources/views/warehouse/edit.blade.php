@@ -28,7 +28,7 @@
             @method('PUT')
             <fieldset class="border p-2 ">
 
-                <legend>New Warehouse</legend>
+                <legend>Update Warehouse</legend>
 
                 <div class="row">
                     <div class="col-4">

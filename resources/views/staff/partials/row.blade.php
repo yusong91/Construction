@@ -23,7 +23,7 @@
                                 <td class="text-center verticel-center">{{ $item->address }}</td>
                                 <td class="text-center verticel-center">
                                 
-                                    <a href="" class="btn btn-icon edit" title="Update" data-toggle="tooltip" data-placement="top"><i class="fas fa-list"></i></a>
+                                    <!-- <a href="" class="btn btn-icon edit" title="Update" data-toggle="tooltip" data-placement="top"><i class="fas fa-list"></i></a> -->
 
                                     <a href="{{ route('staff.edit', $item->id) }}" class="btn btn-icon edit" title="Update" data-toggle="tooltip" data-placement="top"> <i class="fas fa-edit"></i></a>
 
