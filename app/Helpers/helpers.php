@@ -121,6 +121,20 @@ if(!function_exists('getClaimed')){
 }
 
 
+if(!function_exists('checkClaim')){
+    function checkClaim($unclaim){
+        
+        if($unclaim == 1)
+        {
+            return "disabled";
+        } else {
+            return "";
+        }
+    }
+}
+
+
+
 
 
 

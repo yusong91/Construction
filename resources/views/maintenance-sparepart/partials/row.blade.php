@@ -32,9 +32,10 @@
                         <td class="text-center align-middle">{{ $item->note }}</td>
                         <td class="text-center align-middle" ><img src="{{ $item->image_broken ? getUrl($item->image_broken) : url('assets/img/no_photo.png') }}" width="80"></td>
                         <td class="text-center align-middle" ><img src="{{ $item->image_replace ? getUrl($item->image_replace) : url('assets/img/no_photo.png') }}" width="80"></td>   
+                        
                         <td class="text-center align-middle ">        
-                            <a href="{{ route('maintenance.edit', $item->id) }}" class="btn btn-icon edit" title="Update" data-toggle="tooltip" data-placement="top"> <i class="fas fa-edit"></i> </a>
-                            <a href="{{ route('maintenance.destroy', $item->id) }}" class="btn btn-icon" data-action="" title="Delete" data-toggle="tooltip" data-placement="top" data-method="DELETE"data-confirm-title="@lang('app.please_confirm')" data-confirm-text="@lang('app.confirm_delete')" data-confirm-delete="@lang('app.yes_proceed')"><i class="fas fa-trash"></i></a>
+                            <a href="{{ route('maintenance.edit', $item->id) }}" class="btn btn-icon edit {{ checkClaim($item->unclaim) }}" title="Update" data-toggle="tooltip" data-placement="top"> <i class="fas fa-edit"></i> </a>
+                            <a href="{{ route('maintenance.destroy', $item->id) }}" class="btn btn-icon {{ checkClaim($item->unclaim) }}" data-action="" title="Delete" data-toggle="tooltip" data-placement="top" data-method="DELETE"data-confirm-title="@lang('app.please_confirm')" data-confirm-text="@lang('app.confirm_delete')" data-confirm-delete="@lang('app.yes_proceed')"><i class="fas fa-trash"></i></a>
                         </td>
                     </tr>
                 @endforeach
