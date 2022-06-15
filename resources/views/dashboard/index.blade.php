@@ -176,26 +176,29 @@
     </script>
 
     <script>
-
         //Income and Expense by category of each equipment
         //legend: { position: 'bottom', maxLines: 2, pagingTextStyle: { color: '#374a6f' }, scrollArrows: { activeColor: '#666', inactiveColor: '#ccc' } }
+        
+        var income_and_expense = <?php echo collect($income_and_expense); ?>;
+        var income_and_expense_array = Array.from(income_and_expense);
+
         google.charts.load('current', {'packages':['bar']});
         google.charts.setOnLoadCallback(drawChart);
         function drawChart() {
-            var data = google.visualization.arrayToDataTable([
-                ['Year', 'Sales', 'Expenses'],
-                ['2014', 1000, 400],
-                ['2015', 1170, 460]
-            ]);
+            var data = google.visualization.arrayToDataTable(
+                
+                income_and_expense_array
+            );
 
             var options = {
                 chart: {
                 title: '',
                 subtitle: '',
-                width: 10
+                width: 0
             },
-            bar: {groupWidth: "25%", isStacked:true},
-            legend: {position: 'none'},
+            bar: {groupWidth: "20%", isStacked:true},
+            
+            legend: {position: 'left'},
                 bars: 'vertical'
             };
             var chart = new google.charts.Bar(document.getElementById('barchart_material'));
