@@ -29,7 +29,7 @@
             <div class="card-body">
             <div class="text-center">
                         <h3 class="text-center">Total Rent</h3>
-                        <div class="text-muted"><h4>1</h4> </div>
+                        <div class="text-muted"><h4></h4> </div>
                     </div>
             </div> 
         </div>
@@ -40,7 +40,7 @@
             <div class="card-body">
                 <div class="text-center">
                         <h3 class="text-center">In Stock</h3>
-                        <div class="text-muted"><h4>3</h4> </div>
+                        <div class="text-muted"><h4></h4> </div>
                 </div>
             </div> 
         </div>
