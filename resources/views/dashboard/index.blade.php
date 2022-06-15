@@ -13,7 +13,6 @@
 @include('partials.messages') 
  
 <div class="row">
-    
     <div class="col-xl-4 col-md-6"> 
         <div class="card widget">
             <div class="card-body">
@@ -50,8 +49,6 @@
 </div>
 
 <div class="row">
-    
-
     <div class="col-md-6">
         <table class="table tbl-info table-light"  >
             <thead style="background-color: #FFFFFF;">
@@ -235,26 +232,18 @@
 
     <!-- Revenue of rental -->
     <script type="text/javascript">
+
+        var revenue_by_date = <?php echo collect($revenue_by_date); ?>;
+        var revenue = Array.from(revenue_by_date);
+
         google.charts.load('current', {'packages':['corechart']});
         google.charts.setOnLoadCallback(drawChart);
 
         function drawChart() {
-            var data = google.visualization.arrayToDataTable([
-            ['Year', 'Testing', 'Testing'],
-            ['2004',  1000,      400],
-            ['2005',  110070,      460],
-            ['2006',  660,       1120],
-            ['2007',  1030,      540],
-            ['2007',  1030,      540],
-            ['2007',  1030,      540],
-            ['2007',  1030,      540],
-            ['2007',  1030,      540],
-            ['2007',  1030,      540],
-            ['2007',  1030,      540],
-            ['2007',  1030,      540],
-            ['2007',  1030,      540],
-            ['2007',  1030,      540]
-            ]);
+            var data = google.visualization.arrayToDataTable(
+            
+                revenue
+            );
 
             var options = {
                 title: '',
