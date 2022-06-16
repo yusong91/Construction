@@ -119,10 +119,7 @@ class EquipmentController extends Controller
         $file = "equipment.pdf";
         //return PDF::loadHtml($pdf_view)->download($file);    
 
-        //return \Barryvdh\DomPDF\PDF::loadHtml('pdf.patientPdfReport', $data)->stream();
+        return \Barryvdh\DomPDF\PDF::loadHtml('pdf.equipment', compact('equipments'))->download($file);
 
-        $pdf = PDF::loadView('pdf.equipment', compact('equipments'));
-
-        return $pdf->download('document.pdf');
     }
 }
