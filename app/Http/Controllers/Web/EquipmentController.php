@@ -117,6 +117,12 @@ class EquipmentController extends Controller
         $equipments = $this->equipment->all();
         $pdf_view = view('pdf.equipment', compact('equipments'));
         $file = "equipment.pdf";
-        return PDF::loadHtml($pdf_view)->download($file);    
+        //return PDF::loadHtml($pdf_view)->download($file);    
+
+        //return \Barryvdh\DomPDF\PDF::loadHtml('pdf.patientPdfReport', $data)->stream();
+
+        $pdf = PDF::loadView('pdf.equipment', compact('equipments'));
+
+        return $pdf->download('document.pdf');
     }
 }
