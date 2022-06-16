@@ -97,11 +97,7 @@ class EloquentEquipment implements EquipmentRepository
                 
                 continue;
             }
-            //$file_img = $item['11'];
-            // $file_name = $file_img->getClientOriginalName();
-            // $save_path_img = storage_path('images');
-            // $file_img->move($save_path_img, $file_name);
-
+           
             $digital_file = "";
             if(isset($item[11])) 
             { 
@@ -134,11 +130,6 @@ class EloquentEquipment implements EquipmentRepository
     {
         $now = Carbon::now();
        
-        // $file_img = $item['image'];
-        // $file_name = $file_img->getClientOriginalName();
-        // $save_path_img = storage_path('images');
-        // $file_img->move($save_path_img, $file_name);
-
         $digital_file = "";
         if(isset($data['image'])) 
         { 
@@ -192,6 +183,11 @@ class EloquentEquipment implements EquipmentRepository
     public function outstanding($key)
     {
         return Equipment::where('sold', $key)->with(['parent_quipment', 'parent_brand'])->get();
+    }
+
+    public function all()
+    {
+        return Equipment::with(['parent_brand', 'parent_quipment'])->get();
     }
 
     //     ->whereHas('children_equipment', function($q){

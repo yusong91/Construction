@@ -107,6 +107,8 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
      * List
      */
     Route::resource('equipment', 'EquipmentController')->middleware('permission:equipment');
+    Route::get('excel/equipment', 'EquipmentController@downloadExcel')->name('excel/equipment')->middleware('permission:equipment');
+    Route::get('pdf/equipment', 'EquipmentController@downloadPdf')->name('pdf/equipment')->middleware('permission:equipment');
 
     /**
      * Report

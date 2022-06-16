@@ -12,7 +12,12 @@ use Vanguard\Http\Requests\CreateEquipmentRequest;
 use Vanguard\Repositories\Equipment\EquipmentRepository;
 use Illuminate\Support\Facades\Storage;
 use Google\Cloud\Storage\StorageClient;
-
+use Vanguard\Excel\ExcelEquipment;
+use Excel;
+use PDF;
+use Maatwebsite\Excel\Concerns\FromCollection; 
+use Maatwebsite\Excel\Concerns\Exportable;
+use Maatwebsite\Excel\Concerns\WithHeadings;
  
 class EquipmentController extends Controller
 {   
@@ -24,7 +29,7 @@ class EquipmentController extends Controller
 	}
   
     public function index(Request $request) 
-    {            
+    {   
         $brand = getConmonCode('brand');
         $active = "equipment";
         $equipments = $this->equipment->paginate(20, $request->search);
@@ -72,7 +77,7 @@ class EquipmentController extends Controller
         $paginate = json_decode($raw_paginate);
         return view('equipment.list', compact('active', 'equipments', 'paginate', 'id'));
     }
-
+ 
     public function edit($id)
     {
         $edit = $this->equipment->find($id);
@@ -92,7 +97,7 @@ class EquipmentController extends Controller
         return redirect()->route('equipment.index')->withSuccess("Fail");
     }
 
-    public function destroy($id)
+    public function destroy($id) 
     {
         $delete = $this->equipment->delete($id);
         if($delete)
@@ -100,5 +105,18 @@ class EquipmentController extends Controller
             return redirect()->route('equipment.index')->withSuccess("Success");
         }
         return redirect()->route('equipment.index')->withSuccess("Fail");
+    }
+
+    public function downloadExcel()
+    {
+        return Excel::download(new ExcelEquipment(['dd'=>'dd']), 'equipment.xlsx'); 
+    }
+
+    public function downloadPdf()
+    {
+        $equipments = $this->equipment->all();
+        $pdf_view = view('pdf.equipment', compact('equipments'));
+        $file = "equipment.pdf";
+        return PDF::loadHtml($pdf_view)->download($file);    
     }
 }

@@ -41,9 +41,9 @@
                     <div class="row">
 
                         <div class="col-xl-12 pr-4"> 
-                            <a href="" class="mr-2"><img src="{{ url('assets/img/pdf.png') }}" width="25"></a> 
+                            <a href="{{ route('pdf/equipment') }}" class="mr-2"><img src="{{ url('assets/img/pdf.png') }}" width="25"></a>  
                         
-                            <a href="" class="mr-2"><img src="{{ url('assets/img/excel.png') }}" width="25" ></a>
+                            <a href="{{ route('excel/equipment') }}" class="mr-2"><img src="{{ url('assets/img/excel.png') }}" width="25" ></a>
                         
                             <a href="{{ route('equipment.create') }}" class="btn btn-primary" style="width: 145px;" ><i class="fas fa-plus"></i> Equipment</a>
                         </div>
