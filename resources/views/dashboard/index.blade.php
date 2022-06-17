@@ -78,7 +78,7 @@
             <tbody>
                 <tr>
                     <td>
-                        <center> <div id="chart_action"></div></center>
+                         <div id="chart_action"></div>
                     </td>
                 </tr>
             </tbody>
@@ -143,7 +143,7 @@
         google.charts.setOnLoadCallback(drawChart);
         function drawChart() {
             var data = google.visualization.arrayToDataTable([
-                ["Element", "", { role: "style" } ],
+                ["Equipment", "", { role: "style" } ],
                 ["Maintenance", equipment_maintenance, "red"],
                 ["Rental", equipment_rental, "green"],
                 ["Available", equipment_available, "blue"],
@@ -163,9 +163,10 @@
                 height: 200,
                 
                 bar: {groupWidth: "50%"},
-                legend: { position: 'none' },
-                backgroundColor: 'none',
+                legend: { position: 'none'},
 
+
+                backgroundColor: 'none',
             };
             var chart = new google.visualization.BarChart(document.getElementById("barchart_total_gender"));
             chart.draw(view, options);
@@ -189,15 +190,16 @@
 
             var options = {
                 chart: {
-                title: '',
-                subtitle: '',
-                width: 0
-            },
-            bar: {groupWidth: "20%", isStacked:true},
+                    title: '',
+                    subtitle: '',
+                    width: 0
+                },
+                bar: {groupWidth: "20%", isStacked:true},
             
-            legend: {position: 'left'},
-                bars: 'vertical'
+                legend: {position: 'left'},
+                    bars: 'vertical'
             };
+            
             var chart = new google.charts.Bar(document.getElementById('barchart_material'));
             chart.draw(data, google.charts.Bar.convertOptions(options));
         }
@@ -218,7 +220,7 @@
             var options = {
                     title: '',
                     backgroundColor: 'none',
-                    legend: 'none',
+                    legend: 'left',
                     chartArea: {width: 400, height: 300}
                 };
 
@@ -260,8 +262,6 @@
                     width:"100%",
                     height:"100%"
                 }
-                            
-            
             };
 
             var chart = new google.visualization.LineChart(document.getElementById('curve_chart'));

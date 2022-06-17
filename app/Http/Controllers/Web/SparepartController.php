@@ -1,10 +1,16 @@
 <?php
-
+ 
 namespace Vanguard\Http\Controllers\Web;
 
 use Illuminate\Http\Request;
 use Vanguard\Http\Controllers\Controller;
 use Vanguard\Repositories\Sparepart\SparepartRepository;
+use PDF;
+use Excel;
+use Vanguard\Excel\ExcelSparepart;
+use Maatwebsite\Excel\Concerns\FromCollection; 
+use Maatwebsite\Excel\Concerns\Exportable;
+use Maatwebsite\Excel\Concerns\WithHeadings;
 
 class SparepartController extends Controller
 {
@@ -16,7 +22,7 @@ class SparepartController extends Controller
 	}
     
     public function index(Request $request)
-    {
+    {   
         $active = "sparepart";
         $spareparts = $this->sparepart->paginate(50, $request->search);
         return view('spare-part.index', compact('active', 'spareparts'));
@@ -39,7 +45,7 @@ class SparepartController extends Controller
 
     public function edit($id)
     {
-        //
+        // 
     }
 
     public function update(Request $request, $id)
@@ -49,6 +55,21 @@ class SparepartController extends Controller
 
     public function destroy($id)
     {
-        //
+        // 
+    }
+
+    public function downloadExcel() 
+    {
+        $spareparts = $this->sparepart->all();
+        return Excel::download(new ExcelSparepart($spareparts), 'sparepart.xlsx'); 
+    }
+
+    public function downloadPdf()
+    {
+        $spareparts = $this->sparepart->all(); 
+        $pdf_view = view('pdf.sparepart', compact('spareparts'));
+        $file = "sparepart.pdf";
+        $pdf = \App::make('dompdf.wrapper');
+        return $pdf->loadHtml($pdf_view)->download($file);
     }
 }

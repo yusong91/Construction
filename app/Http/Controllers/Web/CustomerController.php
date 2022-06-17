@@ -6,6 +6,12 @@ use Illuminate\Http\Request;
 use Vanguard\Http\Controllers\Controller;
 use Vanguard\Http\Requests\CustomerRequest;
 use Vanguard\Repositories\Customer\CustomerRepository;
+use PDF;
+use Excel;
+use Vanguard\Excel\ExcelCustomer;
+use Maatwebsite\Excel\Concerns\FromCollection; 
+use Maatwebsite\Excel\Concerns\Exportable;
+use Maatwebsite\Excel\Concerns\WithHeadings;
 
 class CustomerController extends Controller
 { 
@@ -84,5 +90,20 @@ class CustomerController extends Controller
             return redirect(route('customer.index'))->withSuccess('Success');
         }
         return redirect(route('customer.index'))->withSuccess('Fail');
+    }
+
+    public function downloadExcel() 
+    {
+        $customers = $this->customer->all();
+        return Excel::download(new ExcelCustomer($customers), 'customer.xlsx'); 
+    }
+
+    public function downloadPdf()
+    {
+        $customers = $this->customer->all(); 
+        $pdf_view = view('pdf.customer', compact('customers'));
+        $file = "customer.pdf";
+        $pdf = \App::make('dompdf.wrapper');
+        return $pdf->loadHtml($pdf_view)->download($file);
     }
 }

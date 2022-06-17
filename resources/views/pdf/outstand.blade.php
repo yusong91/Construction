@@ -11,6 +11,7 @@
                 
             body { font-family: 'khmerfont';   font-size: 11px !important;}
 
+
             #customers {
                 font-family: "khmerfont", Arial, Helvetica, sans-serif;
                 border-collapse: collapse;
@@ -55,39 +56,41 @@
 
         </style>     
     </head>
-    <body>
+    <body> 
         <div class="card">
             <div class="card-body">
 
-                <h4 style="text-align: center; font-size: 14px;">List Equipment</h4>
+                <h4 style="text-align: center; font-size: 14px;">List Equipment Outstanding</h4>
                          
                 <div>
                     <table id="customers">
-                        <thead style="font-size: 12px; font-weight: bold;">      
+                        <thead style="font-size: 12px; font-weight: bold;">        
                             <tr>
-                                <th style="text-align: center; width: 5%;">#</th>
-                                <th style="text-align:center; width: 20%;">Equipment Type</th>
-                                <th style="text-align:center; width: 20%;">Equipment Id</th>
-                                <th style="text-align:center; width: 20%;">Brand</th>
-                                <th style="text-align:center; width: 20%;">Purchased Date</th>
-                                <th style="text-align:center; width: 10%;">Year</th>
-                            </tr>      
+                                <th style="text-align: center; width: 5%;">#</th> 
+                                <th style="text-align:center; width: 18%;">Equipment Type</th>
+                                <th style="text-align:center; width: 14%;">Equipment ID</th>
+                                <th style="text-align:center; width: 15%;">Brand</th>
+                                <th style="text-align:center; width: 12%;">Status</th>
+                                <th style="text-align:center; width: 18%;">Historical Cost</th>
+                                <th style="text-align:center; width: 18%;">Purchased Date</th>
+                            </tr>       
                         </thead>
                         <tbody>
                             @if(count($equipments) > 0)
                                 @foreach($equipments as $item)
-                                    <tr>  
-                                        <td style ="text-align: center;">1</td>
-                                        <td>{{ $item->parent_quipment->value ?? ""}}</td>
+                                    <tr>   
+                                        <td style ="text-align: center;">{{ 1 + $loop->index }}</td>
+                                        <td>{{ $item->parent_quipment->value }}</td>
                                         <td>{{ $item->equipment_id }}</td>
-                                        <td>{{ $item->parent_brand->value ?? "" }}</td>
-                                        <td>{{ $item->purchase_date ? getDateFormat($item->purchase_date) : "" }}</td>
-                                        <td>{{ $item->year ?? ""}}</td>
+                                        <td>{{ $item->parent_brand->value }}</td>
+                                        <td></td>
+                                        <td>${{ $item->historical_cost }}</td>
+                                        <td>{{ getDateFormat($item->purchase_date) }}</td>
                                     </tr>
                                 @endforeach
                             @else
                                 <tr>
-                                    <td colspan="6"><em>@lang('Record no found')</em></td>
+                                    <td colspan="7"><em>@lang('Record no found')</em></td>
                                 </tr>
                             @endif
                         </tbody>

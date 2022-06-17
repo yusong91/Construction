@@ -129,6 +129,9 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
      * Report Equipment Outstanding
      */
     Route::resource('report-equipmentoutstand', 'ReportEquipmentOutStandController')->middleware('permission:report.equipmentoutstand.index');
+    Route::get('excel/outstand', 'ReportEquipmentOutStandController@downloadExcel')->name('excel/outstand')->middleware('permission:report.equipmentoutstand.index');
+    Route::get('pdf/outstand', 'ReportEquipmentOutStandController@downloadPdf')->name('pdf/outstand')->middleware('permission:report.equipmentoutstand.index');
+
 
     /**
      * Warehouse
@@ -219,11 +222,11 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
 
     /**
      * Activity Log
-     */
+     */ 
 
     Route::get('activity', 'ActivityController@index')->name('activity.index')
         ->middleware('permission:users.activity');
-
+ 
     Route::get('activity/user/{user}/log', 'Users\ActivityController@index')->name('activity.user')
         ->middleware('permission:users.activity');
 
@@ -236,10 +239,12 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
     Route::put('common-codes/update/{id}', [CommonCodeController::class,'update'])->name('common-codes.update');
     Route::delete('common-codes/destroy/{id}', [CommonCodeController::class,'destroy'])->name('common-codes.destroy');
 
-    /**
+    /** 
      * Spare-Part
      */
     Route::resource('sparepart', 'SparepartController')->middleware('permission:spartpart.index');
+    Route::get('excel/sparepart', 'SparepartController@downloadExcel')->name('excel/sparepart')->middleware('permission:spartpart.index');
+    Route::get('pdf/sparepart', 'SparepartController@downloadPdf')->name('pdf/sparepart')->middleware('permission:spartpart.index');
 
 
     /**
@@ -251,16 +256,20 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
      * Inventory
      */
     Route::resource('inventory', 'InventoryController')->middleware('permission:inventory.index');
+    Route::get('excel/inventory', 'InventoryController@downloadExcel')->name('excel/inventory')->middleware('permission:inventory.index');
+    Route::get('pdf/inventory', 'InventoryController@downloadPdf')->name('pdf/inventory')->middleware('permission:inventory.index');
 
     /**
      * Supplier
      */
     Route::resource('supplier', 'SupplierController')->middleware('permission:supplier.index');
 
-    /**
+    /** 
      * Customer
      */
     Route::resource('customer', 'CustomerController')->middleware('permission:customer.index');
+    Route::get('excel/customer', 'CustomerController@downloadExcel')->name('excel/customer')->middleware('permission:customer.index');
+    Route::get('pdf/customer', 'CustomerController@downloadPdf')->name('pdf/customer')->middleware('permission:customer.index');
     
 
     /**

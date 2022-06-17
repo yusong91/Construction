@@ -47,7 +47,7 @@
             <div class="row">
                 <div class="col-12">
                     <div class="float-right">
-                        <a href="" class="mr-2"><img src="{{ url('assets/img/pdf.png') }}" width="25"></a>   
+                        <a href="{{ route('pdf/outstand') }}" class="mr-2"><img src="{{ url('assets/img/pdf.png') }}" width="25"></a>   
                     </div>      
                 </div>
             </div>

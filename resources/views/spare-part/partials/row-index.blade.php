@@ -21,8 +21,8 @@
                                 <td class="text-center verticel-center" > </td>
                                 <td class="text-center verticel-center" > {{ $item->quantity }}</td>
                                 <td class="text-center verticel-center" > {{ $item->unit }}</td>
-                                <td class="text-center verticel-center" > {{ $item->unit_price }}</td>
-                                <td class="text-center verticel-center" > {{ $item->amount }}</td>
+                                <td class="text-center verticel-center" > ${{ $item->unit_price }}</td>
+                                <td class="text-center verticel-center" > ${{ $item->amount }}</td>
                                 
                                 <td class="text-center verticel-center text-center">
                                     <a href="" class="btn btn-icon edit" title="Update" data-toggle="tooltip" data-placement="top"> <i class="fas fa-edit"></i></a>

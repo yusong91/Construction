@@ -20,7 +20,6 @@ class EloquentInventory implements InventoryRepository
                 $q->where('name', "like", "%{$search}%");
                 $q->orWhere('menufacture', 'like', "%{$search}%");
                 $q->orWhere('vender', 'like', "%{$search}%"); 
-                
             });
         } 
         
@@ -28,21 +27,18 @@ class EloquentInventory implements InventoryRepository
         if ($search) {
             $result->appends(['search' => $search]);
         }
-
         return $result;
     }
 
     public function all()  
     {
-        return Inventory::all(); 
+        return Inventory::with(['parent_category', 'parent_warehouse'])->get(); 
     } 
 
     public function create($category_id, array $data)
     {   
         $now = Carbon::now(); 
         $insert_data = [];
-
-        
 
         foreach($data as $item)
         {

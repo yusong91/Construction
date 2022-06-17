@@ -1,7 +1,7 @@
 <?php
 
 namespace Vanguard\Http\Controllers\Web;
-
+ 
 use Vanguard\Model\Equipment; 
 use Carbon\Carbon;
 use Validator;
@@ -117,11 +117,7 @@ class EquipmentController extends Controller
         $equipments = $this->equipment->all();
         $pdf_view = view('pdf.equipment', compact('equipments'));
         $file = "equipment.pdf";
-        //return PDF::loadHtml($pdf_view)->download($file);    
-
         $pdf = \App::make('dompdf.wrapper');
-
-        return $pdf->loadHtml($pdf_view)->download('ok.pdf');
-
+        return $pdf->loadHtml($pdf_view)->download('equipment.pdf');
     }
 }

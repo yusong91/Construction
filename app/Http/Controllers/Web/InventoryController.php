@@ -8,7 +8,12 @@ use DB;
 use Illuminate\Http\Request;
 use Vanguard\Http\Controllers\Controller;
 use Vanguard\Http\Requests\InventoryRequest;
+use Vanguard\Excel\ExcelInventory;
 use Vanguard\Repositories\Inventory\InventoryRepository;
+use Excel;
+use Maatwebsite\Excel\Concerns\FromCollection; 
+use Maatwebsite\Excel\Concerns\Exportable;
+use Maatwebsite\Excel\Concerns\WithHeadings;
 
 
 class InventoryController extends Controller
@@ -87,7 +92,7 @@ class InventoryController extends Controller
         }
         return redirect()->route('inventory.index')->withSuccess("Fail");
     }
-
+ 
     public function destroy($id)
     { 
         $data = $this->inventory->delete($id);
@@ -96,5 +101,20 @@ class InventoryController extends Controller
             return redirect()->route('inventory.index')->withSuccess("Success");
         }
         return redirect()->route('inventory.index')->withSuccess("Fail");
+    }
+
+    public function downloadExcel() 
+    {
+        $inventories = $this->inventory->all();
+        return Excel::download(new ExcelInventory($inventories), 'inventory.xlsx'); 
+    }
+
+    public function downloadPdf()
+    {
+        $inventories = $this->inventory->all(); 
+        $pdf_view = view('pdf.inventory', compact('inventories'));
+        $file = "inventory.pdf";
+        $pdf = \App::make('dompdf.wrapper');
+        return $pdf->loadHtml($pdf_view)->download($file);
     }
 }

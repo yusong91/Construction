@@ -30,7 +30,7 @@ class EloquentSparepart implements SparepartRepository
 
     public function all() 
     {
-        return Sparepart::with(['parent_equipment', 'parent_inventory', 'parent_supplier', 'parent_staff'])->get();
+        return Sparepart::all();
     }
  
 

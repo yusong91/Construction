@@ -11,6 +11,7 @@
                 
             body { font-family: 'khmerfont';   font-size: 11px !important;}
 
+
             #customers {
                 font-family: "khmerfont", Arial, Helvetica, sans-serif;
                 border-collapse: collapse;
@@ -59,37 +60,47 @@
         <div class="card">
             <div class="card-body">
 
-                <h4 style="text-align: center; font-size: 14px;">List Equipment</h4>
+                <h4 style="text-align: center; font-size: 14px;">List Inventory</h4>
                          
                 <div>
                     <table id="customers">
-                        <thead style="font-size: 12px; font-weight: bold;">      
+                        <thead style="font-size: 12px; font-weight: bold;"> 
+                                     
                             <tr>
                                 <th style="text-align: center; width: 5%;">#</th>
-                                <th style="text-align:center; width: 20%;">Equipment Type</th>
-                                <th style="text-align:center; width: 20%;">Equipment Id</th>
-                                <th style="text-align:center; width: 20%;">Brand</th>
+                                <th style="text-align:center; width: 20%;">Name</th>
+                                <th style="text-align:center; width: 20%;">Category</th>
+                                <th style="text-align:center; width: 20%;">Warehouse</th>
+                                <th style="text-align:center; width: 20%;">Quantity</th>
+                                <th style="text-align:center; width: 20%;">Unit</th>
+                                <th style="text-align:center; width: 20%;">Unit Price</th>
+                                <th style="text-align:center; width: 20%;">Amount</th>
                                 <th style="text-align:center; width: 20%;">Purchased Date</th>
-                                <th style="text-align:center; width: 10%;">Year</th>
-                            </tr>      
+                            </tr>
+                                    
                         </thead>
                         <tbody>
-                            @if(count($equipments) > 0)
-                                @foreach($equipments as $item)
+                            @if(count($inventories) > 0)
+                                @foreach($inventories as $item)
                                     <tr>  
-                                        <td style ="text-align: center;">1</td>
-                                        <td>{{ $item->parent_quipment->value ?? ""}}</td>
-                                        <td>{{ $item->equipment_id }}</td>
-                                        <td>{{ $item->parent_brand->value ?? "" }}</td>
-                                        <td>{{ $item->purchase_date ? getDateFormat($item->purchase_date) : "" }}</td>
-                                        <td>{{ $item->year ?? ""}}</td>
+                                        <td style ="text-align: center;">{{ 1 + $loop->index }}</td>
+                                        <td>{{ $item->name }}</td>
+                                        <td>{{ $item->parent_category->value ?? "" }}</td>
+                                        <td>{{ $item->parent_warehouse->name ?? "" }}</td>
+                                        <td>{{ $item->quantity }}</td>
+                                        <td>{{ $item->unit }}</td>
+                                        <td>{{ $item->price }}</td>
+                                        <td>{{ $item->quantity + $item->price }}</td>
+                                        <td>{{ $item->purchased_date ? getDateFormat($item->purchased_date) : "" }}</td>
                                     </tr>
                                 @endforeach
                             @else
                                 <tr>
-                                    <td colspan="6"><em>@lang('Record no found')</em></td>
+                                    <td colspan="9"><em>@lang('Record no found')</em></td>
                                 </tr>
                             @endif
+                                        
+
                         </tbody>
                     </table>
                 </div>

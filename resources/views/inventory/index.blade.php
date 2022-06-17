@@ -48,9 +48,9 @@
                 <div class="float-right">
                     <div class="row">
                         <div class="col-xl-12 pr-4"> 
-                            <a href="" class="mr-2" ><img src="{{ url('assets/img/pdf.png') }}" width="25"></a> 
+                            <a href="{{ route('pdf/inventory') }}" class="mr-2" ><img src="{{ url('assets/img/pdf.png') }}" width="25"></a> 
                         
-                            <a href="" class="mr-2"  ><img src="{{ url('assets/img/excel.png') }}" width="25" ></a>
+                            <a href="{{ route('excel/inventory') }}" class="mr-2"  ><img src="{{ url('assets/img/excel.png') }}" width="25" ></a>
                         
                             <a href="{{ route('inventory.create') }}" class="btn btn-primary mr-2" style="width: 110px;" ><i class="fas fa-plus"></i> Item</a> 
 

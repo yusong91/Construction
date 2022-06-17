@@ -60,4 +60,19 @@ class ReportEquipmentOutStandController extends Controller
     {
         //
     }
+
+    public function downloadExcel() 
+    {
+        $equipments = $this->equipment->outstanding(0);
+        return Excel::download(new ExcelSparepart($equipments), 'sparepart.xlsx'); 
+    }
+
+    public function downloadPdf()
+    {
+        $equipments = $this->equipment->outstanding(0);
+        $pdf_view = view('pdf.outstand', compact('equipments'));
+        $file = "equipmentoutstanding.pdf";
+        $pdf = \App::make('dompdf.wrapper');
+        return $pdf->loadHtml($pdf_view)->download($file);
+    }
 }

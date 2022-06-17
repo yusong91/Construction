@@ -11,6 +11,7 @@
                 
             body { font-family: 'khmerfont';   font-size: 11px !important;}
 
+
             #customers {
                 font-family: "khmerfont", Arial, Helvetica, sans-serif;
                 border-collapse: collapse;
@@ -55,39 +56,41 @@
 
         </style>     
     </head>
-    <body>
+    <body> 
         <div class="card">
             <div class="card-body">
 
-                <h4 style="text-align: center; font-size: 14px;">List Equipment</h4>
+                <h4 style="text-align: center; font-size: 14px;">List Customer</h4>
                          
                 <div>
                     <table id="customers">
-                        <thead style="font-size: 12px; font-weight: bold;">      
+                        <thead style="font-size: 12px; font-weight: bold;">        
                             <tr>
-                                <th style="text-align: center; width: 5%;">#</th>
-                                <th style="text-align:center; width: 20%;">Equipment Type</th>
-                                <th style="text-align:center; width: 20%;">Equipment Id</th>
-                                <th style="text-align:center; width: 20%;">Brand</th>
-                                <th style="text-align:center; width: 20%;">Purchased Date</th>
-                                <th style="text-align:center; width: 10%;">Year</th>
-                            </tr>      
+                                <th style="text-align: center; width: 5%;">#</th> 
+                                <th style="text-align:center; width: 20%;">Company Name</th>
+                                <th style="text-align:center; width: 15%;">Customer Name</th>
+                                <th style="text-align:center; width: 10%;">Customer Phone</th>
+                                <th style="text-align:center; width: 20%;">Email</th>
+                                <th style="text-align:center; width: 10%;">Job</th>
+                                <th style="text-align:center; width: 20%;">Address</th>
+                            </tr>       
                         </thead>
                         <tbody>
-                            @if(count($equipments) > 0)
-                                @foreach($equipments as $item)
+                            @if(count($customers) > 0)
+                                @foreach($customers as $item)
                                     <tr>  
-                                        <td style ="text-align: center;">1</td>
-                                        <td>{{ $item->parent_quipment->value ?? ""}}</td>
-                                        <td>{{ $item->equipment_id }}</td>
-                                        <td>{{ $item->parent_brand->value ?? "" }}</td>
-                                        <td>{{ $item->purchase_date ? getDateFormat($item->purchase_date) : "" }}</td>
-                                        <td>{{ $item->year ?? ""}}</td>
+                                        <td style ="text-align: center;">{{ 1 + $loop->index }}</td>
+                                        <td>{{ $item->company_name }}</td>
+                                        <td>{{ $item->customer_name }}</td>
+                                        <td>{{ $item->customer_phone }}</td>
+                                        <td>{{ $item->email }}</td>
+                                        <td>{{ $item->job }}</td>
+                                        <td>{{ $item->address }}</td>
                                     </tr>
                                 @endforeach
                             @else
                                 <tr>
-                                    <td colspan="6"><em>@lang('Record no found')</em></td>
+                                    <td colspan="7"><em>@lang('Record no found')</em></td>
                                 </tr>
                             @endif
                         </tbody>
