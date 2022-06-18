@@ -57,7 +57,7 @@ class SparepartController extends Controller
     {
         // 
     }
-
+ 
     public function downloadExcel() 
     {
         $spareparts = $this->sparepart->all();
