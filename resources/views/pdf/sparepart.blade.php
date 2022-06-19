@@ -5,7 +5,7 @@
     
         <?php   
             ini_set('memory_limit', '64M');
-            ini_set("pcre.backtrack_limit", "2000");
+            ini_set("pcre.backtrack_limit", "90000000");
         ?> 
 
         <style type="text/css">
