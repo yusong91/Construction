@@ -1,8 +1,6 @@
 <!doctype html>
 <html lang="en">
     <head>
-    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
-    <meta charset="UTF-8">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     
         <?php   

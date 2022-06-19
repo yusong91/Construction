@@ -11,6 +11,7 @@ use Vanguard\Excel\ExcelSparepart;
 use Maatwebsite\Excel\Concerns\FromCollection; 
 use Maatwebsite\Excel\Concerns\Exportable;
 use Maatwebsite\Excel\Concerns\WithHeadings;
+use Mpdf\Mpdf;
 
 class SparepartController extends Controller
 {
@@ -67,13 +68,15 @@ class SparepartController extends Controller
     public function downloadPdf()
     {
         $spareparts = $this->sparepart->all(); 
-        $pdf_view = view('pdf.sparepart', compact('spareparts'));
+        $pdf = \App::make('dompdf.wrapper');
+        //$pdf_view = view('pdf.sparepart', compact('spareparts'));
         $file = "sparepart.pdf";
-        //$pdf = \App::make('dompdf.wrapper');
+        $pdf_view = mb_convert_encoding(\View::make('pdf.sparepart', compact('spareparts')), 'HTML-ENTITIES', 'UTF-8');
+        return PDF::loadHtml($pdf_view)->stream($file);
+        
         //return $pdf->loadHtml($pdf_view)->stream($file); //work on GCP download loadHtml
 
-        $pdf = mb_convert_encoding(\View::make('pdf.sparepart', compact('spareparts')), 'HTML-ENTITIES', 'UTF-8');
-        return PDF::loadHtml($pdf)->download($file);
+       
         
         
     }
