@@ -69,9 +69,12 @@ class SparepartController extends Controller
         $spareparts = $this->sparepart->all(); 
         $pdf_view = view('pdf.sparepart', compact('spareparts'));
         $file = "sparepart.pdf";
-        $pdf = \App::make('dompdf.wrapper');
-        //return $pdf->loadHtml($pdf_view)->stream($file); //work on GCP download
+        //$pdf = \App::make('dompdf.wrapper');
+        //return $pdf->loadHtml($pdf_view)->stream($file); //work on GCP download loadHtml
 
-        return PDF::loadHtml($pdf_view)->stream($file);
+        $pdf = mb_convert_encoding(\View::make('pdf.sparepart', compact('spareparts')), 'HTML-ENTITIES', 'UTF-8');
+        return PDF::loadHtml($pdf)->download($file);
+        
+        
     }
 }
