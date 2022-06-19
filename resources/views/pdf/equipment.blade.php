@@ -1,10 +1,10 @@
 <!doctype html>
 <html lang="en">
     <head>
-
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
         <?php   
             ini_set('memory_limit', '64M');
-            ini_set("pcre.backtrack_limit", "2000");
+            ini_set("pcre.backtrack_limit", "90000000");
         ?> 
 
         <style type="text/css">

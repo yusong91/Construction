@@ -14,7 +14,8 @@ use Excel;
 use Maatwebsite\Excel\Concerns\FromCollection; 
 use Maatwebsite\Excel\Concerns\Exportable;
 use Maatwebsite\Excel\Concerns\WithHeadings;
-
+use Mpdf\Mpdf;
+use PDF;
 
 class InventoryController extends Controller
 {
@@ -112,9 +113,9 @@ class InventoryController extends Controller
     public function downloadPdf()
     {
         $inventories = $this->inventory->all(); 
-        $pdf_view = view('pdf.inventory', compact('inventories'));
+        $pdf_view = mb_convert_encoding(\View::make('pdf.inventory', compact('inventories')), 'HTML-ENTITIES', 'UTF-8');
         $file = "inventory.pdf";
         $pdf = \App::make('dompdf.wrapper');
-        return $pdf->loadHtml($pdf_view)->download($file);
+        return PDF::loadHtml($pdf_view)->download($file); 
     }
 }

@@ -6,7 +6,8 @@ use Illuminate\Http\Request;
 use Vanguard\Http\Controllers\Controller;
 use Vanguard\Repositories\CommonCode\CommonCodeRepository;
 use Vanguard\Repositories\Equipment\EquipmentRepository;
-
+use Mpdf\Mpdf;
+use PDF;
 
 
 class ReportEquipmentOutStandController extends Controller
@@ -71,8 +72,9 @@ class ReportEquipmentOutStandController extends Controller
     {
         $equipments = $this->equipment->outstanding(0);
         $pdf_view = view('pdf.outstand', compact('equipments'));
+        $pdf_view = mb_convert_encoding(\View::make('pdf.outstand', compact('equipments')), 'HTML-ENTITIES', 'UTF-8');
         $file = "equipmentoutstanding.pdf";
         $pdf = \App::make('dompdf.wrapper');
-        return $pdf->loadHtml($pdf_view)->download($file);
+        return PDF::loadHtml($pdf_view)->download($file); 
     }
 }

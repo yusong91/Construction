@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Storage;
 use Google\Cloud\Storage\StorageClient;
 use Vanguard\Excel\ExcelEquipment;
 use Excel;
+use Mpdf\Mpdf;
 use PDF;
 use Maatwebsite\Excel\Concerns\FromCollection; 
 use Maatwebsite\Excel\Concerns\Exportable;
@@ -115,9 +116,9 @@ class EquipmentController extends Controller
     public function downloadPdf()
     {
         $equipments = $this->equipment->all();
-        $pdf_view = view('pdf.equipment', compact('equipments'));
+        $pdf_view = mb_convert_encoding(\View::make('pdf.equipment', compact('equipments')), 'HTML-ENTITIES', 'UTF-8');
         $file = "equipment.pdf";
         $pdf = \App::make('dompdf.wrapper');
-        return $pdf->loadHtml($pdf_view)->download('equipment.pdf');
+        return PDF::loadHtml($pdf_view)->download($file);
     }
 }

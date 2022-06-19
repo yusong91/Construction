@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Vanguard\Http\Controllers\Controller;
 use Vanguard\Http\Requests\CustomerRequest;
 use Vanguard\Repositories\Customer\CustomerRepository;
+use Mpdf\Mpdf;
 use PDF;
 use Excel;
 use Vanguard\Excel\ExcelCustomer;
@@ -101,9 +102,9 @@ class CustomerController extends Controller
     public function downloadPdf()
     {
         $customers = $this->customer->all(); 
-        $pdf_view = view('pdf.customer', compact('customers'));
+        $pdf_view = mb_convert_encoding(\View::make('pdf.customer', compact('customers')), 'HTML-ENTITIES', 'UTF-8');
         $file = "customer.pdf";
         $pdf = \App::make('dompdf.wrapper');
-        return $pdf->loadHtml($pdf_view)->download($file);
+        return PDF::loadHtml($pdf_view)->download($file); 
     }
 }
