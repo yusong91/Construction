@@ -70,6 +70,8 @@ class SparepartController extends Controller
         $pdf_view = view('pdf.sparepart', compact('spareparts'));
         $file = "sparepart.pdf";
         $pdf = \App::make('dompdf.wrapper');
-        return $pdf->loadHtml($pdf_view)->download($file);
+        //return $pdf->loadHtml($pdf_view)->stream($file); //work on GCP download
+
+        return PDF::loadHtml($pdf_view)->stream($file);
     }
 }

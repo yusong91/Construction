@@ -77,7 +77,7 @@
                             @if(count($equipments) > 0)
                                 @foreach($equipments as $item)
                                     <tr>  
-                                        <td style ="text-align: center;">1</td>
+                                        <td style ="text-align: center;">{{ 1 + $loop->index }}</td>
                                         <td>{{ $item->parent_quipment->value ?? ""}}</td>
                                         <td>{{ $item->equipment_id }}</td>
                                         <td>{{ $item->parent_brand->value ?? "" }}</td>

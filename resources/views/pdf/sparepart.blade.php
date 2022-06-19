@@ -1,17 +1,13 @@
 <!doctype html>
 <html lang="en">
     <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
-    <meta name="csrf-token" content="{{ csrf_token() }}">
-
     
-
-
-
 
         <?php   
             ini_set('memory_limit', '64M');
@@ -88,7 +84,7 @@
                                         <td style ="text-align: center;">{{ 1 + $loop->index }}</td>
                                         <td>{{ $item->name ?? ""}}</td>
                                         <td>{{ $item->quantity ?? "" }}</td>
-                                        <td>{{ $item->unit ?? "" }}</td>
+                                        <td>គ្រឿង</td>
                                         <td>${{ $item->unit_price ?? "" }}</td>
                                         <td>${{ $item->amount ?? ""}}</td>
                                     </tr>
