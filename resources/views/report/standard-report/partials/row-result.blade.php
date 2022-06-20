@@ -6,7 +6,15 @@
             <th class="text-center" style="width: 30%;">Customer/Supplier Name</th>
             <th class="text-center">Amount</th>   
         </thead>
-        <tbody>   
+        <tbody> 
+            
+        <?php 
+                        
+            $net_expend = 0;
+
+            $net_income = 0;
+                        
+        ?>
             <!-- Income -->
             <tr data-toggle="collapse" data-target="#demo1" class="accordion-toggle" style="padding: 0; margin: 0;">
                 <td colspan="3"><i class="fa fa-caret-down"></i><span class="m-2">Income</span> </td>
@@ -27,7 +35,9 @@
                                             <td style="width: 30%;"><span class="m-4">{{ $item->parent_equipment->equipment_id }}</span> </td>   
                                             <td style="width: 20%;">{{ getDateFormat($item->to_date) }}</td>       
                                             <td style="width: 30%;">{{ $item->parent_customer->company_name }}</td>       
-                                            <td >${{ $item->amount }}</td>                        
+                                            <td >${{ $item->amount }}</td> 
+                                            
+                                            <?php $net_income += $item->amount; ?>
                                         </tr> 
                                     @endforeach
                                 </table>
@@ -51,13 +61,7 @@
                             <td colspan="4"><i class="fa fa-caret-down ml-4"></i><span class="m-2">{{$key}}</span> </td>                    
                         </tr> 
 
-                        <?php 
                         
-                            $net_expend = 0;
-
-                            $net_income = 0;
-                        
-                        ?>
 
                             <td colspan="4" class="hiddenRow" style="padding: 0; margin: 0;">
                                 <table class="table table-bordered collapse row-child" id="demo5" style="padding: 0; margin: 0; border: hidden">
