@@ -16,16 +16,16 @@
             <th class="text-center align-middle" style="width: 2%;">Action</th>  
         </thead>
         <tbody> 
-            @if(count($maintenances))
+            @if(count($maintenances)) 
                 @foreach($maintenances  as $item)
                     <tr>
                         <td class="text-center align-middle">{{ getDateFormat($item->date) }}</td>
                         <td class="text-center align-middle">{{ $item->parent_equipment->equipment_id}}</td>
                         <td class="text-center align-middle">{{ $item->parent_inventory->name ?? $item->service }}</td>
                         <td class="text-center align-middle">{{ $item->quantity }}</td>
-                        <td class="text-center align-middle" >{{ $item->unit }}</td>
-                        <td class="text-center align-middle" >{{ $item->unit_price }}</td>
-                        <td class="text-center align-middle">{{ $item->amount }}</td>
+                        <td class="text-center align-middle" >{{ $item->unit ?? $item->parent_inventory->unit }}</td>
+                        <td class="text-center align-middle" >{{ $item->unit_price ?? $item->parent_inventory->price }}</td>
+                        <td class="text-center align-middle">{{ $item->amount ?? $item->quantity * $item->parent_inventory->price }}</td>
                         <td class="text-center align-middle">{{ $item->parent_supplier->company_name }}</td>
                         <td class="text-center align-middle"  >{{ $item->parent_staff->name }}</td>
                         <td class="text-center align-middle">{{ $item->note }}</td>

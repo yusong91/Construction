@@ -110,12 +110,13 @@ class EquipmentController extends Controller
 
     public function downloadExcel()
     {
-        return Excel::download(new ExcelEquipment(['dd'=>'dd']), 'equipment.xlsx'); 
+        $equipments = $this->equipment->all(); 
+        return Excel::download(new ExcelEquipment($equipments), 'equipment.xlsx'); 
     }
 
     public function downloadPdf()
     {
-        $equipments = $this->equipment->all();
+        $equipments = $this->equipment->all(); 
         $pdf_view = mb_convert_encoding(\View::make('pdf.equipment', compact('equipments')), 'HTML-ENTITIES', 'UTF-8');
         $file = "equipment.pdf";
         $pdf = \App::make('dompdf.wrapper');

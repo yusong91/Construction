@@ -41,16 +41,12 @@ class ReportStandardController extends Controller
         $str_to_date = $data['to_date'];
         $sory_by = $data['sort_by']; 
         $incomes = $this->revenue->findByKey([getStringDate($str_from_date), getStringDate($str_to_date), $sory_by]);
-        //dd($incomes);
-        //$expenses = $this->maintenance->all(); 
         $expenses = $this->maintenance->findByKey([getStringDate($str_from_date), getStringDate($str_to_date), $sory_by]); 
-        //dd($expenses);
         $total_expense = 0;
         $total_income = 0;
         $net_income = 0;
         $key_sort = ['asc'=>'A-Z', 'desc'=>'Z-A'];
         $sort = $data['sort_by'];
-       
         $net_income = $total_income - $total_expense;
         
         return view('report.standard-report.result', compact('active', 'expenses', 'incomes', 'net_income', 'key_sort', 'sort', 'data'));

@@ -16,12 +16,12 @@
                         @foreach($equipmentsolds as $items)
                             <tr>
                                 <td class="text-center verticel-center">{{ $loop->index + 1 }}</td>
-                                <td class="text-center verticel-center">{{ $items->parent_type->value }}</td>
-                                <td class="text-center verticel-center">{{ $items->parent_equipment->equipment_id }}</td>
-                                <td class="text-center verticel-center">{{ $items->sale_description }}</td>
-                                <td class="text-center verticel-center">{{ getDateFormat($items->sale_date) }}</td>
-                                <td class="text-center verticel-center">${{ $items->sale_price }}</td>
-                                <td class="text-center verticel-center">{{ $items->sale_to }}</td>
+                                <td class="text-center verticel-center">{{ $items->parent_type->value ?? '' }}</td>
+                                <td class="text-center verticel-center">{{ $items->parent_equipment->equipment_id ?? ''}}</td>
+                                <td class="text-center verticel-center">{{ $items->sale_description ?? ''}}</td>
+                                <td class="text-center verticel-center">{{ $items->sale_date ? getDateFormat($items->sale_date) : ''}}</td>
+                                <td class="text-center verticel-center">{{ $items->sale_price ? '$' . $items->sale_price : '' }}</td>
+                                <td class="text-center verticel-center">{{ $items->sale_to ?? ''}}</td>
                                     
                                 <td class="text-center verticel-center">
                                     

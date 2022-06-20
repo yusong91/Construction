@@ -7,7 +7,7 @@
             <th class="text-center">Amount</th>   
         </thead>
         <tbody>   
-           
+            <!-- Income -->
             <tr data-toggle="collapse" data-target="#demo1" class="accordion-toggle" style="padding: 0; margin: 0;">
                 <td colspan="3"><i class="fa fa-caret-down"></i><span class="m-2">Income</span> </td>
                 <td ></td>                      
@@ -35,10 +35,9 @@
                     @endforeach
                     </table>
                     
-
                 </td>
 
-                
+            <!-- Expend -->
             <tr data-toggle="collapse" data-target="#demo4" class="accordion-toggle" style="padding: 0; margin: 0;">
                 <td colspan="3"><i class="fa fa-caret-down"></i><span class="m-2">Expense</span> </td>
                 <td ></td>                      
@@ -52,6 +51,14 @@
                             <td colspan="4"><i class="fa fa-caret-down ml-4"></i><span class="m-2">{{$key}}</span> </td>                    
                         </tr> 
 
+                        <?php 
+                        
+                            $net_expend = 0;
+
+                            $net_income = 0;
+                        
+                        ?>
+
                             <td colspan="4" class="hiddenRow" style="padding: 0; margin: 0;">
                                 <table class="table table-bordered collapse row-child" id="demo5" style="padding: 0; margin: 0; border: hidden">
                                 @foreach($value as $item)
@@ -59,7 +66,14 @@
                                         <td style="width: 30%;"><span class="ml-4">{{ $item->service }} {{ $item->parent_equipment->equipment_id }}</span> </td>
                                         <td style="width: 20%;">{{ getDateFormat($item->date) }}</td>
                                         <td style="width: 30%;">{{ $item->parent_supplier->company_name }}</td>
-                                        <td >${{ $item->unit_price * $item->amount }}</td>                     
+                                        <td >${{ $item->unit_price * $item->amount }}</td>   
+                                        
+                                        <?php  
+
+                                            $net_expend += $item->unit_price * $item->amount;
+
+                                        ?>
+
                                     </tr> 
                                 @endforeach
                                 </table>
@@ -76,7 +90,7 @@
                             <tr style="background: #8AD4ED;">
                                 <td colspan="3" ><span >Net Income</span> </td>
                                 
-                                <td style="width: 20%;">$</td>          
+                                <td style="width: 20%;">${{ $net_income - $net_expend }}</td>          
                             </tr>
 
                         </table>

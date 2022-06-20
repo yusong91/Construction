@@ -16,12 +16,9 @@ class ExcelEquipment implements FromCollection, WithHeadings
 
     public function __construct($data)
     {
-        //foreach ($suspiciouses as $item) {
-            
-            $equipment = array('test1'=>'test', 'test2'=>'test');
-
-            $this->equipments[] = $equipment;
-        //}
+        foreach ($data as $item) {    
+            $this->equipments[] = array($item->parent_quipment->value ?? "", $item->equipment_id ?? "", $item->parent_brand->value ?? "", $item->purchase_date ? getDateFormat($item->purchase_date) : "", $item->year ?? "");
+        }
     }
 
     public function collection()
@@ -32,8 +29,11 @@ class ExcelEquipment implements FromCollection, WithHeadings
     public function headings(): array
     {
         return [
-            'Name',
-            'Song',
+            'Equipment Type',
+            'Equipment Id',
+            'Brand',
+            'Purchased Date',
+            'Year'
         ];
     }
 }

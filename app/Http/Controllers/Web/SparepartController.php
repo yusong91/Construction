@@ -57,7 +57,7 @@ class SparepartController extends Controller
     public function destroy($id)
     {
         // 
-    }
+    } 
  
     public function downloadExcel() 
     {

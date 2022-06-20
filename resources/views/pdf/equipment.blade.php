@@ -79,7 +79,7 @@
                                     <tr>  
                                         <td style ="text-align: center;">{{ 1 + $loop->index }}</td>
                                         <td>{{ $item->parent_quipment->value ?? ""}}</td>
-                                        <td>{{ $item->equipment_id }}</td>
+                                        <td>{{ $item->equipment_id ?? "" }}</td>
                                         <td>{{ $item->parent_brand->value ?? "" }}</td>
                                         <td>{{ $item->purchase_date ? getDateFormat($item->purchase_date) : "" }}</td>
                                         <td>{{ $item->year ?? ""}}</td>

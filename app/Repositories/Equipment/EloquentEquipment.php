@@ -187,7 +187,7 @@ class EloquentEquipment implements EquipmentRepository
 
     public function all()
     {
-        return Equipment::with(['parent_brand', 'parent_quipment'])->get();
+        return Equipment::with(['parent_brand', 'parent_quipment'])->where('sold',0)->get();
     }
 
     //     ->whereHas('children_equipment', function($q){

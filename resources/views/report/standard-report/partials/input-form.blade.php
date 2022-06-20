@@ -4,7 +4,7 @@
             <div class="col-4">
                 <div class="form-floating mb-3">
                     <label for="a_date">@lang('From Date')</label>
-                    <input type="text" id="a_date" class="form-control" name="from_date" value="{{ isset($data['to_date']) ? $data['to_date'] : '' }}" required >       
+                    <input type="text" id="a_date" class="form-control" name="from_date" value="{{ isset($data['from_date']) ? $data['from_date'] : '' }}" required >       
                 </div>
             </div> 
   
@@ -26,7 +26,6 @@
                 </div>
             </div>
         </div>
-
 
 <script>
 

@@ -67,18 +67,18 @@
 
             var equipment_id = element.attr("select_type");
 
-            $("#purchased_date" + index).attr("required", "true"); 
+            // $("#purchased_date" + index).attr("required", "true"); 
 
-            $("#"+ index +"sale_price").attr("required", "true");
+            // $("#"+ index +"sale_price").attr("required", "true");
         });
 
         var data = $("#" + index + 'equipment_id option:selected').val() ?? 'remove';
 
         if(data == 'remove') 
         { 
-            $("#purchased_date" + index).removeAttr('required'); 
+            // $("#purchased_date" + index).removeAttr('required'); 
 
-            $("#"+ index +"sale_price").removeAttr('required');
+            // $("#"+ index +"sale_price").removeAttr('required');
         }
     }
 
