@@ -11,17 +11,22 @@ class EloquentMovement implements MovementRepository
 { 
     public function paginate($perPage, $search = null)
     {   
-        $query = MovementRent::query()->with('parent_type')->with('parent_equipment')->with('parent_customer');
+        $query = MovementRent::query()->with('parent_type')->with('parent_equipment')->with('parent_customer')->whereHas('parent_equipment', function($q){ 
+            $q->where('sold', '==', 0);    
+        });
+
         if ($search) {
             $query->where(function ($q) use ($search) {
                 $q->where('equipment_id', "like", "%{$search}%");
                 $q->orWhere('sale_to', 'like', "%{$search}%");
-            }); 
+            });  
         } 
         $result = $query->orderBy('created_at', 'desc')->paginate($perPage);
         if ($search) {
             $result->appends(['search' => $search]);
         }
+        
+
         return $result;
     }
 

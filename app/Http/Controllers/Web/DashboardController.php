@@ -15,14 +15,14 @@ class DashboardController extends Controller
      
     public function index()
     {
-        $equipment_available = Equipment::where('status', 'available')->count();
-        $equipment_rental = Equipment::where('status', 'rental')->count();
-        $equipment_maintenance = Equipment::where('status', 'maintenance')->count();
+        $equipment_available = Equipment::where(['status'=>'available', 'sold'=> 0])->count();
+        $equipment_rental = Equipment::where(['status'=>'rental', 'sold'=> 0])->count();
+        $equipment_maintenance = Equipment::where(['status'=>'maintenance', 'sold'=> 0])->count();
 
-        $claim = Maintenance::where('unclaim', 1)->count();
-        $unclaim = Maintenance::where('unclaim', 0)->count();
+        $claim = Maintenance::where(['unclaim'=> 1])->count();
+        $unclaim = Maintenance::where(['unclaim'=> 0])->count();
 
-        $raw_income_and_expense = Equipment::with(['child_revenue', 'child_maintenance'])->get();
+        $raw_income_and_expense = Equipment::with(['child_revenue', 'child_maintenance'])->where('sold', 0)->get();
         $income_and_expense = [['Equipment', 'Income', 'Expenses']];
 
         //Carbon::now()->month

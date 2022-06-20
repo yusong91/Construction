@@ -19,7 +19,7 @@
                     <tr>
                         <td class="text-center align-middle">{{ $loop->index + 1 }}</td>
                         <td class="text-center align-middle">{{ $item->parent_type->value }}</td>
-                        <td class="text-center align-middle">{{ $item->parent_equipment->equipment_id }}</td>
+                        <td class="text-center align-middle">{{ $item->parent_equipment->equipment_id ?? '' }}</td>
                         <td class="text-center align-middle">{{ $item->parent_customer->company_name }}</td>
                         <td class="text-center align-middle">{{ $item->customer_name }}</td>
                         <td class="text-center align-middle">{{ $item->customer_phone }}</td>

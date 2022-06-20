@@ -65,8 +65,6 @@ class CustomerController extends Controller
         return view('customer.detail', compact('active', 'edit'));
     }
 
-    
-
     public function edit($id)
     {
         $active = "customer";

@@ -180,7 +180,7 @@ class EloquentEquipment implements EquipmentRepository
         return Equipment::find($id);
     } 
 
-    public function outstanding($key)
+    public function outstanding($key) 
     {
         return Equipment::where('sold', $key)->with(['parent_quipment', 'parent_brand'])->get();
     }
