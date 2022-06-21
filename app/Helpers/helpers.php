@@ -68,7 +68,9 @@ if(!function_exists('getSparePart')){
 
 if(!function_exists('getEquipment')){
     function getEquipment(){
-        $equipments = \Vanguard\Model\CommonCode::where('parent_id', 10)->with('children_equipment')->get();
+        $equipments = \Vanguard\Model\CommonCode::where('parent_id',10)->with(['children_equipment' => function ($query) {
+            $query->where('sold', 0);
+        }])->get();
         return $equipments;
     }
 } 

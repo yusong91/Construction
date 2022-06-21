@@ -57,7 +57,7 @@ class InventoryController extends Controller
             
             $groups[substr($key, 0, 1)][] = $value;
         } 
-        array_pop($groups);
+        array_pop($groups); 
         if(count($groups) < 1)
         {
             return redirect()->route('inventory.create')->withErrors("No Insert");

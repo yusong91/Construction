@@ -19,7 +19,7 @@ class MovementController extends Controller
     {   
         $active = "movement";
         $movements = $this->movement->paginate($perPage = 10, $request->search);
-        $raw_paginate = json_encode($movements); 
+        $raw_paginate = json_encode($movements);  
         $paginate = json_decode($raw_paginate);
         return view('movement-rent.index', compact('active', 'movements', 'paginate'));
     }

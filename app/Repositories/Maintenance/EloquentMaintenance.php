@@ -86,7 +86,7 @@ class EloquentMaintenance implements MaintenanceRepository
                     'note'=>$item[10] ?? "",
                     'image_broken'=>$digital_broken,
                     'image_replace'=>$digital_replace,
-                    'date'=>$this->getDate($item[8]) ?? null, 
+                    'date'=>$this->getDate($item[8]), 
                     'created_at'=>$now,
                     'updated_at'=>$now
                 ]; 
@@ -95,13 +95,9 @@ class EloquentMaintenance implements MaintenanceRepository
 
                 if($create)
                 {
-                   // dd($create);
                     $q = $create->quantity;
                     $unit_price = $create->unit_price;
-
-                   // dd($q);
-
-                   $insert = [];
+                    $insert = [];
 
                     array_push($insert,[
                         'maintenance_id'=>$create->id,          
@@ -117,27 +113,24 @@ class EloquentMaintenance implements MaintenanceRepository
                     DB::table('spareparts')->insert($insert);
                 }
 
-                //$create = DB::table('maintenances')->insert($insert_data);
-
-
             } elseif($item[0] == "inventory"){
-
+                
                 $id = explode(' ', $item[3]);
 
                 $digital_broken = "";
                 $digital_replace = "";
 
-                if(isset($item[8])) 
-                { 
-                    $file = $item[8];
-                    $digital_broken = Storage::putFile('img', $file) ?? "";
-                }
-
                 if(isset($item[9])) 
                 { 
                     $file = $item[9];
-                    $digital_replace = Storage::putFile('img', $file) ?? "";
+                    $digital_broken = Storage::putFile('img', $file) ?? "";
                 }
+
+                if(isset($item[10])) 
+                { 
+                    $file = $item[10];
+                    $digital_replace = Storage::putFile('img', $file) ?? "";
+                } 
 
                 array_push($insert_data,[
                     'type'=>$item[0],          
@@ -147,10 +140,10 @@ class EloquentMaintenance implements MaintenanceRepository
                     'staff_id'=>$item[5],
                     'inventory_id'=>$item[2],
                     'quantity'=>$item[6],
-                    'note'=>$item[7] ?? "",
+                    'note'=>$item[8] ?? "",
                     'image_broken'=>$digital_broken,
                     'image_replace'=>$digital_replace,
-                    'date'=>null,
+                    'date'=>$this->getDate($item[7]),
                     'created_at'=>$now,
                     'updated_at'=>$now
                 ]);  

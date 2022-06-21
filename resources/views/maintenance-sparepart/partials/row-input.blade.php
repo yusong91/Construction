@@ -1,6 +1,6 @@
 <div class="table-responsive" style="padding-top: 20px; padding-bottom: 10px;">
     <table class="table table-bordered">
-        <thead>
+        <thead> 
             <tr>
                 <th scope="col" class="text-center align-middle">Type *</th>
                 <th scope="col" class="text-center align-middle">Spare-Part/Service Name *</th>
@@ -10,7 +10,7 @@
                 <th scope="col" class="text-center align-middle">Quantity *</th>
                 <th scope="col" class="text-center align-middle">Unit *</th>
                 <th scope="col" class="text-center align-middle">Unit Price *</th>
-                <th scope="col" class="text-center align-middle">Invoice Date</th>
+                <th scope="col" class="text-center align-middle">Invoice Date * / Date *</th>
                 <th scope="col" class="text-center align-middle">Invoice Number *</th>
                 <th scope="col" class="text-center align-middle">Invoice Number/Other Attachment *</th>
                 <th scope="col" class="text-center align-middle">Note</th>
@@ -37,7 +37,7 @@
                                     @foreach($spare_parts as $items)
                                         <optgroup label="{{ $items->value }}">
                                             @foreach($items->children_inventory as $item)
-                                                <option value="{{ $item->id }}">{{ $item->name }}</option>
+                                                <option value="{{ $item->id }}" inventory="{{ $item->quantity }}">{{ $item->name }}</option>
                                             @endforeach
                                         </optgroup>
                                     @endforeach
@@ -93,7 +93,7 @@
 
                         <td>
                             <div class="form-floating">
-                                <input type="text" class="form-control form-borderless" name="{{$i}}invoice_date" id="a_date{{$i}}" style="width: 130px;">
+                                <input type="text" class="form-control form-borderless" name="{{$i}}invoice_date" id="a_date{{$i}}" style="width: 200px;">
                             </div>
                         </td> 
 
@@ -151,6 +151,21 @@
 
     for (let index = 1; index <= 8; index++) {
 
+        $("#" + index +"type_id").change(function () {
+
+            var inventory = $('#' + index + 'type_id' + ' option:selected').attr('inventory');
+
+            $("#" + index + "quantity").attr({
+                "max" : inventory,        
+                "min" : 1  
+            });
+        });
+
+        $("#service_name" + index).change(function () {
+
+            $("#" + index + "quantity").removeAttr('max');
+        });
+
         $("#" + index + "select_spart_part").hide();
 
         $("#" + index +"category_select").change(function () {
@@ -179,6 +194,7 @@
                         $("#" + index + "quantity").attr("required", "true");
                         $("#" + index + "unit").attr("required", "true");
                         $("#" + index + "unit_price").attr("required", "true");
+                        $("#a_date" + index).attr("required", "true");
                         $("#" + index + "invoice_number").attr("required", "true");
                         $("#" + index + "invoice_file").attr("required", "true");
                         $("#" + index + "supplier_id").attr("required", "true");
@@ -197,11 +213,13 @@
 
                         $("#service_name" + index).val('');
                         $("#service_name" + index).show();
-
+ 
                         $("#service_name" + index).attr("required", "true");
                         $("#" + index + "quantity").attr("required", "true");
+
                         $("#" + index + "unit").attr("required", "true");
                         $("#" + index + "unit_price").attr("required", "true");
+                        $("#a_date" + index).attr("required", "true");
                         $("#" + index + "invoice_file").attr("required", "true");
                         $("#" + index + "invoice_number").attr("required", "true");
                         $("#" + index + "supplier_id").attr("required", "true");
@@ -214,7 +232,7 @@
                         $("#" + index + "unit").prop( "disabled", true );
                         $("#" + index + "unit_price").prop( "disabled", true );
                         $("#" + index + "invoice_number").prop( "disabled", true );
-                        $("#a_date" + index).prop( "disabled", true );
+                        //$("#a_date" + index).prop( "disabled", true );
                         $("#" + index + "invoice_file").prop( "disabled", true );
 
                         $("#" + index + "quantity").removeAttr('required');
@@ -222,6 +240,7 @@
                         $("#" + index + "equipment_id").removeAttr('required');
                         $("#" + index + "unit").removeAttr('required');
                         $("#" + index + "unit_price").removeAttr('required');
+                        $("#a_date" + index).attr("required", "true");
                         $("#" + index + "invoice_file").removeAttr('required');
                         $("#" + index + "invoice_number").removeAttr('required');
                         $("#" + index + "supplier_id").attr("required", "true");

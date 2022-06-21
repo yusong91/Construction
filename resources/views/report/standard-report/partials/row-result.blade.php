@@ -61,8 +61,6 @@
                             <td colspan="4"><i class="fa fa-caret-down ml-4"></i><span class="m-2">{{$key}}</span> </td>                    
                         </tr> 
 
-                        
-
                             <td colspan="4" class="hiddenRow" style="padding: 0; margin: 0;">
                                 <table class="table table-bordered collapse row-child" id="demo5" style="padding: 0; margin: 0; border: hidden">
                                 @foreach($value as $item)
@@ -75,7 +73,6 @@
                                         <?php  
 
                                             $net_expend += $item->unit_price * $item->amount;
-
                                         ?>
 
                                     </tr> 

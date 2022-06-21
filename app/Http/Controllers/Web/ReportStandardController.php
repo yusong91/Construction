@@ -42,6 +42,7 @@ class ReportStandardController extends Controller
         $sory_by = $data['sort_by']; 
         $incomes = $this->revenue->findByKey([getStringDate($str_from_date), getStringDate($str_to_date), $sory_by]);
         $expenses = $this->maintenance->findByKey([getStringDate($str_from_date), getStringDate($str_to_date), $sory_by]); 
+        //dd($expenses);
         $total_expense = 0;
         $total_income = 0;
         $net_income = 0;
@@ -65,7 +66,7 @@ class ReportStandardController extends Controller
     public function update(Request $request, $id)
     {
         //
-    }
+    } 
 
     public function destroy($id)
     {

@@ -49,7 +49,7 @@ class MaintenanceController extends Controller
         array_pop($groups); 
         $create = $this->maintenance->create($groups);
         
-        if($create)
+        if($create) 
         {
             return redirect()->route('maintenance.index')->withSuccess("Success");
         }

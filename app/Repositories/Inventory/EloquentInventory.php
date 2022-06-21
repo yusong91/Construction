@@ -65,7 +65,7 @@ class EloquentInventory implements InventoryRepository
                 'category_id'=>$category_id,
                 'menufacture'=>$item[1],
                 'vender'=>$item[2],
-                'quantity'=>$item[3],
+                'quantity'=>$item[3], 
                 'unit'=>$item[4],
                 'price'=>(int)$item[5],
                 'purchased_date'=>$this->getDate($item[6]),
