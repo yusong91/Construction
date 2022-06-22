@@ -7,9 +7,10 @@ use Validator;
 use DB;
 use Vanguard\Model\Maintenance;
 use Vanguard\Model\Inventory;
+use Vanguard\Model\Sparepart;
 use Illuminate\Support\Facades\Storage;
 use Google\Cloud\Storage\StorageClient;
-
+ 
 class EloquentMaintenance implements MaintenanceRepository
 { 
     public function paginate($perPage, $search = null)
@@ -178,57 +179,113 @@ class EloquentMaintenance implements MaintenanceRepository
 
     public function update($id, array $data)
     {
+        //dd($data);
+        $category_id = $data['category_id'];
+        
         $now = Carbon::now(); 
         
         $eq_id = explode(' ', $data['equipment_id']);
 
+        $invoice_file = "";
         $digital_broken = "";
         $digital_replace = "";
 
+        if(isset($data['invoice_file'])) 
+        { 
+            //$file = $data['invoice_file'];
+            //$invoice_file = Storage::putFile('img', $file);
+        }
+
         if(isset($data['image_broken'])) 
         { 
-            $file = $data['image_broken'];
-            $digital_broken = Storage::putFile('img', $file);
+            // $file = $data['image_broken'];
+            // $digital_broken = Storage::putFile('img', $file);
         }
 
         if(isset($data['image_replace'])) 
         { 
-            $file = $data['image_replace'];
-            $digital_replace = Storage::putFile('img', $file);
+            // $file = $data['image_replace'];
+            // $digital_replace = Storage::putFile('img', $file);
         }
 
         $edit =  Maintenance::find($id);
 
-        //dd($data);
         $amount = null;
-        if(isset($data['quantity']) && isset($data['unit_price']))
-        {
-            $amount = $data['unit_price'] * $data['quantity'];
+        $unit = null;
+        $unit_price = null;
+        $invoice_number = null;
+        $invoice_file = null;
+
+
+        switch ($category_id) {
+            case 'new_spare_part':
+                
+                $unit = $data['unit'] ?? $edit->unit;
+                $invoice_number = $data['invoice_number'] ?? $edit->invoice_number;
+                $unit_price = $data['unit_price'] ?? $edit->unit_price;
+                $quantity = $data['quantity'] ?? $edit->quantity;
+                $amount = $quantity * $unit_price;
+
+                break;
+            case 'inventory':
+                $amount = null;
+                $unit = null;
+                $unit_price = null;
+                $invoice_number = null;
+                $invoice_file = null;
+                break;
+            case 'service':
+                $unit = $data['unit'] ?? $edit->unit;
+                $invoice_number = $data['invoice_number'] ?? $edit->invoice_number;
+                $unit_price = $data['unit_price'] ?? $edit->unit_price;
+                $quantity = $data['quantity'] ?? $edit->quantity;
+                $amount = $quantity * $unit_price;
+                break;
+
+            default:
+                '';
+                break;
         }
 
-        $update = [          
+        // if(isset($data['quantity']) && isset($data['unit_price']))
+        // {
+        //     $amount = $data['unit_price'] * $data['quantity'];
+        // }
+
+        $update = [           
                 'type'=>$data['category_id'],          
                 'type_id'=>$eq_id[0],       
                 'equipment_id'=>$eq_id[1],
                 'supplier_id'=>$data['supplier_id'],
                 'staff_id'=>$data['staff_id'],
                 'inventory_id'=>$data['inventory_id'] ?? $edit->inventory_id,
-                'service'=>$data['service'] ?? $edit->service,
+                'service'=>$data['service_name'] ?? $edit->service,
                 'quantity'=>$data['quantity'] ?? $edit->quantity,
-                'unit'=>$data['unit'] ?? $edit->unit,
-                'unit_price'=>$data['unit_price'] ?? $edit->unit_price,
+                'unit'=>$unit,
+                'unit_price'=>$unit_price,
                 'amount'=>$amount,
+                'invoice_number'=>$invoice_number,
+                'invoice_file'=>$invoice_file,
                 'note'=>$data['note'] ?? "",
-                'image_broken'=>$digital_broken,
-                'image_replace'=>$digital_replace,
-                'date'=>null,
-                'image_broken'=>$digital_broken ? $digital_broken : $edit->image_broken ,
-                'image_replace'=>$digital_replace ? $digital_replace : $edit->image_replace,
-                'date'=> isset($data['date']) ? $this->getDate($data['date']) : null,
+                'image_broken'=>$digital_broken ?? $edit->image_broken,
+                'image_replace'=>$digital_replace ?? $edit->image_replace,
+                'date'=> isset($data['date']) ? $this->getDate($data['date']) : $edit->date,
                 'updated_at'=>$now
         ]; 
         
-        return $edit->update($update);
+        $updated = $edit->update($update);
+
+        if($updated)
+        {
+            $update_sparepart = Sparepart::where('maintenance_id', $id)->first();
+            $update_sparepart->name = $data['service'] ?? $edit->service;
+            $update_sparepart->quantity = $data['quantity'] ?? $edit->quantity;
+            $update_sparepart->unit = $data['unit'] ?? $edit->unit;
+            $update_sparepart->unit_price = $data['unit_price'] ?? $edit->unit_price;
+            $update_sparepart->amount = $amount ?? $edit->amount;
+            $update_sparepart->save();
+        }
+        return $updated;
     }
 
     public function delete($id)

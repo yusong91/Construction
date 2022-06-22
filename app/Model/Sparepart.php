@@ -15,4 +15,9 @@ class Sparepart extends Model
   
         return $this->belongsTo('Vanguard\Model\Maintenance','maintenance_id'); 
     }
+
+    public function parent_equipment(){    
+  
+        return $this->belongsTo('Vanguard\Model\Equipment','equipment_id'); 
+    }
 }

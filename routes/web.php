@@ -132,12 +132,10 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
     Route::get('excel/outstand', 'ReportEquipmentOutStandController@downloadExcel')->name('excel/outstand')->middleware('permission:report.equipmentoutstand.index');
     Route::get('pdf/outstand', 'ReportEquipmentOutStandController@downloadPdf')->name('pdf/outstand')->middleware('permission:report.equipmentoutstand.index');
 
-
     /**
      * Warehouse
      */
     Route::resource('warehouse', 'WarehouseController');
-
 
     /**
      * User Management
@@ -176,7 +174,6 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
 
         Route::resource('permissions', 'PermissionsController')->middleware('permission:permissions.manage');
     });
-
 
     /**
      * Settings

@@ -11,7 +11,7 @@ use Vanguard\Excel\ExcelSparepart;
 use Maatwebsite\Excel\Concerns\FromCollection; 
 use Maatwebsite\Excel\Concerns\Exportable;
 use Maatwebsite\Excel\Concerns\WithHeadings;
-use Mpdf\Mpdf;
+use Mpdf\Mpdf; 
 
 class SparepartController extends Controller
 {
@@ -19,7 +19,7 @@ class SparepartController extends Controller
      
     public function __construct(SparepartRepository $sparepart)
     {  
-		$this->sparepart = $sparepart;
+		$this->sparepart = $sparepart; 
 	}
     
     public function index(Request $request)
@@ -27,6 +27,23 @@ class SparepartController extends Controller
         $active = "sparepart";
         $spareparts = $this->sparepart->paginate(50, $request->search);
         return view('spare-part.index', compact('active', 'spareparts'));
+    }
+
+    public function edit($id)
+    {   
+        $active = "sparepart";
+        $edit = $this->sparepart->find($id);
+        return view('spare-part.edit', compact('active', 'edit'));
+    }
+
+    public function update(Request $request, $id)
+    {
+        $update = $this->sparepart->update($id, $request->all());
+        if($update)
+        {
+            return redirect()->route('sparepart.index')->withSuccess("Success");
+        }
+        return redirect()->route('sparepart.index')->withSuccess("Fail");
     }
 
     public function create()
@@ -44,15 +61,7 @@ class SparepartController extends Controller
         //
     }
 
-    public function edit($id)
-    {
-        // 
-    }
-
-    public function update(Request $request, $id)
-    {
-        //
-    }
+    
 
     public function destroy($id)
     {
