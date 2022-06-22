@@ -56,7 +56,7 @@
             <div class="row mt-5">
                     
                 <div class="col-3">
-                    <label for="a_date">@lang('Claim To')</label>
+                    <label for="a_date">@lang('Claim To') *</label>
                     <select class="form-control js-example-responsive" required name="staff_id" data-live-search="true">
                         @foreach($staffs as $item)   
                             <option value="{{ $item->id }}">{{$item->name}}</option>   
@@ -66,7 +66,7 @@
                 </div> 
         
                 <div class="col-3">
-                    <label for="a_date">@lang('Total Price')($)</label>
+                    <label for="a_date">@lang('Total Price')($) *</label>
                     <input type="number" class="form-control" name="price" required >
                 </div>
 

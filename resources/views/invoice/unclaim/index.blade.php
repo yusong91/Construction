@@ -33,7 +33,7 @@
 
         <form action="{{ route('unclaim.store') }}" method="POST"  accept-charset="UTF-8" autocomplete="off">
 
-            @include('invoice.unclaim.partials.row') 
+            @include('invoice.unclaim.partials.row')  
                     
             @csrf 
             <button type="submit" class="btn btn-primary mt-4">Claim</button>

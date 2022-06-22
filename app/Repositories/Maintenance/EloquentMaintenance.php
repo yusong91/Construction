@@ -179,7 +179,6 @@ class EloquentMaintenance implements MaintenanceRepository
 
     public function update($id, array $data)
     {
-        //dd($data);
         $category_id = $data['category_id'];
         
         $now = Carbon::now(); 
@@ -192,20 +191,20 @@ class EloquentMaintenance implements MaintenanceRepository
 
         if(isset($data['invoice_file'])) 
         { 
-            //$file = $data['invoice_file'];
-            //$invoice_file = Storage::putFile('img', $file);
+            $file = $data['invoice_file'];
+            $invoice_file = Storage::putFile('img', $file);
         }
 
         if(isset($data['image_broken'])) 
         { 
-            // $file = $data['image_broken'];
-            // $digital_broken = Storage::putFile('img', $file);
+            $file = $data['image_broken'];
+            $digital_broken = Storage::putFile('img', $file);
         }
 
         if(isset($data['image_replace'])) 
         { 
-            // $file = $data['image_replace'];
-            // $digital_replace = Storage::putFile('img', $file);
+            $file = $data['image_replace'];
+            $digital_replace = Storage::putFile('img', $file);
         }
 
         $edit =  Maintenance::find($id);
@@ -216,16 +215,13 @@ class EloquentMaintenance implements MaintenanceRepository
         $invoice_number = null;
         $invoice_file = null;
 
-
         switch ($category_id) {
             case 'new_spare_part':
-                
                 $unit = $data['unit'] ?? $edit->unit;
                 $invoice_number = $data['invoice_number'] ?? $edit->invoice_number;
                 $unit_price = $data['unit_price'] ?? $edit->unit_price;
                 $quantity = $data['quantity'] ?? $edit->quantity;
                 $amount = $quantity * $unit_price;
-
                 break;
             case 'inventory':
                 $amount = null;
@@ -241,7 +237,6 @@ class EloquentMaintenance implements MaintenanceRepository
                 $quantity = $data['quantity'] ?? $edit->quantity;
                 $amount = $quantity * $unit_price;
                 break;
-
             default:
                 '';
                 break;
