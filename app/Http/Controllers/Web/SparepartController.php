@@ -40,7 +40,7 @@ class SparepartController extends Controller
     {
         $update = $this->sparepart->update($id, $request->all());
         if($update)
-        {
+        { 
             return redirect()->route('sparepart.index')->withSuccess("Success");
         }
         return redirect()->route('sparepart.index')->withSuccess("Fail");

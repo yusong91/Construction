@@ -21,8 +21,8 @@
                         <td class="text-center verticel-center"> {{ $item->unit }}</td>
                         <td class="text-center verticel-center"> ${{ $item->unit_price }}</td>
                         <td class="text-center verticel-center"> ${{ $item->amount }}</td> 
-                        <td class="text-center verticel-center text-center">
-                            <a href="{{route('sparepart.edit', $item->id)}}" class="btn btn-icon edit" title="Update" data-toggle="tooltip" data-placement="top"> <i class="fas fa-edit"></i></a>
+                        <td class="text-center verticel-center text-center"> 
+                            <a href="{{route('sparepart.edit', $item->id)}}" class="btn btn-icon edit {{ checkClaim($item->claim) }}" title="Update" data-toggle="tooltip" data-placement="top"> <i class="fas fa-edit"></i></a>
                         </td>
                     </tr>
                 @endforeach

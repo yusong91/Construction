@@ -110,10 +110,11 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
     Route::get('excel/equipment', 'EquipmentController@downloadExcel')->name('excel/equipment')->middleware('permission:equipment');
     Route::get('pdf/equipment', 'EquipmentController@downloadPdf')->name('pdf/equipment')->middleware('permission:equipment');
 
-    /**
+    /** 
      * Report
      */
     Route::resource('report-standard', 'ReportStandardController')->middleware('permission:report');
+    Route::get('pdf/report/standard', 'ReportStandardController@downloadPdf')->name('pdf.report.standard')->middleware('permission:report');
 
     /**
      * Report Equipment

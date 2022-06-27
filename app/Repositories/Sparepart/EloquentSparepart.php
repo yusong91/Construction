@@ -42,6 +42,11 @@ class EloquentSparepart implements SparepartRepository
     public function update($id, array $data)
     {
         $update = Sparepart::find($id);
+
+        if($update->claim == 1)
+        {
+            return false;
+        }
         $maintenance_id = $update->maintenance_id;
         $update->name = $data['name'];
         $update->quantity = $data['quantity'];

@@ -3,6 +3,7 @@
 namespace Vanguard\Repositories\Unclaim;
 use Vanguard\Model\Maintenance;
 use Vanguard\Model\Unclaim;
+use Vanguard\Model\Sparepart;
 use Carbon\Carbon;
 use Validator;
 use DB;
@@ -39,6 +40,11 @@ class EloquentUnclaim implements UnclaimRepository
             $maintenance = Maintenance::find($id);
             $maintenance->unclaim = 1;
             $maintenance->save();
+
+            $sparepart = Sparepart::where('maintenance_id', $id)->first();
+            $sparepart->claim = 1;
+            $sparepart->save();
+
         }
         return $create;
     }

@@ -6,11 +6,13 @@ use Illuminate\Http\Request;
 use Vanguard\Http\Controllers\Controller;
 use Vanguard\Repositories\Revenue\RevenueRepository;
 use Vanguard\Repositories\Maintenance\MaintenanceRepository;
+use Mpdf\Mpdf;
+use PDF;
 
 
 class ReportStandardController extends Controller
 {
-    private $revenue;
+    private $revenue; 
     private $maintenance;
       
     public function __construct(RevenueRepository $revenue, MaintenanceRepository $maintenance)
@@ -51,6 +53,15 @@ class ReportStandardController extends Controller
         $net_income = $total_income - $total_expense;
         
         return view('report.standard-report.result', compact('active', 'expenses', 'incomes', 'net_income', 'key_sort', 'sort', 'data'));
+    }
+
+    public function downloadPdf()
+    {
+        $reports = [1];//$this->equipment->all(); 
+        $pdf_view = mb_convert_encoding(\View::make('pdf.report-standard', compact('reports')), 'HTML-ENTITIES', 'UTF-8');
+        $file = "standard-report.pdf";
+        $pdf = \App::make('dompdf.wrapper');
+        return PDF::loadHtml($pdf_view)->stream($file); //download
     }
 
     public function show($id)
