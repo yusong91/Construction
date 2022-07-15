@@ -25,14 +25,14 @@ class DashboardController extends Controller
         $raw_income_and_expense = Equipment::with(['child_revenue', 'child_maintenance'])->where('sold', 0)->get();
         $income_and_expense = [['Equipment', 'Income', 'Expenses']];
 
-        //Carbon::now()->month
+        $current_amount = getStringDate(Carbon::now());
         //Carbon::now()->subDays(7)
 
 
         $revenue_by_date = [['Date', 'Revenue']];
-        $revenue = Revenue::whereMonth('from_date', Carbon::now()->month)->get()->groupBy(function ($test) {
+        $revenue = Revenue::whereMonth('from_date', Carbon::now()->month)->get()->groupBy(function ($r) {
 
-            return $test->from_date;
+            return $r->from_date;
         });
 
         foreach ($revenue as $key => $values) {
@@ -42,6 +42,14 @@ class DashboardController extends Controller
                 $amount += $item->amount;   
             }
             $revenue_by_date[] = [getDateFormat($key), $amount];
+        }
+
+        if(count($revenue_by_date) == 1)
+        {
+            $revenue_by_date = [
+                                    ['Date', 'Revenue'],
+                                    [$current_amount,  0]
+                                ];
         }
 
         foreach ($raw_income_and_expense as $items) {
@@ -57,6 +65,7 @@ class DashboardController extends Controller
             $income_and_expense[] = [$items->equipment_id, $total_revenue, $total_maintenance];
         }
 
+        
         return view('dashboard.index', compact('equipment_available', 'equipment_rental', 'equipment_maintenance', 'claim', 'unclaim', 'income_and_expense', 'revenue_by_date'));
     }
 
