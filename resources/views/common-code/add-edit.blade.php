@@ -60,7 +60,7 @@
                         </div>
 
                         <div class="col-md-6">
-                            <label for="value">@lang('Image') <span class="text-danger">*</span></label>
+                            <label for="value">@lang('Image')</label>
                             <div class="custom-file">
                                 <label for="key">@lang('កូដ')</label>
                                 <input type="file" class="custom-file-input" id="customFile" name="image" >
