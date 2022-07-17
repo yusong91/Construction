@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('page-title', "លេខកូដប្រព័ន្ធ")
+@section('page-title', $page_title)
 @section('page-heading', isset($commonCode) ? __('កែប្រែ') : __('បង្កើត'))
 
 @section('breadcrumbs')
@@ -36,26 +36,35 @@
 
                 <div class="col-md-3">
                     <h5 class="card-title">
-                        @lang('កូដ និងតម្លៃ')
+                    {{ $page_title }} @lang('Name')
                     </h5>
                     <p class="text-muted">
-                        @lang('សូមបញ្ចូលកូដ និងតម្លៃ')
+                        @lang('Please input name')
                     </p>
                 </div>
                 
                 <div class="col-md-9">
                     <div class="row">
-                        <div class="col-md-6">
+                        <!-- <div class="col-md-6">
                             <div class="form-group">
                                 <label for="key">@lang('កូដ') <span class="text-danger">*</span></label>
                                 {!! Form::text('key', $commonCode->key ?? null, ['class' => 'form-control input-solid', 'id' => 'key']) !!}
                             </div>
-                        </div>
+                        </div> -->
                         
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label for="value">@lang('តម្លៃ') <span class="text-danger">*</span></label>
+                                <label for="value">@lang('Name') <span class="text-danger">*</span></label>
                                 {!! Form::text('value', $commonCode->value ?? null, ['class' => 'form-control input-solid', 'id' => 'value']) !!}
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <label for="value">@lang('Image') <span class="text-danger">*</span></label>
+                            <div class="custom-file">
+                                <label for="key">@lang('កូដ')</label>
+                                <input type="file" class="custom-file-input" id="customFile" name="image" >
+                                <label class="custom-file-label" for="customFile">Choose file</label>
                             </div>
                         </div>
 
@@ -66,17 +75,9 @@
                         @endif 
                     </div>
 
-                    <div class="row">
+                    <!-- <div class="row">
 
-                        <div class="col-md-12">
-                            <div class="custom-file">
-                                <label for="key">@lang('កូដ')</label>
-                                <input type="file" class="custom-file-input" id="customFile" name="image" >
-                                <label class="custom-file-label" for="customFile">Choose file</label>
-                            </div>
-                        </div>
-
-                    </div>
+                    </div> -->
 
                 </div>
 
@@ -85,7 +86,7 @@
     </div>
 
     <button type="submit" class="btn btn-primary">
-        {{ __(isset($commonCode) ? 'កែប្រែ' : 'បង្កើត') }}
+        {{ __(isset($commonCode) ? 'Edit' : 'Create') }}
     </button>
 
 {{ Form::close() }}

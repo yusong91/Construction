@@ -15,7 +15,7 @@ class CreateRequest extends FormRequest
     public function rules()
     {
         return [
-            'key' => 'required|unique:commond_codes,key',
+            // 'key' => 'required|unique:commond_codes,key',
             'value' => 'required|unique:commond_codes,value'
         ];
     }

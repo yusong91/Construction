@@ -27,20 +27,26 @@ class CommonCodeController extends Controller
     }
 
     public function index(){
+
         return view('common-code.index', [
             'parentCommonCode' => null,
             'commonCodes' => $this->getCommonCodeCollection(),
-            'breadcrumbs' => $this->getBreadcrumbs()
+            'breadcrumbs' => $this->getBreadcrumbs(),
+            'page_title'=>''
         ]);
     }
 
     public function show($id)
-    {
+    {        
         $commonCode = CommonCode::find($id);
+
+        $page_title = $commonCode->value;
+        
         return view('common-code.index', [
             'parentCommonCode' => $commonCode,
             'commonCodes' => $this->getCommonCodeCollection($commonCode->id),
-            'breadcrumbs' => $this->getBreadcrumbs($commonCode)
+            'breadcrumbs' => $this->getBreadcrumbs($commonCode),
+            'page_title'=>$page_title
         ]);
     }
 
@@ -48,10 +54,13 @@ class CommonCodeController extends Controller
 
         $parentCommonCode = CommonCode::find($request->parent_id);
 
+        $page_title = $parentCommonCode->value;
+
         $this->breadcrumbs[0]['isActive'] = false;
         return view('common-code.add-edit',[
-            'parentCommonCode' => $parentCommonCode,
-            'breadcrumbs' => $this->getBreadcrumbs($parentCommonCode, true),
+            'parentCommonCode'=>$parentCommonCode,
+            'breadcrumbs'=>$this->getBreadcrumbs($parentCommonCode, true),
+            'page_title'=>$page_title
         ]);
     }
 
@@ -66,13 +75,15 @@ class CommonCodeController extends Controller
             $digital_file = Storage::putFile('img', $file);
         }
 
-        $commonCode = CommonCode::create(['key'=>$request->input('key'), 'value'=>$request->input('value'), 'image'=>$digital_file, 'parent_id'=>$request->input('parent_id')]);
+        $key = trim($request->value);
+
+        $commonCode = CommonCode::create(['key'=>$key, 'value'=>$request->input('value'), 'image'=>$digital_file, 'parent_id'=>$request->input('parent_id')]);
 
         if ($commonCode->parent_id) {
-            return redirect()->route('common-codes.show', $commonCode->parent)->withSuccess(__('បង្កើតកូដនិងតម្លៃសម្រាប់ប្រព័ន្ធបានជោគជ័យ'));
+            return redirect()->route('common-codes.show', $commonCode->parent)->withSuccess(__('Success'));
         }
 
-        return redirect()->route('common-codes.index')->withSuccess(__('បង្កើតកូដនិងតម្លៃសម្រាប់ប្រព័ន្ធបានជោគជ័យ'));
+        return redirect()->route('common-codes.index')->withSuccess(__('Success'));
     } 
 
 
@@ -80,10 +91,14 @@ class CommonCodeController extends Controller
     {
         $commonCode = CommonCode::find($id);
         $this->breadcrumbs[0]['isActive'] = false;
+
+        $page_title = $commonCode->value;
+
         return view('common-code.add-edit', [
             'parentCommonCode' => $commonCode,
             'commonCode' => $commonCode,
-            'breadcrumbs' => $this->getBreadcrumbs($commonCode->parent, true)
+            'breadcrumbs' => $this->getBreadcrumbs($commonCode->parent, true),
+            'page_title'=>$page_title
         ]);
     }
 
@@ -105,10 +120,10 @@ class CommonCodeController extends Controller
         $commonCode->update($data);
 
         if ($commonCode->parent_id) {
-            return redirect()->route('common-codes.show',$commonCode->parent)->withSuccess(__('កែប្រែកូដនិងតម្លៃបានជោគជ័យ'));
+            return redirect()->route('common-codes.show',$commonCode->parent)->withSuccess(__('Success'));
         }
 
-        return redirect()->route('common-codes.index')->withSuccess(__('កែប្រែកូដនិងតម្លៃបានជោគជ័យ'));
+        return redirect()->route('common-codes.index')->withSuccess(__('Success'));
     }
 
     public function destroy($id)
@@ -116,7 +131,7 @@ class CommonCodeController extends Controller
         $commonCode = CommonCode::find($id);
         $commonCode->delete();
 
-        return redirect()->back()->withSuccess(__('លុបកូដនិងតម្លៃបានជោគជ័យ'));
+        return redirect()->back()->withSuccess(__('Success'));
     }
 
     private function getCommonCodeCollection($parentId = 0) {
@@ -147,7 +162,7 @@ class CommonCodeController extends Controller
             DB::commit();
             return response()->json([
                 'success' => true,
-                'message' => 'ផ្លាស់ប្ដូរលំដាប់លេខកូដប្រព័ន្ធបានជោគជ័យ'
+                'message' => 'Success'
             ]);
         } catch (\Throwable $th) {
             DB::rollback();

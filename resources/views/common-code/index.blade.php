@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
-@section('page-title', "លេខកូដប្រព័ន្ធ")
-@section('page-heading', " លេខកូដប្រព័ន្ធ")
+@section('page-title',  $page_title )
+@section('page-heading', $page_title )
 
 @section('breadcrumbs')
     @if (isset($breadcrumbs))
@@ -55,8 +55,8 @@
                     <tr>
                         <th></th>
                         <th>#</th>
-                        <th class="min-width-150">Key</th>
-                        <th class="min-width-150">Value</th>
+                        <!-- <th class="min-width-150">Key</th> -->
+                        <th class="min-width-150">Name</th>
                         <!-- <th class="min-width-80"># Children</th> -->
                         <th class="text-center min-width-150">@lang('Action')</th>
                     </tr>
@@ -67,7 +67,7 @@
                             <tr id="item_{{ $item->id }}">
                                 <td><span><i class="fa fa-arrows-alt-v handler" style="cursor:pointer"></i></span></td>
                                 <td class="align-middle no">{{ ($commonCodes->perPage() * ($commonCodes->currentPage() - 1)) + $index + 1 }}</td>
-                                <td class="align-middle min-width-150">{{$item->key}}</td>
+                                <!-- <td class="align-middle min-width-150">{{$item->key}}</td> -->
                                 <td class="align-middle min-width-150">{{$item->value}}</td>
                                 <!-- <td class="align-middle min-width-80">
                                     <a href="{{ route('common-codes.show', $item) }}">{{ $item->children_count }} តម្លៃ</a>
@@ -75,20 +75,20 @@
                                 <td class="text-center">
                                     @if (auth()->user()->hasPermission('common-codes.edit'))
                                     <a href="{{ route('common-codes.edit', $item) }}" class="btn btn-icon border-primary"
-                                        title="@lang('កែប្រែ')" data-toggle="tooltip" data-placement="top">
+                                        title="@lang('Edit')" data-toggle="tooltip" data-placement="top">
                                         <i class="fas fa-edit"></i>
                                     </a>
                                     @endif
 
                                     @if (auth()->user()->hasPermission('common-codes.destroy'))
                                     <a href="{{ route('common-codes.destroy', $item) }}" class="btn btn-icon border-danger"
-                                        title="@lang('លុប')"
+                                        title="@lang('Delete')"
                                         data-icon="warning"
                                         data-toggle="tooltip"
                                         data-placement="top"
                                         data-method="DELETE"
-                                        data-confirm-title="@lang('តើអ្នកប្រាកដក្នុងការលុបទិន្នន័យនេះមែនទេ?')"
-                                        data-confirm-text="@lang('អនុទិន្នន័យទាំងអស់នឹងត្រូវលុបចោលពីប្រព័ន្ធដោយស្វ័យប្រវត្តិ')"
+                                        data-confirm-title="@lang('Confirm')"
+                                        data-confirm-text="@lang('Do you want to delete it?')"
                                         data-confirm-delete="@lang('លុប')"
                                         data-button-cancel-text="@lang('បោះបង់')">
                                         <i class="fas fa-trash"></i>
