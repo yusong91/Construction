@@ -129,9 +129,34 @@ class CommonCodeController extends Controller
     public function destroy($id)
     {
         $commonCode = CommonCode::find($id);
-        $commonCode->delete();
 
-        return redirect()->back()->withSuccess(__('Success'));
+        $children = $commonCode->children_equipment;
+
+        $have_child = true;
+
+        if($commonCode->children_equipment){
+            $have_child = false;
+        } elseif($commonCode->children_inventory){
+            $have_child = false;
+        } elseif($commonCode->children_revenue){
+            $have_child = false;
+        } elseif($commonCode->children_movement){
+            $have_child = false;
+        } 
+
+        if($have_child == false)
+        {
+            return redirect()->back()->withErrors(__('Can not delete this record because its used by other'));
+        }
+
+        $delete = $commonCode->delete();
+
+        if($delete)
+        {
+            return redirect()->back()->withSuccess(__('Success'));
+        }
+        return redirect()->back()->withErrors(__('False'));
+        
     }
 
     private function getCommonCodeCollection($parentId = 0) {

@@ -89,8 +89,8 @@
                                         data-method="DELETE"
                                         data-confirm-title="@lang('Confirm')"
                                         data-confirm-text="@lang('Do you want to delete it?')"
-                                        data-confirm-delete="@lang('លុប')"
-                                        data-button-cancel-text="@lang('បោះបង់')">
+                                        data-confirm-delete="@lang('Delete')"
+                                        data-confirm-cancel="@lang('Cancel')">
                                         <i class="fas fa-trash"></i>
                                     </a>
                                     @endif
