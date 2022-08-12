@@ -7,7 +7,6 @@ use Vanguard\Http\Controllers\Controller;
 use Vanguard\Http\Requests\SupplierRequest;
 use Vanguard\Repositories\Supplier\SupplierRepository;
 
-
 class SupplierController extends Controller
 {
     private $supplier;
