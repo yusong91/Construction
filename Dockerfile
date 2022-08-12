@@ -1,6 +1,5 @@
 FROM php:8.0.0-fpm-alpine
 
-
 RUN apk add --no-cache nginx wget
 
 RUN mkdir -p /run/nginx
