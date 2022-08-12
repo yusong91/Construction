@@ -30,7 +30,7 @@ class CustomerController extends Controller
         $customers = $this->customer->paginate($perPage = 10, $request->search);
         $raw_paginate = json_encode($customers); 
         $paginate = json_decode($raw_paginate);
-        //dd($customers);
+        
         return view('customer.index', compact('active', 'paginate', 'customers'));
     }
 

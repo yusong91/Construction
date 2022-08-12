@@ -5,7 +5,6 @@ namespace Vanguard\Http\Controllers\Web;
 use Illuminate\Http\Request;
 use Vanguard\Http\Controllers\Controller;
 use Vanguard\Repositories\Warehouse\WarehouseRepository;
-
  
 class WarehouseController extends Controller
 {
