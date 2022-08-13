@@ -9,7 +9,7 @@
             <th scope="col" class="text-center">Chassis No.</th>
             <th scope="col" class="text-center">Engine No *</th>
             <th scope="col" class="text-center">Weight</th>
-            <th scope="col" class="text-center">Years</th>
+            <th scope="col" class="text-center">Year</th>
             <th scope="col" class="text-center">Tax Receipt No.</th>
             <th scope="col" class="text-center">Notes</th>
             <th scope="col" class="text-center">Attached Image</th>
