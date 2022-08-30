@@ -2,8 +2,8 @@
     <table class="table table-bordered" style="width: 150%;"> 
         <thead>
             <tr>
-                <th class="text-center">Company Name *</th>
-                <th class="text-center">Customer Name</th>
+                <th class="text-center">Customer Name *</th>
+                <th class="text-center">Company Name</th>
                 <th class="text-center">Customer Phone *</th>
                 <th class="text-center">Email</th>
                 <th class="text-center">Job Title</th>

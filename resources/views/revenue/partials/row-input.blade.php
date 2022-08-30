@@ -2,14 +2,13 @@
     <table class="table table-bordered">
         <thead>
             <tr>
-                <th scope="col" class="text-center align-middle">Company *</th>
-                <th scope="col" class="text-center align-middle">Customer</th>
+                <th scope="col" class="text-center align-middle">Customer *</th>
+                <th scope="col" class="text-center align-middle">Company</th>
                 <th scope="col" class="text-center align-middle">Equipment ID *</th>
                 <th scope="col" class="text-center align-middle">From Date *</th>
                 <th scope="col" class="text-center align-middle">To Date *</th>
                 <th scope="col" class="text-center align-middle">Number of Working Days *</th>
                 <th scope="col" class="text-center align-middle">Rental Price *</th>
-                
                 <th scope="col" class="text-center align-middle">Note</th>
                 <th scope="col" class="text-center align-middle">Attached File</th>
             </tr>

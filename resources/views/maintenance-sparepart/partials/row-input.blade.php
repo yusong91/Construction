@@ -12,7 +12,7 @@
                 <th scope="col" class="text-center align-middle">Unit Price *</th>
                 <th scope="col" class="text-center align-middle">Invoice Date * / Date *</th>
                 <th scope="col" class="text-center align-middle">Invoice Number *</th>
-                <th scope="col" class="text-center align-middle">Invoice Number/Other Attachment *</th>
+                <th scope="col" class="text-center align-middle">Invoice Number/Other Attachment</th>
                 <th scope="col" class="text-center align-middle">Note</th>
                 <th scope="col" class="text-center align-middle">Image of Broken</th>
                 <th scope="col" class="text-center align-middle">Image of Replacement</th>
@@ -196,7 +196,7 @@
                         $("#" + index + "unit_price").attr("required", "true");
                         $("#a_date" + index).attr("required", "true");
                         $("#" + index + "invoice_number").attr("required", "true");
-                        $("#" + index + "invoice_file").attr("required", "true");
+                        //$("#" + index + "invoice_file").attr("required", "true");
                         $("#" + index + "supplier_id").attr("required", "true");
                         $("#" + index + "staff_id").attr("required", "true");
         
@@ -220,7 +220,7 @@
                         $("#" + index + "unit").attr("required", "true");
                         $("#" + index + "unit_price").attr("required", "true");
                         $("#a_date" + index).attr("required", "true");
-                        $("#" + index + "invoice_file").attr("required", "true");
+                        //$("#" + index + "invoice_file").attr("required", "true");
                         $("#" + index + "invoice_number").attr("required", "true");
                         $("#" + index + "supplier_id").attr("required", "true");
                         $("#" + index + "staff_id").attr("required", "true");
@@ -241,7 +241,7 @@
                         $("#" + index + "unit").removeAttr('required');
                         $("#" + index + "unit_price").removeAttr('required');
                         $("#a_date" + index).attr("required", "true");
-                        $("#" + index + "invoice_file").removeAttr('required');
+                        //$("#" + index + "invoice_file").removeAttr('required');
                         $("#" + index + "invoice_number").removeAttr('required');
                         $("#" + index + "supplier_id").attr("required", "true");
                         $("#" + index + "staff_id").attr("required", "true");
