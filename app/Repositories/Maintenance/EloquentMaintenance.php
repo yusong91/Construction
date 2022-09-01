@@ -167,7 +167,7 @@ class EloquentMaintenance implements MaintenanceRepository
 
     public function findByKey($key)
     {
-        return Maintenance::whereBetween('date', [$key[0], $key[1]])->orderBy('date', $key[2])->get()->groupBy(function($date) {
+        return Maintenance::whereBetween('date', [$key[0], $key[1]])->get()->groupBy(function($date) {
             return Carbon::parse($date->date)->format('Y-m-d');
         });
     }

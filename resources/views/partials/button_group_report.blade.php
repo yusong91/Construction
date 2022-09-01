@@ -25,7 +25,7 @@
  
         case 'reportstandard': 
         
-            $('#reportstandard').addClass('active');
+            // $('#reportstandard').addClass('active');
 
             break;
 

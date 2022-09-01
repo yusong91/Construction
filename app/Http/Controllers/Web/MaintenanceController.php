@@ -22,7 +22,6 @@ class MaintenanceController extends Controller
         $maintenances = $this->maintenance->paginate($perPage = 10, $request->search);
         $raw_paginate = json_encode($maintenances); 
         $paginate = json_decode($raw_paginate);
-        //dd($maintenances);
         return view('maintenance-sparepart.index', compact('active', 'maintenances', 'paginate'));
     } 
 

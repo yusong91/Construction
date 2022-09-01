@@ -33,7 +33,7 @@ class EloquentRevenue implements RevenueRepository
 
     public function findByKey($key)
     {
-        return Revenue::where('from_date', '>=', $key[0])->where('to_date', '<=', $key[1])->orderBy('from_date', $key[2])->get()->groupBy(function($date) {
+        return Revenue::where('from_date', '>=', $key[0])->where('to_date', '<=', $key[1])->get()->groupBy(function($date) {
             return Carbon::parse($date->from_date)->format('Y-m-d');
         });
     }

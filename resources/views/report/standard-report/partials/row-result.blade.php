@@ -1,104 +1,121 @@
-<div class="table-responsive mb-4" style="padding-top: 10px;">
-    <table class="table table-bordered table-striped" style="padding: 0; margin: 0; border: hidden">
-        <thead> 
-            <th class="text-center" style="width: 30%;">Income/Expense</th>
-            <th class="text-center" style="width: 20%;">Date</th>
-            <th class="text-center" style="width: 30%;">Customer/Supplier Name</th>
-            <th class="text-center">Amount</th>   
-        </thead>
-        <tbody> 
-            
-        <?php 
-                        
-            $net_expend = 0;
+<div class="table-responsive">
 
-            $net_income = 0;
-                        
-        ?>
-            <!-- Income -->
-            <tr data-toggle="collapse" data-target="#demo1" class="accordion-toggle" style="padding: 0; margin: 0;">
-                <td colspan="3"><i class="fa fa-caret-down"></i><span class="m-2">Income</span> </td>
-                <td ></td>                      
-            </tr>  
-                <td colspan="4" class="hiddenRow" style="padding: 0; margin: 0;">
-                    <table class="table table-bordered collapse row-child" id="demo1" style="padding: 0; margin: 0; border: hidden">
+    <!-- <button type="button" class="collapsible">Open Collapsible</button> -->
+    
+    <button type="button" class="collapsible">Income</button>
 
-                    @foreach($incomes as $key => $value)
-                        <tr data-toggle="collapse" data-target="#demo3{{$key}}" class="accordion-toggle" style="padding: 0; margin: 0;">
-                            <td colspan="4"><i class="fa fa-caret-down ml-4"></i><span class="m-2">{{$key}}</span> </td>                    
-                        </tr> 
+    <div class="content">
 
-                            <td colspan="4" class="hiddenRow" style="padding: 0; margin: 0;">
-                                <table class="table table-bordered collapse row-child" id="demo3{{$key}}" style="padding: 0; margin: 0; border: hidden">
-                                    @foreach($value as $item)
-                                        <tr >
-                                            <td style="width: 30%;"><span class="m-4">{{ $item->parent_equipment->equipment_id }}</span> </td>   
-                                            <td style="width: 20%;">{{ getDateFormat($item->to_date) }}</td>       
-                                            <td style="width: 30%;">{{ $item->parent_customer->company_name }}</td>       
-                                            <td >${{ $item->amount }}</td> 
-                                            
-                                            <?php $net_income += $item->amount; ?>
-                                        </tr> 
-                                    @endforeach
-                                </table>
-                            </td>
-                    @endforeach
-                    </table>
-                    
-                </td>
+    
+        <table class="table table-bordered table-striped display" id="table_id" width="100%">
 
-            <!-- Expend -->
-            <tr data-toggle="collapse" data-target="#demo4" class="accordion-toggle" style="padding: 0; margin: 0;">
-                <td colspan="3"><i class="fa fa-caret-down"></i><span class="m-2">Expense</span> </td>
-                <td ></td>                      
-            </tr>  
-                <td colspan="4" class="hiddenRow" style="padding: 0; margin: 0;">
-                    <table class="table table-bordered collapse row-child" id="demo4" style="padding: 0; margin: 0; border: hidden">
-
-                    @foreach($expenses as $key => $value)
-                   
-                        <tr data-toggle="collapse" data-target="#demo5" class="accordion-toggle" style="padding: 0; margin: 0;">
-                            <td colspan="4"><i class="fa fa-caret-down ml-4"></i><span class="m-2">{{$key}}</span> </td>                    
-                        </tr> 
-
-                            <td colspan="4" class="hiddenRow" style="padding: 0; margin: 0;">
-                                <table class="table table-bordered collapse row-child" id="demo5" style="padding: 0; margin: 0; border: hidden">
-                                @foreach($value as $item)
-                                    <tr >
-                                        <td style="width: 30%;"><span class="ml-4">{{ $item->service }} {{ $item->parent_equipment->equipment_id }}</span> </td>
-                                        <td style="width: 20%;">{{ getDateFormat($item->date) }}</td>
-                                        <td style="width: 30%;">{{ $item->parent_supplier->company_name }}</td>
-                                        <td >${{ $item->unit_price * $item->amount }}</td>   
-                                        
-                                        <?php  
-
-                                            $net_expend += $item->unit_price * $item->amount;
-                                        ?>
-
-                                    </tr> 
-                                @endforeach
-                                </table>
-                            </td>
-                    @endforeach
-                    </table>
-                </td>
-
-                <tr style="padding: 0; margin: 0;">
-
-                    <td colspan="4" class="hiddenRow" style="padding: 0; margin: 0;">
-                        <table class="table table-bordered row-child" id="demo3" style="padding: 0; margin: 0; border: hidden">
-
-                            <tr style="background: #8AD4ED;">
-                                <td colspan="3" ><span >Net Income</span> </td>
-                                
-                                <td style="width: 20%;">${{ $net_income - $net_expend }}</td>          
-                            </tr>
-
-                        </table>
-                    </td>
-
+            <thead> 
+                
+                <tr>
+                    <th colspan="4">20/08/2022</th>
                 </tr>
+                <tr >
+                    <th>Income/Expense</th>
+                    <th>Equipment ID</th>
+                    <th>Customer/Supplier Name</th>
+                    <th>Amount</th>
+                </tr>
+                
+            </thead>
+
+            <tbody>
+
+                <tr>
+                    <td style="width: 30%;">1</td>
+                    <td style="width: 20%;">DX001</td>
+                    <td style="width: 30%;">YOUSONG</td>
+                    <td>$10000</td>
+                </tr>
+                <tr>
+                    <td style="width: 30%;">2</td>
+                    <td style="width: 20%;">DX002</td>
+                    <td style="width: 30%;">YOUSONG</td>
+                    <td>$20000</td>
+                </tr>
+                <tr>
+                    <td style="width: 30%;">3</td>
+                    <td style="width: 20%;">DX003</td>
+                    <td style="width: 30%;">YOUSONG</td>
+                    <td>$30000</td>
+                </tr>
+                <tr>
+                    <td style="width: 30%;">4</td>
+                    <td style="width: 20%;">DX004</td>
+                    <td style="width: 30%;">YOUSONG</td>
+                    <td>$30000</td>
+                </tr>
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+    <button type="button" class="collapsible_exponse">Expense</button>
+
+    <div class="content_exponse">
+
+    
+        <table class="table table-bordered table-striped display" id="table_expense" width="100%">
+
+            <thead> 
+                
+                <tr>
+                    <th colspan="4">20/08/2022</th>
+                </tr>
+                <tr >
+                    <th>Income/Expense</th>
+                    <th>Equipment ID</th>
+                    <th>Customer/Supplier Name</th>
+                    <th>Amount</th>
+                </tr>
+                
+            </thead>
+
+            <tbody>
+
+                <tr>
+                    <td style="width: 30%;">1</td>
+                    <td style="width: 20%;">DX001</td>
+                    <td style="width: 30%;">YOUSONG</td>
+                    <td>$10000</td>
+                </tr>
+                <tr>
+                    <td style="width: 30%;">2</td>
+                    <td style="width: 20%;">DX002</td>
+                    <td style="width: 30%;">YOUSONG</td>
+                    <td>$20000</td>
+                </tr>
+                <tr>
+                    <td style="width: 30%;">3</td>
+                    <td style="width: 20%;">DX003</td>
+                    <td style="width: 30%;">YOUSONG</td>
+                    <td>$30000</td>
+                </tr>
+                <tr>
+                    <td style="width: 30%;">4</td>
+                    <td style="width: 20%;">DX004</td>
+                    <td style="width: 30%;">YOUSONG</td>
+                    <td>$30000</td>
+                </tr>
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+    <table class="table table-bordered table-striped" width="100%">
+        <tr style="background-color: #7ACAE9;">
+            <td colspan="3" style="width: 80%;">Net Income</td>
             
-        </tbody>
-    </table> 
+            <td >$30000</td>
+        </tr>
+    </table>
+
 </div>

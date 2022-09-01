@@ -25,9 +25,8 @@ class ReportStandardController extends Controller
     {
         $active = 'reportstandard'; 
         $key_sort = ['asc'=>'A-Z', 'desc'=>'Z-A'];
-        $sort = '';
         
-        return view('report.standard-report.index', compact('active', 'key_sort', 'sort'));
+        return view('report.standard-report.index', compact('active', 'key_sort'));
     } 
  
     public function create()
@@ -41,18 +40,17 @@ class ReportStandardController extends Controller
         $data = $request->all();
         $str_from_date = $data['from_date'];
         $str_to_date = $data['to_date'];
-        $sory_by = $data['sort_by']; 
-        $incomes = $this->revenue->findByKey([getStringDate($str_from_date), getStringDate($str_to_date), $sory_by]);
-        $expenses = $this->maintenance->findByKey([getStringDate($str_from_date), getStringDate($str_to_date), $sory_by]); 
-        //dd($expenses);
+       
+        $incomes = $this->revenue->findByKey([getStringDate($str_from_date), getStringDate($str_to_date)]);
+        $expenses = $this->maintenance->findByKey([getStringDate($str_from_date), getStringDate($str_to_date)]); 
+        
         $total_expense = 0;
         $total_income = 0;
         $net_income = 0;
-        $key_sort = ['asc'=>'A-Z', 'desc'=>'Z-A'];
-        $sort = $data['sort_by'];
+       
         $net_income = $total_income - $total_expense;
         
-        return view('report.standard-report.result', compact('active', 'expenses', 'incomes', 'net_income', 'key_sort', 'sort', 'data'));
+        return view('report.standard-report.result', compact('active', 'expenses', 'incomes', 'net_income', 'data'));
     }
 
     public function downloadPdf()

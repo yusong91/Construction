@@ -79,8 +79,6 @@
                 <a class="nav-link {{ Request::is('report-standard*' , 'report-equipment*', 'report-movement*') ? 'active' : ''  }}"  href="{{ route('report-standard.index') }}"><h5 class="header mb-0">Report</h5></a>
             </li>
 
-            
-
             <li class="nav-item dropdown d-flex align-items-center visible-lg {{ Request::is('common-codes*', 'staff*', 'warehouse*') ? 'active' : ''  }} ">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-expanded="false">
                     <span style="font-size:17px; font-weight:bold; font-weight: 540;">Setting<span>

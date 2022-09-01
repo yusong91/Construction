@@ -1,4 +1,4 @@
-@extends('layouts.main_app')
+@extends('layouts.app-report')
 
 <style>
 
@@ -25,6 +25,7 @@
     }
 
 </style>
+
 
 @section('page-title', __('Report Standard'))
 @section('breadcrumbs')
@@ -58,6 +59,7 @@
 
                 @include('report.standard-report.partials.row-result')
                 
+                
             </fieldset>
             @csrf
             <button type="submit" class="btn btn-primary mt-4">OK</button>
@@ -67,10 +69,7 @@
 
 @stop
 
-@section('scripts')
-    {!! HTML::script('assets/js/as/btn.js') !!}
-    {!! HTML::script('assets/js/as/login.js') !!}
-@stop
+
 
 
 
