@@ -26,7 +26,6 @@
 
 </style>
 
-
 @section('page-title', __('Report Standard'))
 @section('breadcrumbs')
     <li class="breadcrumb-item active">
@@ -59,7 +58,6 @@
 
                 @include('report.standard-report.partials.row-result')
                 
-                
             </fieldset>
             @csrf
             <button type="submit" class="btn btn-primary mt-4">OK</button>
@@ -69,7 +67,29 @@
 
 @stop
 
+<script type="text/javascript">
 
+    function data_table(table_id) {
+            
+        $(document).ready( function () {
+            $('#' + table_id).DataTable(
+            {
+                "paging": false,
+                "searching": false,
+                "info": false
+            });
+        });
+    }
+
+    function setGrandTotal(id, value, title) 
+    {
+        $(document).ready( function () {
+            $('#' + id).text(title +" $" + value);
+        });
+    }
+
+
+</script>
 
 
 

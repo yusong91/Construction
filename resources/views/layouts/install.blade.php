@@ -26,7 +26,7 @@
         </div>
     </div>
 
-    <script type="text/javascript" src="{{ mix("assets/js/vendor.js") }}"></script>
+    <script type="text/javascript" src="{{ mix('assets/js/vendor.js') }}"></script>
     <script type="text/javascript" src="{{ url('assets/js/as/app.js') }}"></script>
     <script type="text/javascript" src="{{ url('assets/js/as/btn.js') }}"></script>
     <script>

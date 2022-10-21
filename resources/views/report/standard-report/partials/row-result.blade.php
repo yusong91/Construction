@@ -1,121 +1,123 @@
 <div class="table-responsive">
 
-    <!-- <button type="button" class="collapsible">Open Collapsible</button> -->
-    
-    <button type="button" class="collapsible">Income</button>
+    @foreach($results as $equipment_type)
 
-    <div class="content">
+        <button type="button" class="collapsible_exponse">{{ $equipment_type->value }} <span class="badge badge-light" id="income_{{ $equipment_type->value }}">Income $9</span>/<span class="badge badge-light" id="expend_{{ $equipment_type->value }}" >Expend $9</span></button>
 
-    
-        <table class="table table-bordered table-striped display" id="table_id" width="100%">
 
-            <thead> 
+        <div class="content_exponse">
+
+            @php($grand_total_income = 0)
+            @php($grand_total_expend = 0)
+
+            @foreach($equipment_type->children_equipment as $equipment)
+
+                <button type="button" class="collapsible">{{ $equipment->equipment_id }} </button>
+
+                    <div class="content">
+                        <!-- INCOME -->
+                        <table class="table table-bordered table-striped display" id="income_{{$equipment->equipment_id}}"   width="100%">
+
+                                <thead>     
+                                    <tr >
+                                        <th colspan="4">Income</th>
+                                    </tr>
+                                    <tr >              
+                                        <th> </th>
+                                        <th>Amount</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="ml-2">
+
+                                    @php($total = 0)
+                                    @foreach($equipment->child_revenue as $revenue)
+
+                                        <tr>
+                                            <td style="width: 50%"> </td>
+                                            <td>${{ $revenue->amount }}</td> @php($total += $revenue->amount)
+                                        </tr>
+                                        
+                                    @endforeach  
+                                    @php( $grand_total_income += $total )
+                                    
+                                </tbody>
+                        </table>
+
+                        <script>
+                        
+                            var table_id = '<?php echo $equipment->equipment_id; ?>';
+
+                            data_table("income_" + table_id);
+
+                            data_table("expend_" + table_id);
+                    
+                        </script>
+
+                        <!-- EXPEND -->
+                        <table class="table table-bordered table-striped display" id="expend_{{ $equipment->equipment_id }}"  width="100%">
+
+                                <thead>     
+                                    <tr>
+                                        <th colspan="4">Expend</th>
+                                    </tr>
+                                    <tr > 
+                                        <th>Item/Service</th>       
+                                        <th>Amount</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @php($total_expend = 0)
+                                    @foreach($equipment->child_maintenance as $m)
+
+                                        @if($m->inventory_id == null)
+                                            <tr>
+                                                <td style="width: 50%">{{ $m->service }}</td>
+                                                <td>${{ $m->amount }}</td> 
+                                                @php($total_expend += $m->amount)
+                                            </tr>  
+                                        @else
+
+                                            <tr>
+                                                <td style="width: 50%">{{  getInventoryName($m->inventory->category_id) }}</td>
+                                                <td>${{ isset($m->inventory->price) ? $m->inventory->price * 1 : 0  }}</td> 
+                                                    
+                                            </tr> 
+
+                                        @endif
+                                    
+                                        @php( $grand_total_expend += $total_expend )
+                                        
+                                    @endforeach  
+                                    
+                                </tbody>
+
+                        </table>
+
+                    </div>      
+
+            @endforeach
+
+            <script>
                 
-                <tr>
-                    <th colspan="4">20/08/2022</th>
-                </tr>
-                <tr >
-                    <th>Income/Expense</th>
-                    <th>Equipment ID</th>
-                    <th>Customer/Supplier Name</th>
-                    <th>Amount</th>
-                </tr>
-                
-            </thead>
+                var equipment_type_id_income = 'income_' + '<?php echo $equipment_type->value ?>';
 
-            <tbody>
+                var grand_income = '<?php echo $grand_total_income ?>';
 
-                <tr>
-                    <td style="width: 30%;">1</td>
-                    <td style="width: 20%;">DX001</td>
-                    <td style="width: 30%;">YOUSONG</td>
-                    <td>$10000</td>
-                </tr>
-                <tr>
-                    <td style="width: 30%;">2</td>
-                    <td style="width: 20%;">DX002</td>
-                    <td style="width: 30%;">YOUSONG</td>
-                    <td>$20000</td>
-                </tr>
-                <tr>
-                    <td style="width: 30%;">3</td>
-                    <td style="width: 20%;">DX003</td>
-                    <td style="width: 30%;">YOUSONG</td>
-                    <td>$30000</td>
-                </tr>
-                <tr>
-                    <td style="width: 30%;">4</td>
-                    <td style="width: 20%;">DX004</td>
-                    <td style="width: 30%;">YOUSONG</td>
-                    <td>$30000</td>
-                </tr>
+                setGrandTotal(equipment_type_id_income, grand_income, "Income");
 
-            </tbody>
+                var equipment_type_id_expend = 'expend_' + '<?php echo $equipment_type->value ?>';
 
-        </table>
+                var grand_expend = '<?php echo $grand_total_expend ?>';
 
-    </div>
+                setGrandTotal(equipment_type_id_expend, grand_expend, "Expend");
 
-    <button type="button" class="collapsible_exponse">Expense</button>
 
-    <div class="content_exponse">
+            </script>
 
-    
-        <table class="table table-bordered table-striped display" id="table_expense" width="100%">
+        </div>
 
-            <thead> 
-                
-                <tr>
-                    <th colspan="4">20/08/2022</th>
-                </tr>
-                <tr >
-                    <th>Income/Expense</th>
-                    <th>Equipment ID</th>
-                    <th>Customer/Supplier Name</th>
-                    <th>Amount</th>
-                </tr>
-                
-            </thead>
-
-            <tbody>
-
-                <tr>
-                    <td style="width: 30%;">1</td>
-                    <td style="width: 20%;">DX001</td>
-                    <td style="width: 30%;">YOUSONG</td>
-                    <td>$10000</td>
-                </tr>
-                <tr>
-                    <td style="width: 30%;">2</td>
-                    <td style="width: 20%;">DX002</td>
-                    <td style="width: 30%;">YOUSONG</td>
-                    <td>$20000</td>
-                </tr>
-                <tr>
-                    <td style="width: 30%;">3</td>
-                    <td style="width: 20%;">DX003</td>
-                    <td style="width: 30%;">YOUSONG</td>
-                    <td>$30000</td>
-                </tr>
-                <tr>
-                    <td style="width: 30%;">4</td>
-                    <td style="width: 20%;">DX004</td>
-                    <td style="width: 30%;">YOUSONG</td>
-                    <td>$30000</td>
-                </tr>
-
-            </tbody>
-
-        </table>
-
-    </div>
-
-    <table class="table table-bordered table-striped" width="100%">
-        <tr style="background-color: #7ACAE9;">
-            <td colspan="3" style="width: 80%;">Net Income</td>
-            
-            <td >$30000</td>
-        </tr>
-    </table>
+    @endforeach
 
 </div>
+
+

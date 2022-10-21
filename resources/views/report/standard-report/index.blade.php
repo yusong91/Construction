@@ -59,10 +59,5 @@
 
 @stop
 
-@section('scripts')
-    {!! HTML::script('assets/js/as/btn.js') !!}
-    {!! HTML::script('assets/js/as/login.js') !!}
-@stop
-
 
 

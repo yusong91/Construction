@@ -43,6 +43,7 @@ class EquipmentController extends Controller
         $active = "equipment"; 
         $brands = getConmonCode('brand');
         $equipmentTypes = getConmonCode('equipment_type');
+        //dd($equipmentTypes);
         return view('equipment.create', compact('equipmentTypes','brands','active'));
     }
 

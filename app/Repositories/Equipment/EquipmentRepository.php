@@ -14,4 +14,6 @@ interface EquipmentRepository
     public function paginateList($id, $perPage, $search = null);
     public function outstanding($key);
 
+    public function standard_report($id, $from_date, $to_date);
+
 }

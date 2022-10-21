@@ -11,15 +11,8 @@ use Illuminate\Support\Facades\Storage;
 
 class EloquentEquipment implements EquipmentRepository
 { 
-
     public function paginateList($id, $perPage, $search = null)
     {
-        // ->whereHas('wristband_last', function($q){
-        //     $now = Carbon::now();
-        //     $past = Carbon::parse($now)->subMinute(30);
-        //     $q->where('updated_at', '>', $past);
-        // })
-
         $query = Equipment::query()->where('sold', 0)->with(['parent_brand', 'parent_quipment'])->where('equip_type_id', $id);
 
         if ($search) {
@@ -38,19 +31,12 @@ class EloquentEquipment implements EquipmentRepository
   
     public function paginate($perPage, $search = null)
     {
-        //
-
         $query = CommonCode::with('children')->where('key', 'equipment_type');
-
-        // ->whereHas('children', function($q){ 
-        //             $q->where('key', '==', 'equipment_type');
-        //         }); 
-        
+ 
         if ($search) {
             $query->Where(function ($q) use ($search) {
                 $q->orWhere('key', "like", "%{$search}%");
                 $q->orWhere('value', "like", "%{$search}%");
-                
             });
         } 
   
@@ -59,14 +45,12 @@ class EloquentEquipment implements EquipmentRepository
             $result->appends(['search' => $search]);
         }
 
-
         $equipments = [];
 
         foreach($result as $items) 
         {
             foreach($items->children as $item)
             {
-                //dd('child');
                 $child = DB::table('equipment')->where(['equip_type_id'=> $item->id, 'sold'=>0])->get();
                 $count = DB::table('equipment')->where(['equip_type_id'=> $item->id, 'sold'=>1])->count();
 
@@ -188,6 +172,31 @@ class EloquentEquipment implements EquipmentRepository
     public function all()
     {
         return Equipment::with(['parent_brand', 'parent_quipment'])->where('sold',0)->get();
+    }
+
+    public function standard_report($id, $from_date, $to_date)
+    {
+        // $query = Equipment::query();//->where('sold', 1)->where('id', $id);
+
+        // $query->with(['child_revenue' => function ($query) use ($from_date, $to_date) {
+
+        //     $query->where('from_date', '>=', $from_date);
+
+        //     $query->where('to_date', '<=', $to_date);
+            
+        // }]);
+
+        // $query->with(['child_maintenance' => function ($query) use ($from_date, $to_date) {
+
+        //     $query->where('date', '>=', $from_date);
+        //     $query->where('date', '<=', $to_date);
+            
+        // }]);
+
+
+        // $result = $query->orderBy('created_at', 'desc')->paginate();
+
+        // return $result;
     }
 
     //     ->whereHas('children_equipment', function($q){

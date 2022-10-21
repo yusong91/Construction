@@ -23,8 +23,16 @@ if(!function_exists('getEquipmentAll')){
  
 if(!function_exists('getConmonCode')){
     function getConmonCode($key){
-        $communCode = \Vanguard\Model\CommonCode::where('key',$key)->first();
-        return $communCode->children;
+        $data = \Vanguard\Model\CommonCode::where('key',$key)->first();
+        return $data->children;
+    }
+}
+
+//Get Equipment type with equipment
+if(!function_exists('getEquipmentType')){
+    function getEquipmentType($key){
+        $communCode = \Vanguard\Model\CommonCode::with('children_equipment')->where('parent_id', $key)->get();
+        return $communCode;
     }
 }
 
@@ -122,7 +130,6 @@ if(!function_exists('getClaimed')){
     }
 }
 
-
 if(!function_exists('checkClaim')){
     function checkClaim($unclaim){
         
@@ -132,6 +139,52 @@ if(!function_exists('checkClaim')){
         } else {
             return "";
         }
+    }
+}
+
+if(!function_exists('getEquipmentTypeTest')){
+    function getEquipmentTypeTest($id, $from_date, $last_date){
+
+        $parameter = 'parent_id';
+
+        if($id != 0)
+        {
+            $parameter = 'id';
+        } else {
+            $id = 10;
+        }
+
+        $query = \Vanguard\Model\CommonCode::with('children_equipment')->where($parameter, $id);
+
+        $query->with(['children_equipment.child_revenue' => function ($q) use ($from_date, $last_date) {
+
+            $q->where('from_date', '>=', $from_date);
+            $q->where('from_date', '<=', '2022-06-30');
+    
+        }]);
+
+        $query->with(['children_equipment.child_maintenance' => function ($q) use ($from_date, $last_date) {
+
+            $q->where('date', '>=', $from_date);
+            $q->where('date', '<=', '2022-06-30');
+            
+        }]);
+
+        $query->with(['children_equipment.child_maintenance.inventory' => function ($q) {
+            $q->get();            
+        }]);
+
+        $result = $query->orderBy('created_at', 'desc')->paginate();
+
+        return $result;
+    }
+}
+
+if(!function_exists('getInventoryName')){
+    function getInventoryName($id){
+
+        $query = \Vanguard\Model\CommonCode::where('id', $id)->first();
+        return $query->value ?? '';
     }
 }
 

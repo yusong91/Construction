@@ -29,7 +29,7 @@
 
     .collapsible {
         
-        background-color: #82EBFF;
+        background-color: #D5F1FF;
         color: #444;
         cursor: pointer;
         padding: 12px;
@@ -38,6 +38,8 @@
         text-align: left;
         outline: none;
         font-size: 15px;
+        margin-bottom: 1px;
+        /* margin-left: 15px; */
     }
 
     .content {
@@ -48,7 +50,7 @@
      
     .collapsible_exponse {
         
-        background-color: #FED2A9;
+        /* background-color: #FED2A9; */
         color: #444;
         cursor: pointer;
         padding: 12px;
@@ -57,12 +59,17 @@
         text-align: left;
         outline: none;
         font-size: 15px;
+        margin-bottom: 1px;
     }
 
     .content_exponse {
         padding: 0 0;
         display: none;
         overflow: hidden;
+    }
+
+    .display {
+        /* margin-left: 15px;    */
     }
 
 </style>
@@ -86,7 +93,7 @@
     <script src="{{ url(mix('assets/js/vendor.js')) }}"></script>
     <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.js"></script>
 
-    <script>
+    <script type="text/javascript">
 
         var coll = document.getElementsByClassName("collapsible");
        
@@ -115,29 +122,7 @@
                 }
             });
         }
-
-        $(document).ready( function () {
-            $('#table_id').DataTable(
-               {
-                "paging": false,
-                "searching": false,
-                "info": false
-               }
-            );
-        });
-
-        $(document).ready( function () {
-            $('#table_expense').DataTable(
-               {
-                "paging": false,
-                "searching": false,
-                "info": false
-               }
-            );
-        });
-        
-    
-    
+ 
     </script>
     
 </footer>
