@@ -53,7 +53,7 @@ class ReportStandardController extends Controller
 
         $equipment_type_selected = isset($str_array_select[1]) ? intval($str_array_select[1]) : 0;
  
-        $last_date_of_month = Carbon::createFromFormat('m/d/Y', $str_from_date)->lastOfMonth()->format('Y-m-d');
+        $last_date_of_month = Carbon::createFromFormat('d/m/Y', $str_from_date)->endOfMonth()->format('Y-m-d');
   
         $results = getEquipmentTypeTest($equipment_type_selected, getStringDate($str_from_date), $last_date_of_month);//$this->equipment->standard_report($equipment_type_selected, getStringDate($str_from_date), getStringDate($str_to_date));
 

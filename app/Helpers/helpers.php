@@ -159,14 +159,14 @@ if(!function_exists('getEquipmentTypeTest')){
         $query->with(['children_equipment.child_revenue' => function ($q) use ($from_date, $last_date) {
 
             $q->where('from_date', '>=', $from_date);
-            $q->where('from_date', '<=', '2022-06-30');
+            $q->where('from_date', '<=', $last_date);
     
         }]);
 
         $query->with(['children_equipment.child_maintenance' => function ($q) use ($from_date, $last_date) {
 
             $q->where('date', '>=', $from_date);
-            $q->where('date', '<=', '2022-06-30');
+            $q->where('date', '<=', $last_date);
             
         }]);
 

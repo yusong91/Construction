@@ -24,6 +24,17 @@
         line-height: 48px
     }
 
+    tr.something {
+        td {
+            width: 90px;
+        }
+    }
+
+    table {
+    table-layout: fixed;
+    word-wrap: break-word;
+}
+
 </style>
 
 @section('page-title', __('Report Standard'))

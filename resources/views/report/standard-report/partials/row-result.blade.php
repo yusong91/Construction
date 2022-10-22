@@ -1,9 +1,30 @@
-<div class="table-responsive">
+<!-- table-responsive -->
+<div class="table-responsive"> 
 
     @foreach($results as $equipment_type)
 
-        <button type="button" class="collapsible_exponse">{{ $equipment_type->value }} <span class="badge badge-light" id="income_{{ $equipment_type->value }}">Income $9</span>/<span class="badge badge-light" id="expend_{{ $equipment_type->value }}" >Expend $9</span></button>
+        <!-- <button type="button" class="collapsible_exponse">{{ $equipment_type->value }} <span class="badge badge-light" id="income_{{ $equipment_type->value }}">Income $9</span>/<span class="badge badge-light" id="expend_{{ $equipment_type->value }}" >Expend $9</span>
+    
+        </button> -->
 
+        <button type="button" class="collapsible_exponse">
+
+            <div class="container">
+                <div class="row">
+                    <div class="col">
+                        {{ $equipment_type->value }}
+                    </div>
+                    <div class="col">
+                        <span id="income_{{ $equipment_type->value }}"></span>
+                    </div>
+
+                    <div class="col">
+                        <span id="expend_{{ $equipment_type->value }}"></span>
+                    </div>
+                </div>
+            </div>
+
+        </button>
 
         <div class="content_exponse">
 
@@ -19,22 +40,22 @@
                         <table class="table table-bordered table-striped display" id="income_{{$equipment->equipment_id}}"   width="100%">
 
                                 <thead>     
-                                    <tr >
-                                        <th colspan="4">Income</th>
+                                    <tr>
+                                        <th colspan="2">Income</th>
                                     </tr>
-                                    <tr >              
-                                        <th> </th>
-                                        <th>Amount</th>
+                                    <tr class="something">              
+                                        <th></th>
+                                        <th >Amount</th>
                                     </tr>
                                 </thead>
-                                <tbody class="ml-2">
+                                <tbody>
 
                                     @php($total = 0)
                                     @foreach($equipment->child_revenue as $revenue)
 
                                         <tr>
-                                            <td style="width: 50%"> </td>
-                                            <td>${{ $revenue->amount }}</td> @php($total += $revenue->amount)
+                                            <td></td>
+                                            <td >${{ $revenue->amount }}</td> @php($total += $revenue->amount)
                                         </tr>
                                         
                                     @endforeach  
@@ -58,11 +79,11 @@
 
                                 <thead>     
                                     <tr>
-                                        <th colspan="4">Expend</th>
+                                        <th colspan="2">Expend</th>
                                     </tr>
-                                    <tr > 
-                                        <th>Item/Service</th>       
-                                        <th>Amount</th>
+                                    <tr class="something" > 
+                                        <th >Item/Service</th>       
+                                        <th >Amount</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -71,15 +92,15 @@
 
                                         @if($m->inventory_id == null)
                                             <tr>
-                                                <td style="width: 50%">{{ $m->service }}</td>
-                                                <td>${{ $m->amount }}</td> 
+                                                <td >{{ $m->service }}</td>
+                                                <td >${{ $m->amount }}</td> 
                                                 @php($total_expend += $m->amount)
                                             </tr>  
                                         @else
 
                                             <tr>
-                                                <td style="width: 50%">{{  getInventoryName($m->inventory->category_id) }}</td>
-                                                <td>${{ isset($m->inventory->price) ? $m->inventory->price * 1 : 0  }}</td> 
+                                                <td >{{  getInventoryName($m->inventory->category_id) }}</td>
+                                                <td >${{ isset($m->inventory->price) ? $m->inventory->price * 1 : 0  }}</td> 
                                                     
                                             </tr> 
 
@@ -90,7 +111,6 @@
                                     @endforeach  
                                     
                                 </tbody>
-
                         </table>
 
                     </div>      
