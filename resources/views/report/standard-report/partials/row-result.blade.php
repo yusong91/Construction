@@ -3,10 +3,6 @@
 
     @foreach($results as $equipment_type)
 
-        <!-- <button type="button" class="collapsible_exponse">{{ $equipment_type->value }} <span class="badge badge-light" id="income_{{ $equipment_type->value }}">Income $9</span>/<span class="badge badge-light" id="expend_{{ $equipment_type->value }}" >Expend $9</span>
-    
-        </button> -->
-
         <button type="button" class="collapsible_exponse">
 
             <div class="container">
@@ -123,13 +119,13 @@
 
                 var grand_income = '<?php echo $grand_total_income ?>';
 
-                setGrandTotal(equipment_type_id_income, grand_income, "Income");
+                setGrandTotal(equipment_type_id_income, grand_income, "Income ");
 
                 var equipment_type_id_expend = 'expend_' + '<?php echo $equipment_type->value ?>';
 
                 var grand_expend = '<?php echo $grand_total_expend ?>';
 
-                setGrandTotal(equipment_type_id_expend, grand_expend, "Expend");
+                setGrandTotal(equipment_type_id_expend, grand_expend, "Expend ");
 
 
             </script>
@@ -138,6 +134,97 @@
 
     @endforeach
 
+    <div class="alert alert-primary" role="alert">
+        Total Income ${{ $grand_total_income - $grand_total_expend }}
+    </div>
+
+
+    <table class="table table-bordered table-striped display"  width="100%">
+        <thead>     
+            <tr>
+                <th class="table-warning" colspan="2">Expend</th>
+            </tr>
+                    
+        </thead>
+        <tbody>
+            <tr>
+                <td class="table-light">Spareparts</td>
+                <td class="table-light">${{ $total_sparepart }}</td>
+            </tr>
+
+            <tr>
+                <td class="table-light" colspan="2"><b>Inventory</b></td>
+
+
+                @foreach($expend_inventory as $item)
+
+                    <tr>
+                        <td class="table-light pl-5">{{ $item['category'] }}</td>
+                        <td class="table-light">${{ $item['expend'] }}</td>
+                    </tr>
+
+                @endforeach
+            
+                
+
+            </tr>
+
+            <tr>
+                <td class="table-danger">Total Expend</td>
+                <td class="table-danger">$4000</td>
+            </tr>
+
+
+        </tbody>
+    </table>
+
+
+
+    <!-- <div class="alert alert-secondary" role="alert">
+        <h6 class="alert-heading">Expend</h6>
+
+        <ul class="list-group">
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+                Sparepart
+                <span class="badge badge-primary badge-pill">$1000</span>
+            </li>
+           
+            
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+                Inventory                
+            </li>
+            <ul class="list-group ml-4">
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        Tyre
+                        <span class="badge badge-primary badge-pill">$1400</span>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        Oil
+                        <span class="badge badge-primary badge-pill">$2000</span>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        Battery
+                        <span class="badge badge-primary badge-pill">$3000</span>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        Total Inventory
+                        <span class="badge badge-primary badge-pill">$6400</span>
+                    </li>
+            </ul>
+ 
+            
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+                Total Expend
+                <span class="badge badge-primary badge-pill">$7400</span>
+            </li>
+        </ul>
+        
+    </div> -->
+
+
+    
+
 </div>
+
 
 

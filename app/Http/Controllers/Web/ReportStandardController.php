@@ -10,6 +10,7 @@ use Vanguard\Repositories\Equipment\EquipmentRepository;
 use Mpdf\Mpdf;
 use PDF;
 use Carbon\Carbon;
+use DB;
 
 
 class ReportStandardController extends Controller
@@ -31,8 +32,6 @@ class ReportStandardController extends Controller
         $equipment_type_selected = 0;
         $equipment_types = getEquipmentType(10);
 
-        //dd($equipment_types);
-
         return view('report.standard-report.index', compact('active', 'equipment_types', 'equipment_type_selected'));
     } 
  
@@ -44,8 +43,12 @@ class ReportStandardController extends Controller
     public function store(Request $request)
     {
         $active = 'reportstandard'; 
+        $total_sparepart = 0;
+        $inventories = array(); 
+        $expend_inventory = array();
         $data = $request->all();
-        $str_from_date = $data['from_date'] ?? '';
+        $str_from_date = $data['from_date'] ?? null;
+        $str_to_date = $data['to_date'] ?? null;
 
         $equipment_types = getEquipmentType(10);
 
@@ -53,13 +56,46 @@ class ReportStandardController extends Controller
 
         $equipment_type_selected = isset($str_array_select[1]) ? intval($str_array_select[1]) : 0;
  
-        $last_date_of_month = Carbon::createFromFormat('d/m/Y', $str_from_date)->endOfMonth()->format('Y-m-d');
+        $last_date_of_month = isset($str_to_date) ? $str_to_date : Carbon::createFromFormat('d/m/Y', $str_from_date)->endOfMonth()->format('Y-m-d');
   
-        $results = getEquipmentTypeTest($equipment_type_selected, getStringDate($str_from_date), $last_date_of_month);//$this->equipment->standard_report($equipment_type_selected, getStringDate($str_from_date), getStringDate($str_to_date));
+        $results = getEquipmentTypeTest($equipment_type_selected, getStringDate($str_from_date), $last_date_of_month);
+        
+        $expend_maintenance_by_date = $this->maintenance->getMaintenanceByDate(getStringDate($str_from_date), $last_date_of_month);
 
-        //dd($results);
+        foreach($expend_maintenance_by_date as $maintenance)
+        {
+            $spare_parts = $maintenance->sparepart_children;
 
-        return view('report.standard-report.result', compact('active', 'data', 'equipment_types', 'equipment_type_selected', 'results'));
+            $inventory = $maintenance->parent_inventory ?? null;
+        
+            foreach($spare_parts as $spare_part)
+            {
+                $total_sparepart += $spare_part->amount;
+            }   
+
+            if($inventory != null)
+            {
+                $inventories[$inventory->category_id][] = $inventory;
+            }
+        }
+
+        foreach($inventories as $key => $values)
+        {
+            $category = DB::table('commond_codes')->find($key);
+
+            $price = 0;
+
+            foreach($values as $value)
+            {
+                $price += $value->price;
+            }
+
+            $expend_inventory[] = ['category'=>$category->value, 'expend'=>$price];
+        }
+
+        //$this->equipment->standard_report($equipment_type_selected, getStringDate($str_from_date), getStringDate($str_to_date));
+
+        return view('report.standard-report.result', compact('active', 'data', 'equipment_types', 'equipment_type_selected', 'results', 'last_date_of_month', 'expend_maintenance_by_date', 'total_sparepart', 'expend_inventory'));
     }
 
     public function downloadPdf()

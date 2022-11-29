@@ -11,4 +11,5 @@ interface MaintenanceRepository
     public function update($id, array $data);
     public function delete($id);
     public function paginate($perPage, $search = null);
+    public function getMaintenanceByDate($date_from, $date_to);
 }

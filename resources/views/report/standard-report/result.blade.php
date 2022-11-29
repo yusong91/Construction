@@ -83,19 +83,21 @@
     function data_table(table_id) {
             
         $(document).ready( function () {
+
             $('#' + table_id).DataTable(
             {
                 "paging": false,
                 "searching": false,
                 "info": false
             });
+
         });
     }
 
     function setGrandTotal(id, value, title) 
     {
         $(document).ready( function () {
-            $('#' + id).text(title +" $" + value);
+            $('#' + id).text(title +"$" + value);
         });
     }
 

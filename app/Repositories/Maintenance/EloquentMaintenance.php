@@ -298,4 +298,9 @@ class EloquentMaintenance implements MaintenanceRepository
         $newformat = date('Y-m-d', $time);
         return $newformat;
     }
+
+    public function getMaintenanceByDate($date_from, $date_to)
+    {
+        return Maintenance::with(['parent_inventory', 'sparepart_children'])->get(); //'inventory_child', 
+    }
 }
