@@ -61,7 +61,6 @@
                         </table>
 
                         <script>
-                        
                             var table_id = '<?php echo $equipment->equipment_id; ?>';
 
                             data_table("income_" + table_id);
