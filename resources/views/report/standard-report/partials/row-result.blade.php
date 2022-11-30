@@ -1,6 +1,11 @@
 <!-- table-responsive -->
 <div class="table-responsive"> 
 
+    <h4>Income</h4>
+
+    @php($grand_total_income = 0)
+    @php($grand_total_expend = 0)
+
     @foreach($results as $equipment_type)
 
         <button type="button" class="collapsible_exponse">
@@ -11,11 +16,11 @@
                         {{ $equipment_type->value }}
                     </div>
                     <div class="col">
-                        <span id="income_{{ $equipment_type->value }}"></span>
+                        <span id="income_{{ $equipment_type->value }}">Income $0</span>
                     </div>
 
                     <div class="col">
-                        <span id="expend_{{ $equipment_type->value }}"></span>
+                        <span id="expend_{{ $equipment_type->value }}">Expend $0</span>
                     </div>
                 </div>
             </div>
@@ -24,8 +29,7 @@
 
         <div class="content_exponse">
 
-            @php($grand_total_income = 0)
-            @php($grand_total_expend = 0)
+            
 
             @foreach($equipment_type->children_equipment as $equipment)
 
@@ -40,22 +44,35 @@
                                         <th colspan="2">Income</th>
                                     </tr>
                                     <tr class="something">              
-                                        <th></th>
+                                        <th>Date</th>
                                         <th >Amount</th>
                                     </tr>
                                 </thead>
                                 <tbody>
 
-                                    @php($total = 0)
+                                    @php($total_income_by_category = 0)
                                     @foreach($equipment->child_revenue as $revenue)
 
                                         <tr>
-                                            <td></td>
-                                            <td >${{ $revenue->amount }}</td> @php($total += $revenue->amount)
+                                            <td>{{ getDateFormat($revenue->from_date) }}</td>
+                                            <td >${{ $revenue->amount }}</td> @php($total_income_by_category += $revenue->amount)
                                         </tr>
+
+                                        @php( $grand_total_income += $total_income_by_category )
                                         
                                     @endforeach  
-                                    @php( $grand_total_income += $total )
+
+                                    <script>
+                
+                                        var equipment_type_id_income = 'income_' + '<?php echo $equipment_type->value ?>';
+
+                                        var grand_income = '<?php echo $total_income_by_category ?>';
+
+                                        setGrandTotal(equipment_type_id_income, grand_income, "Income ");
+
+                                    </script>
+
+                                    
                                     
                                 </tbody>
                         </table>
@@ -82,28 +99,42 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @php($total_expend = 0)
+
+                                @php($total_expend_by_category = 0)
+                                    
                                     @foreach($equipment->child_maintenance as $m)
 
                                         @if($m->inventory_id == null)
                                             <tr>
                                                 <td >{{ $m->service }}</td>
                                                 <td >${{ $m->amount }}</td> 
-                                                @php($total_expend += $m->amount)
+                                                
+                                                @php($total_expend_by_category += $m->amount)
+                                            
                                             </tr>  
                                         @else
 
                                             <tr>
                                                 <td >{{  getInventoryName($m->inventory->category_id) }}</td>
-                                                <td >${{ isset($m->inventory->price) ? $m->inventory->price * 1 : 0  }}</td> 
-                                                    
+                                                <td >${{ isset($m->inventory->price) ? $m->inventory->price * $m->quantity : 0  }}</td>     
+                                                
+                                                @php($total_expend_by_category += $m->inventory->price * $m->quantity)
+
                                             </tr> 
 
                                         @endif
-                                    
-                                        @php( $grand_total_expend += $total_expend )
-                                        
+
                                     @endforeach  
+
+                                        <script>
+
+                                            var equipment_type_id_expend = 'expend_' + '<?php echo $equipment_type->value ?>';
+
+                                            var grand_expend = '<?php echo $total_expend_by_category ?>';
+
+                                            setGrandTotal(equipment_type_id_expend, grand_expend, "Expend ");
+
+                                        </script>
                                     
                                 </tbody>
                         </table>
@@ -112,37 +143,19 @@
 
             @endforeach
 
-            <script>
-                
-                var equipment_type_id_income = 'income_' + '<?php echo $equipment_type->value ?>';
-
-                var grand_income = '<?php echo $grand_total_income ?>';
-
-                setGrandTotal(equipment_type_id_income, grand_income, "Income ");
-
-                var equipment_type_id_expend = 'expend_' + '<?php echo $equipment_type->value ?>';
-
-                var grand_expend = '<?php echo $grand_total_expend ?>';
-
-                setGrandTotal(equipment_type_id_expend, grand_expend, "Expend ");
-
-
-            </script>
+           
 
         </div>
 
     @endforeach
 
-    <div class="alert alert-primary" role="alert">
-        Total Income ${{ $grand_total_income - $grand_total_expend }}
-    </div>
-
+    <h4 class="mt-3">Expend</h4>
 
     <table class="table table-bordered table-striped display"  width="100%">
         <thead>     
-            <tr>
+            <!-- <tr>
                 <th class="table-warning" colspan="2">Expend</th>
-            </tr>
+            </tr> -->
                     
         </thead>
         <tbody>
@@ -154,8 +167,9 @@
             <tr>
                 <td class="table-light" colspan="2"><b>Inventory</b></td>
 
-
                 @foreach($expend_inventory as $item)
+
+                    @php( $grand_total_expend += $item['expend'] )
 
                     <tr>
                         <td class="table-light pl-5">{{ $item['category'] }}</td>
@@ -164,65 +178,22 @@
 
                 @endforeach
             
-                
-
             </tr>
+
+            @php($all_total = $grand_total_expend + $total_sparepart )
 
             <tr>
                 <td class="table-danger">Total Expend</td>
-                <td class="table-danger">$4000</td>
+                <td class="table-danger">${{ $all_total }}</td>
             </tr>
 
+            <tr>
+                <td class="table-success">Total Income</td>
+                <td class="table-success">${{ $grand_total_income - $all_total }}</td>
+            </tr>
 
         </tbody>
     </table>
-
-
-
-    <!-- <div class="alert alert-secondary" role="alert">
-        <h6 class="alert-heading">Expend</h6>
-
-        <ul class="list-group">
-            <li class="list-group-item d-flex justify-content-between align-items-center">
-                Sparepart
-                <span class="badge badge-primary badge-pill">$1000</span>
-            </li>
-           
-            
-            <li class="list-group-item d-flex justify-content-between align-items-center">
-                Inventory                
-            </li>
-            <ul class="list-group ml-4">
-                    <li class="list-group-item d-flex justify-content-between align-items-center">
-                        Tyre
-                        <span class="badge badge-primary badge-pill">$1400</span>
-                    </li>
-                    <li class="list-group-item d-flex justify-content-between align-items-center">
-                        Oil
-                        <span class="badge badge-primary badge-pill">$2000</span>
-                    </li>
-                    <li class="list-group-item d-flex justify-content-between align-items-center">
-                        Battery
-                        <span class="badge badge-primary badge-pill">$3000</span>
-                    </li>
-                    <li class="list-group-item d-flex justify-content-between align-items-center">
-                        Total Inventory
-                        <span class="badge badge-primary badge-pill">$6400</span>
-                    </li>
-            </ul>
- 
-            
-            <li class="list-group-item d-flex justify-content-between align-items-center">
-                Total Expend
-                <span class="badge badge-primary badge-pill">$7400</span>
-            </li>
-        </ul>
-        
-    </div> -->
-
-
-    
-
 </div>
 
 

@@ -38,32 +38,54 @@
 </div>
 
 <script>
+
     var equipment_id = <?php echo $data['equipment'] ?? 0; ?>
+
     $("#equipment_type").change(function () {
+
         var str_equipment = $("#equipment_type").val();
+
         var expose_array = str_equipment.split('|');
+
         var json_equipment = JSON.parse(expose_array);
+
         var equipment =  json_equipment[0];
+
         $('#equipment').empty()
+
         $('#equipment').append(`<option value="" >Select</option>`);
+
         for (let index = 0; index < equipment.length; index++) {
             
             const element = equipment[index];
+
             var selected = equipment_id == element.id ? 'selected' : '';
+
             $('#equipment').append(`<option value="${element.id}"   "${selected}"> ${element.equipment_id} </option>`);
         }        
     });
+
     if(equipment_id)
     {
         var str_equipment = $("#equipment_type").val();
+
         var expose_array = str_equipment.split('|');
+
         var json_equipment = JSON.parse(expose_array);
+
         var equipment =  json_equipment[0];
+
         for (let index = 0; index < equipment.length; index++) {
             
             const element = equipment[index];
+
             var selected = equipment_id == element.id ? 'selected' : '';
+
             $('#equipment').append(`<option value="${element.id}" ${selected}> ${element.equipment_id} </option>`);
         }        
     }
+
 </script>
+
+
+

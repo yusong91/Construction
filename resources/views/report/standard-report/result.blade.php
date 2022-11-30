@@ -55,7 +55,7 @@
         <form action="{{ route('report-standard.store') }}" id="user-form" method="POST" accept-charset="UTF-8">
 
             <fieldset class="border p-2">
-            <legend>Report</legend> 
+            <legend>Report Result</legend> 
 
                 <div class="row">
                     <div class="col-12">
