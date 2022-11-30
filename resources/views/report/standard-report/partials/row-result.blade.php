@@ -4,6 +4,7 @@
     <h4>Income</h4>
 
     @php($total_income = 0)
+    @php($total_expend = 0)
     @php($grand_total_expend = 0)
 
     @foreach($results as $equipment_type)
@@ -21,8 +22,6 @@
                     @php($total_expend_by_category = 0)
 
                     @foreach($equipment_type->children_equipment as $equipment)
-
-                       
 
                         @foreach($equipment->child_revenue as $revenue)
 
@@ -47,11 +46,11 @@
                     @endforeach
 
                     <div class="col">
-                        <span>Income $ {{ $test_category_income }}</span>
+                        <span>Income ${{ $test_category_income }}</span>
                     </div>
 
                     <div class="col">
-                        <span>Expend $ {{ $total_expend_by_category }}</span>
+                        <span>Expend ${{ $total_expend_by_category }}</span>
                     </div>
 
 
@@ -130,12 +129,16 @@
                                                 <td >{{ $m->service }}</td>
                                                 <td >${{ $m->amount }}</td> 
                                             </tr>  
+
+                                            @php( $total_expend += $m->amount )
                                         @else
 
                                             <tr>
                                                 <td >{{  getInventoryName($m->inventory->category_id) }}</td>
                                                 <td >${{ isset($m->inventory->price) ? $m->inventory->price * $m->quantity : 0  }}</td>     
                                             </tr> 
+
+                                            @php( $total_expend += $m->inventory->price * $m->quantity )
 
                                         @endif
 
@@ -154,11 +157,12 @@
 
     <table class="table table-bordered table-striped" width="100%">
         <tr >
-            <td class="table-success">Total Income</td>
-            
-            <td class="table-success">${{ $total_income }}</td>
+            <td class="table-success">Total Income: ${{ $total_income }}</td>
+        
+            <td class="table-success">Total Expend: ${{ $total_expend }}</td>
         </tr>
     </table>
+
 
     <h4 class="mt-3">Expend</h4>
 
