@@ -15,12 +15,42 @@
                     <div class="col">
                         {{ $equipment_type->value }}
                     </div>
+
+                    @foreach($equipment_type->children_equipment as $equipment)
+
+                        @php($test_category_income = 0)
+
+                        @php($total_expend_by_category = 0)
+
+                        @foreach($equipment->child_revenue as $revenue)
+
+                            @php($test_category_income += $revenue->amount)
+
+                        @endforeach
+
+
+                        @foreach($equipment->child_maintenance as $m)
+
+                            @if($m->inventory_id == null)
+
+                                @php($total_expend_by_category += $m->amount)
+
+                            @else
+
+                                @php($total_expend_by_category += $m->inventory->price * $m->quantity)
+
+                            @endif
+
+                        @endforeach
+
+                    @endforeach
+
                     <div class="col">
-                        <span id="income_{{ $equipment_type->value }}">Income $0</span>
+                        <span id="income_{{ $equipment_type->value }}">Income $ {{ $test_category_income }}</span>
                     </div>
 
                     <div class="col">
-                        <span id="expend_{{ $equipment_type->value }}">Expend $0</span>
+                        <span id="expend_{{ $equipment_type->value }}">Expend $ {{ $total_expend_by_category }}</span>
                     </div>
                 </div>
             </div>
@@ -35,7 +65,7 @@
                     @continue
                 @endif
 
-                <button type="button" class="collapsible">{{ $equipment->equipment_id }} </button>
+                <button type="button" class="collapsible">{{ $equipment->equipment_id }}</button>
 
                     <div class="content">
                         <!-- INCOME -->
@@ -53,6 +83,7 @@
                                 <tbody>
 
                                     @php($total_income_by_category = 0)
+
                                     @foreach($equipment->child_revenue as $revenue)
 
                                         <tr>
@@ -64,18 +95,6 @@
 
                                     @php( $total_income += $total_income_by_category )
 
-                                    <script>
-                
-                                        var equipment_type_id_income = 'income_' + '<?php echo $equipment_type->value ?>';
-
-                                        var grand_income = '<?php echo $total_income_by_category ?>';
-
-                                        setGrandTotal(equipment_type_id_income, grand_income, "Income ");
-
-                                    </script>
-
-                                    
-                                    
                                 </tbody>
                         </table>
                         <script>
@@ -101,42 +120,24 @@
                                 </thead>
                                 <tbody>
 
-                                @php($total_expend_by_category = 0)
-                                    
                                     @foreach($equipment->child_maintenance as $m)
 
                                         @if($m->inventory_id == null)
                                             <tr>
                                                 <td >{{ $m->service }}</td>
                                                 <td >${{ $m->amount }}</td> 
-                                                
-                                                @php($total_expend_by_category += $m->amount)
-                                            
                                             </tr>  
                                         @else
 
                                             <tr>
                                                 <td >{{  getInventoryName($m->inventory->category_id) }}</td>
                                                 <td >${{ isset($m->inventory->price) ? $m->inventory->price * $m->quantity : 0  }}</td>     
-                                                
-                                                @php($total_expend_by_category += $m->inventory->price * $m->quantity)
-
                                             </tr> 
 
                                         @endif
 
                                     @endforeach  
 
-                                        <script>
-
-                                            var equipment_type_id_expend = 'expend_' + '<?php echo $equipment_type->value ?>';
-
-                                            var grand_expend = '<?php echo $total_expend_by_category ?>';
-
-                                            setGrandTotal(equipment_type_id_expend, grand_expend, "Expend ");
-
-                                        </script>
-                                    
                                 </tbody>
                         </table>
 
@@ -155,8 +156,6 @@
             <td class="table-success">${{ $total_income }}</td>
         </tr>
     </table>
-
-    
 
     <h4 class="mt-3">Expend</h4>
 
