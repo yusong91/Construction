@@ -16,18 +16,19 @@
                         {{ $equipment_type->value }}
                     </div>
 
+                    @php($test_category_income = 0)
+
+                    @php($total_expend_by_category = 0)
+
                     @foreach($equipment_type->children_equipment as $equipment)
 
-                        @php($test_category_income = 0)
-
-                        @php($total_expend_by_category = 0)
+                       
 
                         @foreach($equipment->child_revenue as $revenue)
 
                             @php($test_category_income += $revenue->amount)
 
                         @endforeach
-
 
                         @foreach($equipment->child_maintenance as $m)
 
@@ -46,12 +47,14 @@
                     @endforeach
 
                     <div class="col">
-                        <span id="income_{{ $equipment_type->value }}">Income $ {{ $test_category_income }}</span>
+                        <span>Income $ {{ $test_category_income }}</span>
                     </div>
 
                     <div class="col">
-                        <span id="expend_{{ $equipment_type->value }}">Expend $ {{ $total_expend_by_category }}</span>
+                        <span>Expend $ {{ $total_expend_by_category }}</span>
                     </div>
+
+
                 </div>
             </div>
 
