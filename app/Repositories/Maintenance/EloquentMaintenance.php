@@ -301,6 +301,13 @@ class EloquentMaintenance implements MaintenanceRepository
 
     public function getMaintenanceByDate($date_from, $date_to)
     {
-        return Maintenance::with(['parent_inventory', 'sparepart_children'])->whereBetween(\DB::raw('DATE(date)'), [$date_from, $date_to])->get();
+        //return Maintenance::with(['parent_inventory', 'sparepart_children'])->whereBetween(\DB::raw('DATE(date)'), [$date_from, $date_to])->get();
+
+        return Maintenance::with(['parent_inventory', 'sparepart_children'])->where(function($query) use ($date_from, $date_to) {
+
+                $query->where('date','>=', $date_from)->where('date','<=', $date_to);
+          
+            })->get();
+
     }
 }

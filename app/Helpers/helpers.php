@@ -155,8 +155,6 @@ if(!function_exists('getReportStandard')){
         }
 
         $query = \Vanguard\Model\CommonCode::with('children_equipment')->where($parameter, $id);
-
-        //$query = \Vanguard\Model\CommonCode::whereRelation('children_equipment', 'sold', '==', 1)->get();
         
         $query->with(['children_equipment.child_revenue' => function ($q) use ($from_date, $last_date) {
 
