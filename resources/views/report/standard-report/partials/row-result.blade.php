@@ -3,7 +3,7 @@
 
     <h4>Income</h4>
 
-    @php($grand_total_income = 0)
+    @php($total_income = 0)
     @php($grand_total_expend = 0)
 
     @foreach($results as $equipment_type)
@@ -29,9 +29,11 @@
 
         <div class="content_exponse">
 
-            
-
             @foreach($equipment_type->children_equipment as $equipment)
+
+                @if($equipment->sold == 1)
+                    @continue
+                @endif
 
                 <button type="button" class="collapsible">{{ $equipment->equipment_id }} </button>
 
@@ -58,9 +60,9 @@
                                             <td >${{ $revenue->amount }}</td> @php($total_income_by_category += $revenue->amount)
                                         </tr>
 
-                                        @php( $grand_total_income += $total_income_by_category )
-                                        
                                     @endforeach  
+
+                                    @php( $total_income += $total_income_by_category )
 
                                     <script>
                 
@@ -76,7 +78,6 @@
                                     
                                 </tbody>
                         </table>
-
                         <script>
                             var table_id = '<?php echo $equipment->equipment_id; ?>';
 
@@ -143,11 +144,19 @@
 
             @endforeach
 
-           
-
         </div>
 
     @endforeach
+
+    <table class="table table-bordered table-striped" width="100%">
+        <tr >
+            <td class="table-success">Total Income</td>
+            
+            <td class="table-success">${{ $total_income }}</td>
+        </tr>
+    </table>
+
+    
 
     <h4 class="mt-3">Expend</h4>
 
@@ -165,7 +174,7 @@
             </tr>
 
             <tr>
-                <td class="table-light" colspan="2"><b>Inventory</b></td>
+                <td class="table-light" colspan="2">Inventory</td>
 
                 @foreach($expend_inventory as $item)
 
@@ -188,8 +197,8 @@
             </tr>
 
             <tr>
-                <td class="table-success">Total Income</td>
-                <td class="table-success">${{ $grand_total_income - $all_total }}</td>
+                <td class="table-success">Grand Total Income</td>
+                <td class="table-success">${{ $total_income - $all_total }}</td>
             </tr>
 
         </tbody>

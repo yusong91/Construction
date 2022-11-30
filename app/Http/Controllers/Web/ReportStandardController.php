@@ -58,12 +58,10 @@ class ReportStandardController extends Controller
  
         $last_date_of_month = isset($str_to_date) ? $str_to_date : Carbon::createFromFormat('d/m/Y', $str_from_date)->endOfMonth()->format('Y-m-d');
   
-        $results = getEquipmentTypeTest($equipment_type_selected, getStringDate($str_from_date), $last_date_of_month);
-
+        $results = getReportStandard($equipment_type_selected, getStringDate($str_from_date), $last_date_of_month);
 
         //dd($results);
 
-        
         $expend_maintenance_by_date = $this->maintenance->getMaintenanceByDate(getStringDate($str_from_date), $last_date_of_month);
 
         foreach($expend_maintenance_by_date as $maintenance)
@@ -79,7 +77,6 @@ class ReportStandardController extends Controller
 
             if($inventory != null)
             {
-                //$inventories[$inventory->category_id][] = $inventory;
                 $inventories[$inventory->category_id][] = ['name'=>$inventory->name, 'price'=>$maintenance->quantity * $inventory->price];
             }
         }
@@ -92,9 +89,10 @@ class ReportStandardController extends Controller
 
             foreach($values as $value)
             {
-                //$price += $value->price;
                 $price += $value['price'];
             }
+
+           
 
             $expend_inventory[] = ['category'=>$category->value, 'expend'=>$price];
         }

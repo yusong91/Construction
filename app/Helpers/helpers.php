@@ -142,8 +142,8 @@ if(!function_exists('checkClaim')){
     }
 }
 
-if(!function_exists('getEquipmentTypeTest')){
-    function getEquipmentTypeTest($id, $from_date, $last_date){
+if(!function_exists('getReportStandard')){
+    function getReportStandard($id, $from_date, $last_date){
 
         $parameter = 'parent_id';
 
@@ -156,6 +156,8 @@ if(!function_exists('getEquipmentTypeTest')){
 
         $query = \Vanguard\Model\CommonCode::with('children_equipment')->where($parameter, $id);
 
+        //$query = \Vanguard\Model\CommonCode::whereRelation('children_equipment', 'sold', '==', 1)->get();
+        
         $query->with(['children_equipment.child_revenue' => function ($q) use ($from_date, $last_date) {
 
             $q->where('from_date', '>=', $from_date);
