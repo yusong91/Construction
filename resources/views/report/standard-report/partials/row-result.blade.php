@@ -134,7 +134,7 @@
                                         @else
 
                                             <tr>
-                                                <td >{{  getInventoryName($m->inventory->category_id) }}</td>
+                                                <td >Inventory: {{  getInventoryName($m->inventory->category_id) }}</td>
                                                 <td >${{ isset($m->inventory->price) ? $m->inventory->price * $m->quantity : 0  }}</td>     
                                             </tr> 
 
@@ -199,7 +199,7 @@
             </tr>
 
             <tr>
-                <td class="table-success">Grand Total Income</td>
+                <td class="table-success">Net Profit/Loss</td>
                 <td class="table-success">${{ $total_income - $all_total }}</td>
             </tr>
 
