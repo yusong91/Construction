@@ -126,7 +126,7 @@
 
                                         @if($m->inventory_id == null)
                                             <tr>
-                                                <td >{{ $m->service }}</td>
+                                                <td > {{ $m->type }}: {{ $m->service }}</td>
                                                 <td >${{ $m->amount }}</td> 
                                             </tr>  
 
@@ -167,15 +167,11 @@
     <h4 class="mt-3">Expend</h4>
 
     <table class="table table-bordered table-striped display"  width="100%">
-        <thead>     
-            <!-- <tr>
-                <th class="table-warning" colspan="2">Expend</th>
-            </tr> -->
-                    
+        <thead>             
         </thead>
         <tbody>
             <tr>
-                <td class="table-light">Spareparts</td>
+                <td class="table-light">Spareparts/Service</td>
                 <td class="table-light">${{ $total_sparepart }}</td>
             </tr>
 

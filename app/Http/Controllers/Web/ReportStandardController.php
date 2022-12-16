@@ -64,6 +64,10 @@ class ReportStandardController extends Controller
 
         $expend_maintenance_by_date = $this->maintenance->getMaintenanceByDate(getStringDate($str_from_date), $last_date_of_month);
 
+
+        //dd($expend_maintenance_by_date);
+
+
         foreach($expend_maintenance_by_date as $maintenance)
         {
             $spare_parts = $maintenance->sparepart_children;
