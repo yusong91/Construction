@@ -60,13 +60,8 @@ class ReportStandardController extends Controller
   
         $results = getReportStandard($equipment_type_selected, getStringDate($str_from_date), $last_date_of_month);
 
-        //dd($results);
 
         $expend_maintenance_by_date = $this->maintenance->getMaintenanceByDate(getStringDate($str_from_date), $last_date_of_month);
-
-
-        //dd($expend_maintenance_by_date);
-
 
         foreach($expend_maintenance_by_date as $maintenance)
         {
@@ -96,16 +91,44 @@ class ReportStandardController extends Controller
                 $price += $value['price'];
             }
 
-           
-
             $expend_inventory[] = ['category'=>$category->value, 'expend'=>$price];
         }
 
-        //dd($expend_inventory);
 
-        //$this->equipment->standard_report($equipment_type_selected, getStringDate($str_from_date), getStringDate($str_to_date));
+        $total_income = 0;
+        $total_expend = 0;
 
-        return view('report.standard-report.result', compact('active', 'data', 'equipment_types', 'equipment_type_selected', 'results', 'last_date_of_month', 'expend_maintenance_by_date', 'total_sparepart', 'expend_inventory'));
+        for ($i=0; $i < count($results);  $i++) {
+
+            $income = 0;
+            $expend = 0;
+
+            $equipments = $results[$i]->child_equipment ?? [];
+
+            foreach ($equipments as $equipment) {
+
+                $revenues = $equipment->child_revenue ?? [];
+                
+                $maintenances = $equipment->child_maintenance ?? [];
+
+                foreach ($revenues as $revenue) {
+                    
+                    $income += $revenue->amount;
+                }
+
+                foreach ($maintenances as $maintenance) {
+                    
+                    $expend += $maintenance->amount;
+                }
+            }
+            $results[$i]->income = $income;
+            $results[$i]->expend = $expend;   
+            
+            $total_income += $income;
+            $total_expend += $expend;
+        }
+
+        return view('report.standard-report.result', compact('active', 'data', 'equipment_types', 'equipment_type_selected', 'results', 'last_date_of_month', 'expend_maintenance_by_date', 'total_sparepart', 'expend_inventory', 'total_income', 'total_expend'));
     }
 
     public function downloadPdf()

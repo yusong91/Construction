@@ -154,29 +154,30 @@ if(!function_exists('getReportStandard')){
             $id = 10;
         }
 
-        $query = \Vanguard\Model\CommonCode::with('children_equipment')->where($parameter, $id);
-        
-        $query->with(['children_equipment.child_revenue' => function ($q) use ($from_date, $last_date) {
+        $query = DB::table('commond_codes')->where($parameter, $id)->get();
 
-            $q->where('from_date', '>=', $from_date);
-            $q->where('from_date', '<=', $last_date);
-    
-        }]);
-
-        $query->with(['children_equipment.child_maintenance' => function ($q) use ($from_date, $last_date) {
-
-            $q->where('date', '>=', $from_date);
-            $q->where('date', '<=', $last_date);
+        for ($i=0; $i < count($query) ; $i++) { 
             
-        }]);
+            $equipments = DB::table('equipment')->where('equip_type_id', $query[$i]->id)->get();
 
-        $query->with(['children_equipment.child_maintenance.inventory' => function ($q) {
-            $q->get();            
-        }]);
+            for ($j=0; $j < count($equipments); $j++) { 
+                
+                $equipments[$j]->child_revenue = DB::table('revenues')->where('equipment_id', $equipments[$j]->id)->whereBetween('from_date', [$from_date, $last_date])->get();
 
-        $result = $query->orderBy('created_at', 'desc')->paginate();
+                $maintenances = DB::table('maintenances')->where('equipment_id', $equipments[$j]->id)->whereBetween('date', [$from_date, $last_date])->get();
 
-        return $result;
+                for ($k=0; $k < count($maintenances); $k++) { 
+                    
+                    $maintenances[$k]->child_inventory = DB::table('inventorys')->where('id', $maintenances[$k]->inventory_id)->get() ?? [];                    
+                }
+
+                $equipments[$j]->child_maintenance = $maintenances;
+            }
+
+            $query[$i]->child_equipment = $equipments;            
+        }
+
+        return $query;
     }
 }
 
@@ -191,8 +192,27 @@ if(!function_exists('getInventoryName')){
 
 
 
+//$query = \Vanguard\Model\CommonCode::with('children_equipment')->where($parameter, $id);
 
+        // $query->with(['children_equipment.child_revenue' => function ($q) use ($from_date, $last_date) {
 
+        //     $q->where('from_date', '>=', $from_date);
+        //     $q->where('from_date', '<=', $last_date);
+    
+        // }]);
+
+        // $query->with(['children_equipment.child_maintenance' => function ($q) use ($from_date, $last_date) {
+
+        //     //$q->where('date', '>=', $from_date);
+        //     $q->where('date', '>', $last_date);
+            
+        // }]);
+
+        // $query->with(['children_equipment.child_maintenance.inventory' => function ($q) {
+        //     $q->get();            
+        // }]);
+
+        //$result = $query->orderBy('created_at', 'desc')->paginate();
 
 
 

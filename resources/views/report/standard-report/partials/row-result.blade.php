@@ -3,8 +3,6 @@
 
     <h4>Income</h4>
 
-    @php($total_income = 0)
-    @php($total_expend = 0)
     @php($grand_total_expend = 0)
 
     @foreach($results as $equipment_type)
@@ -17,42 +15,13 @@
                         {{ $equipment_type->value }}
                     </div>
 
-                    @php($test_category_income = 0)
-
-                    @php($total_expend_by_category = 0)
-
-                    @foreach($equipment_type->children_equipment as $equipment)
-
-                        @foreach($equipment->child_revenue as $revenue)
-
-                            @php($test_category_income += $revenue->amount)
-
-                        @endforeach
-
-                        @foreach($equipment->child_maintenance as $m)
-
-                            @if($m->inventory_id == null)
-
-                                @php($total_expend_by_category += $m->amount)
-
-                            @else
-
-                                @php($total_expend_by_category += $m->inventory->price * $m->quantity)
-
-                            @endif
-
-                        @endforeach
-
-                    @endforeach
-
                     <div class="col">
-                        <span>Income ${{ $test_category_income }}</span>
+                        <span>Income: ${{ $equipment_type->income ?? 0 }}</span>
                     </div>
 
                     <div class="col">
-                        <span>Expend ${{ $total_expend_by_category }}</span>
+                        <span>Expend: ${{ $equipment_type->expend ?? 0 }} </span>
                     </div>
-
 
                 </div>
             </div>
@@ -61,11 +30,7 @@
 
         <div class="content_exponse">
 
-            @foreach($equipment_type->children_equipment as $equipment)
-
-                @if($equipment->sold == 1)
-                    @continue
-                @endif
+            @foreach($equipment_type->child_equipment as $equipment)
 
                 <button type="button" class="collapsible">{{ $equipment->equipment_id }}</button>
 
@@ -84,28 +49,19 @@
                                 </thead>
                                 <tbody>
 
-                                    @php($total_income_by_category = 0)
-
-                                    @foreach($equipment->child_revenue as $revenue)
+                                @foreach($equipment->child_revenue as $revenue)
 
                                         <tr>
                                             <td>{{ getDateFormat($revenue->from_date) }}</td>
-                                            <td >${{ $revenue->amount }}</td> @php($total_income_by_category += $revenue->amount)
+                                            <td>${{ $revenue->amount }}</td> 
                                         </tr>
-
-                                    @endforeach  
-
-                                    @php( $total_income += $total_income_by_category )
-
+                                @endforeach
                                 </tbody>
                         </table>
                         <script>
                             var table_id = '<?php echo $equipment->equipment_id; ?>';
-
                             data_table("income_" + table_id);
-
                             data_table("expend_" + table_id);
-                    
                         </script>
 
                         <!-- EXPEND -->
@@ -130,7 +86,6 @@
                                                 <td >${{ $m->amount }}</td> 
                                             </tr>  
 
-                                            @php( $total_expend += $m->amount )
                                         @else
 
                                             <tr>
@@ -138,8 +93,7 @@
                                                 <td >${{ isset($m->inventory->price) ? $m->inventory->price * $m->quantity : 0  }}</td>     
                                             </tr> 
 
-                                            @php( $total_expend += $m->inventory->price * $m->quantity )
-
+                                        
                                         @endif
 
                                     @endforeach  
@@ -158,10 +112,10 @@
     <table class="table table-bordered table-striped" width="100%">
         <tr >
             <td class="table-success">Total Income: ${{ $total_income }}</td>
-        
             <td class="table-success">Total Expend: ${{ $total_expend }}</td>
         </tr>
     </table>
+
 
 
     <h4 class="mt-3">Expend</h4>
